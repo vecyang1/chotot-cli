@@ -7,7 +7,8 @@ modifying anything in `chotot/` or `tools/`.
 
 0. **Zero runtime dependencies.**
    `chotot-cli` is built exclusively on Python 3.9+ standard library modules (`urllib.request`,
-   `json`, `sqlite3`, `argparse`, `math`, `csv`). No third-party packages may be added to
+   `json`, `argparse`, `math`, `csv`, `statistics`). There is no database: the bundled
+   taxonomy and facet snapshots are plain JSON under `chotot/data/`. No third-party packages may be added to
    `dependencies = []` in `pyproject.toml`. This guarantees it runs in any bare Python environment.
 
 1. **Privacy by default.**
@@ -21,16 +22,26 @@ modifying anything in `chotot/` or `tools/`.
    `chotot` enforces these client-side and explicitly states when sorting or filtering is
    performed locally. Never present a sampled or locally-filtered result as an exact server-side count.
 
-3. **Multi-province expansion (2025 Administrative Reforms).**
-   Vietnam's 2025 administrative mergers combine previously separate province codes. The taxonomy
-   layer (`chotot/taxonomy.py`) maps merged province keys to their underlying modern sub-codes
-   and performs balanced round-robin sampling across all constituent regions.
+3. **Query terms are UNIONed upstream, never intersected.**
+   `q="canon powershot v1"` returns the 39 ads matching `v1` plus the 1 matching
+   `canon powershot` — adding a word WIDENS the result set, and the least specific word
+   dominates the ranking. Every search checks the text of the rows it received and warns
+   when they do not all carry every term; `--match-all` recomputes the intersection
+   client-side. Never remove that guard: without it `analyze` reports a confident median
+   for a product that has no listings at all.
 
-4. **Rate limiting and backoff.**
+4. **Multi-province expansion (2025 Administrative Reforms).**
+   Vietnam's 2025 administrative mergers combine previously separate province codes. The taxonomy
+   layer (`chotot/taxonomy.py`) maps merged province keys to their underlying legacy sub-codes.
+   Sampling across them is **proportional to each region's real size**, not balanced
+   round-robin: an equal split made `--region hcm` return mostly the annexed provinces
+   and almost none of the city itself.
+
+5. **Rate limiting and backoff.**
    `chotot/http.py` enforces a minimum 0.2s interval between requests, honours `Retry-After`
    headers, and uses exponential backoff on HTTP 429/503. Never disable pacing or retries.
 
-5. **Location-independent launcher.**
+6. **Location-independent launcher.**
    `bin/chotot` resolves its path through symlinks and injects `$root` into `PYTHONPATH`.
    CLI commands should be invoked directly via the `chotot` binary or `bin/chotot`, never via `cd <repo> && python3 -m chotot.cli`.
 
@@ -48,7 +59,7 @@ modifying anything in `chotot/` or `tools/`.
 | `chotot regions` | Display province and district codes (including 2025 merger groups) |
 | `chotot export "ipad" -o out.csv` | Export search results to CSV, JSON, or Markdown |
 | `chotot doctor` | Re-measure upstream gateway contract and report API health |
-| `chotot mcp` | Serve FastMCP/JSON-RPC server over stdio for AI agent tool calling |
+| `chotot mcp` | Serve the Model Context Protocol (JSON-RPC 2.0) over stdio; 8 tools |
 
 ## Verification Protocol
 
