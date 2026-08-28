@@ -1,0 +1,40 @@
+{
+  "name": "chotot-cli",
+  "version": "2.0.0",
+  "description": "Command-line client, market-price analyser and MCP server for Chợ Tốt (Vietnam classifieds)",
+  "language": "python",
+  "requires_python": ">=3.9",
+  "runtime_dependencies": [],
+  "entrypoint": "chotot.cli:main",
+  "commands": {
+    "search": "Search listings by keyword, category, province, district, price, condition, seller type",
+    "detail": "One listing in full: specs, location, seller, images, active status",
+    "analyze": "Asking-price distribution with percentiles, per-condition breakdown and histogram",
+    "seller": "A seller's complete live inventory and asking-price summary",
+    "shop": "A professional shop's profile (phone numbers redacted unless --show-contact)",
+    "facets": "List the probe-verified search filters a category supports",
+    "categories": "Category codes and hierarchy",
+    "regions": "Province and district codes, including 2025 merger groups",
+    "export": "Write results to CSV, JSON or Markdown",
+    "doctor": "Re-measure the upstream API contract against the live gateway",
+    "mcp": "Serve the Model Context Protocol over stdio"
+  },
+  "source_root": "chotot",
+  "test_root": "tests",
+  "data_root": "chotot/data",
+  "exit_codes": {
+    "0": "success", "1": "internal error", "2": "usage error",
+    "3": "no results", "4": "not found", "5": "transport failure",
+    "6": "rate limited", "7": "upstream contract mismatch"
+  },
+  "verification": {
+    "unit": "python3 -m pytest tests/ -m 'not slow'",
+    "packaging": "python3 -m pytest tests/test_packaging.py",
+    "mutation": "python3 tools/mutate.py",
+    "live_contract": "python3 -m chotot.cli doctor"
+  },
+  "regenerate_data": [
+    "python3 tools/build_taxonomy.py --harvest-areas",
+    "python3 tools/build_facets.py"
+  ]
+}

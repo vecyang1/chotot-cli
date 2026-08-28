@@ -1,0 +1,59 @@
+chotot-cli
+Copyright (C) 2026 V
+
+This program is free software: you can redistribute it and/or modify it under
+the terms of the GNU Affero General Public License as published by the Free
+Software Foundation, either version 3 of the License, or (at your option) any
+later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE.  See the GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License along
+with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+AGPL-3.0-or-later from the first public release.
+
+
+THIRD-PARTY DATA
+----------------
+
+This tool reads public endpoints of the Chợ Tốt marketplace (chotot.com,
+gateway.chotot.com) at runtime. The terms of that service stay with Chợ Tốt and
+are not granted by the licence above. The AGPL covers the code in this
+repository; it says nothing about who may use the listings, asking prices, or
+photographs the code fetches.
+
+  gateway.chotot.com   Listing, category, region, seller and shop data is Chợ Tốt's
+                       and its users'. This project redistributes no scraped listing
+                       dataset and ships no harvested ad catalogue. The bundled
+                       taxonomy files (`chotot/data/*.json`) contain only structural
+                       metadata (category IDs, administrative region codes, and
+                       supported facet parameters) required for client-side query
+                       construction and local validation.
+
+PRIVACY AND CONTACT DETAILS
+---------------------------
+
+Chợ Tốt seller and shop profiles often include contact telephone numbers. To protect
+user privacy and comply with data minimization principles:
+- The `chotot shop` and `chotot seller` commands REDACT all phone numbers by default.
+- Phone numbers are only revealed when the operator explicitly passes `--show-contact`.
+- The MCP server defaults to redacting phone numbers (`show_contact: false`).
+- Operators must not collect, aggregate, or publish unredacted contact numbers.
+
+RATE LIMITING AND POLITE CRAWLING
+---------------------------------
+
+The HTTP transport layer enforces rate limiting (default minimum 0.2s between
+requests), exponential backoff on HTTP 429/503 responses, and respects `Retry-After`
+headers. Operators must not circumvent these protections for high-volume automated
+scraping.
+
+TEST FIXTURES
+-------------
+
+`tests/fixtures/` contains mock responses and static payloads retained so parsers
+and models are tested against actual gateway payload schemas. They contain sample
+ad data for unit testing and are not a licence to the underlying content.

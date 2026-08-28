@@ -1,0 +1,69 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "chotot-cli"
+version = "2.0.0"
+description = "Command-line client, market-price analyser and MCP server for Chợ Tốt, Vietnam's largest classifieds marketplace"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "AGPL-3.0-or-later" }
+authors = [{ name = "V" }]
+keywords = [
+    "chotot", "cho-tot", "vietnam", "marketplace", "classifieds",
+    "ecommerce", "cli", "mcp", "price-analysis", "market-research",
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)",
+    "Natural Language :: Vietnamese",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Internet :: WWW/HTTP",
+    "Topic :: Office/Business",
+    "Topic :: Utilities",
+]
+# No runtime dependencies on purpose: the client is built on urllib from the
+# standard library, so `pip install chotot-cli` cannot fail on a transitive
+# resolution and the tool runs on a bare Python.
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0.0"]
+
+[project.urls]
+Homepage = "https://github.com/vecyang1/chotot-cli"
+Issues = "https://github.com/vecyang1/chotot-cli/issues"
+
+[project.scripts]
+chotot = "chotot.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["chotot*"]
+
+# The bundled taxonomy IS the product: without these the CLI cannot resolve a
+# province, a category or a facet. They must ship inside the wheel, and
+# tests/test_packaging.py installs the built artefact into a clean environment
+# and runs it from outside the source tree to prove they did.
+[tool.setuptools.package-data]
+chotot = ["data/*.json"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "--strict-markers"
+markers = [
+    "live: talks to the real Chợ Tốt gateway (deselect with -m 'not live')",
+    "slow: builds and installs a wheel (deselect with -m 'not slow')",
+]

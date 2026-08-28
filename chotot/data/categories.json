@@ -1,0 +1,758 @@
+{
+ "fetched_at": "2026-08-28T06:41:43Z",
+ "source": "https://gateway.chotot.com/v1/public/chapy-pro/categories",
+ "categories": {
+  "1000": {
+   "id": 1000,
+   "name": "Bất động sản",
+   "slug": "bat-dong-san",
+   "parent": null,
+   "aliases": [
+    "bat-dong-san",
+    "batdongsan",
+    "bds"
+   ]
+  },
+  "1010": {
+   "id": 1010,
+   "name": "Căn hộ/Chung cư",
+   "slug": "can-ho-chung-cu",
+   "parent": 1000,
+   "aliases": [
+    "can-ho-chung-cu",
+    "canhochungcu",
+    "chcc"
+   ]
+  },
+  "1020": {
+   "id": 1020,
+   "name": "Nhà ở",
+   "slug": "nha-o",
+   "parent": 1000,
+   "aliases": [
+    "nha-o",
+    "nhao",
+    "no"
+   ]
+  },
+  "1040": {
+   "id": 1040,
+   "name": "Đất",
+   "slug": "dat",
+   "parent": 1000,
+   "aliases": [
+    "dat"
+   ]
+  },
+  "1030": {
+   "id": 1030,
+   "name": "Văn phòng, Mặt bằng kinh doanh",
+   "slug": "van-phong-mat-bang-kinh-doanh",
+   "parent": 1000,
+   "aliases": [
+    "van-phong-mat-bang-kinh-doanh",
+    "vanphongmatbangkinhdoanh",
+    "vpmbkd"
+   ]
+  },
+  "1050": {
+   "id": 1050,
+   "name": "Phòng trọ",
+   "slug": "phong-tro",
+   "parent": 1000,
+   "aliases": [
+    "phong-tro",
+    "phongtro",
+    "pt"
+   ]
+  },
+  "2000": {
+   "id": 2000,
+   "name": "Xe cộ",
+   "slug": "xe-co",
+   "parent": null,
+   "aliases": [
+    "xc",
+    "xe-co",
+    "xeco"
+   ]
+  },
+  "2010": {
+   "id": 2010,
+   "name": "Ô tô",
+   "slug": "o-to",
+   "parent": 2000,
+   "aliases": [
+    "o-to",
+    "ot",
+    "oto"
+   ]
+  },
+  "2020": {
+   "id": 2020,
+   "name": "Xe máy",
+   "slug": "xe-may",
+   "parent": 2000,
+   "aliases": [
+    "xe-may",
+    "xemay",
+    "xm"
+   ]
+  },
+  "2050": {
+   "id": 2050,
+   "name": "Xe tải, xe ben",
+   "slug": "xe-tai-xe-ben",
+   "parent": 2000,
+   "aliases": [
+    "xe-tai-xe-ben",
+    "xetaixeben",
+    "xtxb"
+   ]
+  },
+  "2090": {
+   "id": 2090,
+   "name": "Xe điện",
+   "slug": "xe-dien",
+   "parent": 2000,
+   "aliases": [
+    "xd",
+    "xe-dien",
+    "xedien"
+   ]
+  },
+  "2060": {
+   "id": 2060,
+   "name": "Xe đạp",
+   "slug": "xe-dap",
+   "parent": 2000,
+   "aliases": [
+    "xd",
+    "xe-dap",
+    "xedap"
+   ]
+  },
+  "2080": {
+   "id": 2080,
+   "name": "Phương tiện khác",
+   "slug": "phuong-tien-khac",
+   "parent": 2000,
+   "aliases": [
+    "phuong-tien-khac",
+    "phuongtienkhac",
+    "ptk"
+   ]
+  },
+  "2030": {
+   "id": 2030,
+   "name": "Phụ tùng xe",
+   "slug": "phu-tung-xe",
+   "parent": 2000,
+   "aliases": [
+    "phu-tung-xe",
+    "phutungxe",
+    "ptx"
+   ]
+  },
+  "5000": {
+   "id": 5000,
+   "name": "Đồ điện tử",
+   "slug": "do-dien-tu",
+   "parent": null,
+   "aliases": [
+    "ddt",
+    "do-dien-tu",
+    "dodientu"
+   ]
+  },
+  "5010": {
+   "id": 5010,
+   "name": "Điện thoại",
+   "slug": "dien-thoai",
+   "parent": 5000,
+   "aliases": [
+    "dien-thoai",
+    "dienthoai",
+    "dt"
+   ]
+  },
+  "5040": {
+   "id": 5040,
+   "name": "Máy tính bảng",
+   "slug": "may-tinh-bang",
+   "parent": 5000,
+   "aliases": [
+    "may-tinh-bang",
+    "maytinhbang",
+    "mtb"
+   ]
+  },
+  "5030": {
+   "id": 5030,
+   "name": "Laptop",
+   "slug": "laptop",
+   "parent": 5000,
+   "aliases": [
+    "laptop"
+   ]
+  },
+  "5070": {
+   "id": 5070,
+   "name": "Máy tính để bàn",
+   "slug": "may-tinh-de-ban",
+   "parent": 5000,
+   "aliases": [
+    "may-tinh-de-ban",
+    "maytinhdeban",
+    "mtdb"
+   ]
+  },
+  "5050": {
+   "id": 5050,
+   "name": "Máy ảnh, Máy quay",
+   "slug": "may-anh-may-quay",
+   "parent": 5000,
+   "aliases": [
+    "mamq",
+    "may-anh-may-quay",
+    "mayanhmayquay"
+   ]
+  },
+  "5020": {
+   "id": 5020,
+   "name": "Tivi, Âm thanh",
+   "slug": "tivi-am-thanh",
+   "parent": 5000,
+   "aliases": [
+    "tat",
+    "tivi-am-thanh",
+    "tiviamthanh"
+   ]
+  },
+  "5090": {
+   "id": 5090,
+   "name": "Thiết bị đeo thông minh",
+   "slug": "thiet-bi-deo-thong-minh",
+   "parent": 5000,
+   "aliases": [
+    "tbdtm",
+    "thiet-bi-deo-thong-minh",
+    "thietbideothongminh"
+   ]
+  },
+  "5060": {
+   "id": 5060,
+   "name": "Phụ kiện (Màn hình, Chuột...)",
+   "slug": "phu-kien-man-hinh-chuot",
+   "parent": 5000,
+   "aliases": [
+    "phu-kien-man-hinh-chuot",
+    "phukienmanhinhchuot",
+    "pkmhc"
+   ]
+  },
+  "5080": {
+   "id": 5080,
+   "name": "Linh kiện (RAM, Card...)",
+   "slug": "linh-kien-ram-card",
+   "parent": 5000,
+   "aliases": [
+    "linh-kien-ram-card",
+    "linhkienramcard",
+    "lkrc"
+   ]
+  },
+  "12000": {
+   "id": 12000,
+   "name": "Thú cưng",
+   "slug": "thu-cung",
+   "parent": null,
+   "aliases": [
+    "tc",
+    "thu-cung",
+    "thucung"
+   ]
+  },
+  "12010": {
+   "id": 12010,
+   "name": "Gà",
+   "slug": "ga",
+   "parent": 12000,
+   "aliases": [
+    "ga"
+   ]
+  },
+  "12020": {
+   "id": 12020,
+   "name": "Chó",
+   "slug": "cho",
+   "parent": 12000,
+   "aliases": [
+    "cho"
+   ]
+  },
+  "12030": {
+   "id": 12030,
+   "name": "Chim",
+   "slug": "chim",
+   "parent": 12000,
+   "aliases": [
+    "chim"
+   ]
+  },
+  "12050": {
+   "id": 12050,
+   "name": "Mèo",
+   "slug": "meo",
+   "parent": 12000,
+   "aliases": [
+    "meo"
+   ]
+  },
+  "12060": {
+   "id": 12060,
+   "name": "Thú cưng khác",
+   "slug": "thu-cung-khac",
+   "parent": 12000,
+   "aliases": [
+    "tck",
+    "thu-cung-khac",
+    "thucungkhac"
+   ]
+  },
+  "12040": {
+   "id": 12040,
+   "name": "Phụ kiện, Thức ăn, Dịch vụ",
+   "slug": "phu-kien-thuc-an-dich-vu",
+   "parent": 12000,
+   "aliases": [
+    "phu-kien-thuc-an-dich-vu",
+    "phukienthucandichvu",
+    "pktadv"
+   ]
+  },
+  "7000": {
+   "id": 7000,
+   "name": "Đồ ăn, thực phẩm và các loại khác",
+   "slug": "do-an-thuc-pham-va-cac-loai-khac",
+   "parent": null,
+   "aliases": [
+    "datpvclk",
+    "do-an-thuc-pham-va-cac-loai-khac",
+    "doanthucphamvacacloaikhac"
+   ]
+  },
+  "7010": {
+   "id": 7010,
+   "name": "Đồ ăn, thực phẩm và các loại khác",
+   "slug": "do-an-thuc-pham-va-cac-loai-khac",
+   "parent": 7000,
+   "aliases": [
+    "datpvclk",
+    "do-an-thuc-pham-va-cac-loai-khac",
+    "doanthucphamvacacloaikhac"
+   ]
+  },
+  "9000": {
+   "id": 9000,
+   "name": "Tủ lạnh, máy lạnh, máy giặt",
+   "slug": "tu-lanh-may-lanh-may-giat",
+   "parent": null,
+   "aliases": [
+    "tlmlmg",
+    "tu-lanh-may-lanh-may-giat",
+    "tulanhmaylanhmaygiat"
+   ]
+  },
+  "9030": {
+   "id": 9030,
+   "name": "Tủ lạnh",
+   "slug": "tu-lanh",
+   "parent": 9000,
+   "aliases": [
+    "tl",
+    "tu-lanh",
+    "tulanh"
+   ]
+  },
+  "9060": {
+   "id": 9060,
+   "name": "Máy lạnh, điều hoà",
+   "slug": "may-lanh-dieu-hoa",
+   "parent": 9000,
+   "aliases": [
+    "may-lanh-dieu-hoa",
+    "maylanhdieuhoa",
+    "mldh"
+   ]
+  },
+  "9070": {
+   "id": 9070,
+   "name": "Máy giặt",
+   "slug": "may-giat",
+   "parent": 9000,
+   "aliases": [
+    "may-giat",
+    "maygiat",
+    "mg"
+   ]
+  },
+  "14000": {
+   "id": 14000,
+   "name": "Đồ gia dụng, nội thất, cây cảnh",
+   "slug": "do-gia-dung-noi-that-cay-canh",
+   "parent": null,
+   "aliases": [
+    "dgdntcc",
+    "do-gia-dung-noi-that-cay-canh",
+    "dogiadungnoithatcaycanh"
+   ]
+  },
+  "14070": {
+   "id": 14070,
+   "name": "Bàn ghế",
+   "slug": "ban-ghe",
+   "parent": 14000,
+   "aliases": [
+    "ban-ghe",
+    "banghe",
+    "bg"
+   ]
+  },
+  "14080": {
+   "id": 14080,
+   "name": "Tủ, kệ gia đình",
+   "slug": "tu-ke-gia-dinh",
+   "parent": 14000,
+   "aliases": [
+    "tkgd",
+    "tu-ke-gia-dinh",
+    "tukegiadinh"
+   ]
+  },
+  "14030": {
+   "id": 14030,
+   "name": "Giường, chăn ga gối nệm",
+   "slug": "giuong-chan-ga-goi-nem",
+   "parent": 14000,
+   "aliases": [
+    "gcggn",
+    "giuong-chan-ga-goi-nem",
+    "giuongchangagoinem"
+   ]
+  },
+  "14010": {
+   "id": 14010,
+   "name": "Bếp, lò, đồ điện nhà bếp",
+   "slug": "bep-lo-do-dien-nha-bep",
+   "parent": 14000,
+   "aliases": [
+    "bep-lo-do-dien-nha-bep",
+    "beplododiennhabep",
+    "blddnb"
+   ]
+  },
+  "14020": {
+   "id": 14020,
+   "name": "Dụng cụ nhà bếp",
+   "slug": "dung-cu-nha-bep",
+   "parent": 14000,
+   "aliases": [
+    "dcnb",
+    "dung-cu-nha-bep",
+    "dungcunhabep"
+   ]
+  },
+  "14050": {
+   "id": 14050,
+   "name": "Quạt",
+   "slug": "quat",
+   "parent": 14000,
+   "aliases": [
+    "quat"
+   ]
+  },
+  "14060": {
+   "id": 14060,
+   "name": "Đèn",
+   "slug": "den",
+   "parent": 14000,
+   "aliases": [
+    "den"
+   ]
+  },
+  "14090": {
+   "id": 14090,
+   "name": "Cây cảnh, đồ trang trí",
+   "slug": "cay-canh-do-trang-tri",
+   "parent": 14000,
+   "aliases": [
+    "cay-canh-do-trang-tri",
+    "caycanhdotrangtri",
+    "ccdtt"
+   ]
+  },
+  "14040": {
+   "id": 14040,
+   "name": "Thiết bị vệ sinh, nhà tắm",
+   "slug": "thiet-bi-ve-sinh-nha-tam",
+   "parent": 14000,
+   "aliases": [
+    "tbvsnt",
+    "thiet-bi-ve-sinh-nha-tam",
+    "thietbivesinhnhatam"
+   ]
+  },
+  "14110": {
+   "id": 14110,
+   "name": "Nội thất, đồ gia dụng khác",
+   "slug": "noi-that-do-gia-dung-khac",
+   "parent": 14000,
+   "aliases": [
+    "noi-that-do-gia-dung-khac",
+    "noithatdogiadungkhac",
+    "ntdgdk"
+   ]
+  },
+  "11000": {
+   "id": 11000,
+   "name": "Mẹ và bé",
+   "slug": "me-va-be",
+   "parent": null,
+   "aliases": [
+    "me-va-be",
+    "mevabe",
+    "mvb"
+   ]
+  },
+  "11010": {
+   "id": 11010,
+   "name": "Mẹ và bé",
+   "slug": "me-va-be",
+   "parent": 11000,
+   "aliases": [
+    "me-va-be",
+    "mevabe",
+    "mvb"
+   ]
+  },
+  "3000": {
+   "id": 3000,
+   "name": "Thời trang, Đồ dùng cá nhân",
+   "slug": "thoi-trang-do-dung-ca-nhan",
+   "parent": null,
+   "aliases": [
+    "thoi-trang-do-dung-ca-nhan",
+    "thoitrangdodungcanhan",
+    "ttddcn"
+   ]
+  },
+  "3030": {
+   "id": 3030,
+   "name": "Quần áo",
+   "slug": "quan-ao",
+   "parent": 3000,
+   "aliases": [
+    "qa",
+    "quan-ao",
+    "quanao"
+   ]
+  },
+  "3050": {
+   "id": 3050,
+   "name": "Đồng hồ",
+   "slug": "dong-ho",
+   "parent": 3000,
+   "aliases": [
+    "dh",
+    "dong-ho",
+    "dongho"
+   ]
+  },
+  "3060": {
+   "id": 3060,
+   "name": "Giày dép",
+   "slug": "giay-dep",
+   "parent": 3000,
+   "aliases": [
+    "gd",
+    "giay-dep",
+    "giaydep"
+   ]
+  },
+  "3070": {
+   "id": 3070,
+   "name": "Túi xách",
+   "slug": "tui-xach",
+   "parent": 3000,
+   "aliases": [
+    "tui-xach",
+    "tuixach",
+    "tx"
+   ]
+  },
+  "3080": {
+   "id": 3080,
+   "name": "Nước hoa",
+   "slug": "nuoc-hoa",
+   "parent": 3000,
+   "aliases": [
+    "nh",
+    "nuoc-hoa",
+    "nuochoa"
+   ]
+  },
+  "3090": {
+   "id": 3090,
+   "name": "Phụ kiện thời trang khác",
+   "slug": "phu-kien-thoi-trang-khac",
+   "parent": 3000,
+   "aliases": [
+    "phu-kien-thoi-trang-khac",
+    "phukienthoitrangkhac",
+    "pkttk"
+   ]
+  },
+  "4000": {
+   "id": 4000,
+   "name": "Giải trí, Thể thao, Sở thích",
+   "slug": "giai-tri-the-thao-so-thich",
+   "parent": null,
+   "aliases": [
+    "giai-tri-the-thao-so-thich",
+    "giaitrithethaosothich",
+    "gtttst"
+   ]
+  },
+  "4040": {
+   "id": 4040,
+   "name": "Nhạc cụ",
+   "slug": "nhac-cu",
+   "parent": 4000,
+   "aliases": [
+    "nc",
+    "nhac-cu",
+    "nhaccu"
+   ]
+  },
+  "4070": {
+   "id": 4070,
+   "name": "Sách",
+   "slug": "sach",
+   "parent": 4000,
+   "aliases": [
+    "sach"
+   ]
+  },
+  "4020": {
+   "id": 4020,
+   "name": "Đồ thể thao, Dã ngoại",
+   "slug": "do-the-thao-da-ngoai",
+   "parent": 4000,
+   "aliases": [
+    "do-the-thao-da-ngoai",
+    "dothethaodangoai",
+    "dttdn"
+   ]
+  },
+  "4010": {
+   "id": 4010,
+   "name": "Đồ sưu tầm, đồ cổ",
+   "slug": "do-suu-tam-do-co",
+   "parent": 4000,
+   "aliases": [
+    "do-suu-tam-do-co",
+    "dosuutamdoco",
+    "dstdc"
+   ]
+  },
+  "4050": {
+   "id": 4050,
+   "name": "Thiết bị chơi game",
+   "slug": "thiet-bi-choi-game",
+   "parent": 4000,
+   "aliases": [
+    "tbcg",
+    "thiet-bi-choi-game",
+    "thietbichoigame"
+   ]
+  },
+  "4060": {
+   "id": 4060,
+   "name": "Sở thích khác",
+   "slug": "so-thich-khac",
+   "parent": 4000,
+   "aliases": [
+    "so-thich-khac",
+    "sothichkhac",
+    "stk"
+   ]
+  },
+  "8000": {
+   "id": 8000,
+   "name": "Đồ dùng văn phòng, công nông nghiệp",
+   "slug": "do-dung-van-phong-cong-nong-nghiep",
+   "parent": null,
+   "aliases": [
+    "ddvpcnn",
+    "do-dung-van-phong-cong-nong-nghiep",
+    "dodungvanphongcongnongnghiep"
+   ]
+  },
+  "8010": {
+   "id": 8010,
+   "name": "Đồ dùng văn phòng",
+   "slug": "do-dung-van-phong",
+   "parent": 8000,
+   "aliases": [
+    "ddvp",
+    "do-dung-van-phong",
+    "dodungvanphong"
+   ]
+  },
+  "8030": {
+   "id": 8030,
+   "name": "Đồ chuyên dụng, Giống nuôi trồng",
+   "slug": "do-chuyen-dung-giong-nuoi-trong",
+   "parent": 8000,
+   "aliases": [
+    "dcdgnt",
+    "do-chuyen-dung-giong-nuoi-trong",
+    "dochuyendunggiongnuoitrong"
+   ]
+  },
+  "6000": {
+   "id": 6000,
+   "name": "Dịch vụ, Du lịch",
+   "slug": "dich-vu-du-lich",
+   "parent": null,
+   "aliases": [
+    "dich-vu-du-lich",
+    "dichvudulich",
+    "dvdl"
+   ]
+  },
+  "6020": {
+   "id": 6020,
+   "name": "Dịch vụ",
+   "slug": "dich-vu",
+   "parent": 6000,
+   "aliases": [
+    "dich-vu",
+    "dichvu",
+    "dv"
+   ]
+  },
+  "6030": {
+   "id": 6030,
+   "name": "Du lịch",
+   "slug": "du-lich",
+   "parent": 6000,
+   "aliases": [
+    "dl",
+    "du-lich",
+    "dulich"
+   ]
+  }
+ }
+}
