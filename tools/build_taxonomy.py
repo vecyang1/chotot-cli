@@ -120,6 +120,49 @@ def fetch_categories() -> Dict[str, Any]:
                 "parent": int(gid),
                 "aliases": province_aliases(sname),
             }
+
+    # Additional standalone categories present on Chợ Tốt gateway (/ad-listing):
+    extra_groups = [
+        {
+            "id": 13000,
+            "name": "Việc làm",
+            "subcategories": [
+                {"id": 13010, "name": "Việc làm"},
+            ],
+        },
+        {
+            "id": 15000,
+            "name": "Dịch vụ nhà cửa",
+            "subcategories": [
+                {"id": 15010, "name": "Dịch vụ dọn dẹp nhà"},
+                {"id": 15020, "name": "Dịch vụ chuyển nhà"},
+                {"id": 15030, "name": "Dịch vụ sửa chữa & bảo dưỡng điện máy"},
+                {"id": 15040, "name": "Dịch vụ nhà cửa khác"},
+            ],
+        },
+    ]
+    for group in extra_groups:
+        gid = str(group["id"])
+        gname = group["name"]
+        if gid not in categories:
+            categories[gid] = {
+                "id": int(gid),
+                "name": gname,
+                "slug": slugify(gname),
+                "parent": None,
+                "aliases": province_aliases(gname),
+            }
+        for sub in group.get("subcategories") or []:
+            sid = str(sub["id"])
+            sname = sub["name"]
+            if sid not in categories:
+                categories[sid] = {
+                    "id": int(sid),
+                    "name": sname,
+                    "slug": slugify(sname),
+                    "parent": int(gid),
+                    "aliases": province_aliases(sname),
+                }
     return categories
 
 

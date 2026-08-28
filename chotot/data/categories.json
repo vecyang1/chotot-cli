@@ -1,5 +1,5 @@
 {
- "fetched_at": "2026-08-28T06:41:43Z",
+ "fetched_at": "2026-08-28T13:11:57Z",
  "source": "https://gateway.chotot.com/v1/public/chapy-pro/categories",
  "categories": {
   "1000": {
@@ -752,6 +752,83 @@
     "dl",
     "du-lich",
     "dulich"
+   ]
+  },
+  "13000": {
+   "id": 13000,
+   "name": "Việc làm",
+   "slug": "viec-lam",
+   "parent": null,
+   "aliases": [
+    "viec-lam",
+    "vieclam",
+    "vl"
+   ]
+  },
+  "13010": {
+   "id": 13010,
+   "name": "Việc làm",
+   "slug": "viec-lam",
+   "parent": 13000,
+   "aliases": [
+    "viec-lam",
+    "vieclam",
+    "vl"
+   ]
+  },
+  "15000": {
+   "id": 15000,
+   "name": "Dịch vụ nhà cửa",
+   "slug": "dich-vu-nha-cua",
+   "parent": null,
+   "aliases": [
+    "dich-vu-nha-cua",
+    "dichvunhacua",
+    "dvnc"
+   ]
+  },
+  "15010": {
+   "id": 15010,
+   "name": "Dịch vụ dọn dẹp nhà",
+   "slug": "dich-vu-don-dep-nha",
+   "parent": 15000,
+   "aliases": [
+    "dich-vu-don-dep-nha",
+    "dichvudondepnha",
+    "dvddn"
+   ]
+  },
+  "15020": {
+   "id": 15020,
+   "name": "Dịch vụ chuyển nhà",
+   "slug": "dich-vu-chuyen-nha",
+   "parent": 15000,
+   "aliases": [
+    "dich-vu-chuyen-nha",
+    "dichvuchuyennha",
+    "dvcn"
+   ]
+  },
+  "15030": {
+   "id": 15030,
+   "name": "Dịch vụ sửa chữa & bảo dưỡng điện máy",
+   "slug": "dich-vu-sua-chua-bao-duong-dien-may",
+   "parent": 15000,
+   "aliases": [
+    "dich-vu-sua-chua-bao-duong-dien-may",
+    "dichvusuachuabaoduongdienmay",
+    "dvscbddm"
+   ]
+  },
+  "15040": {
+   "id": 15040,
+   "name": "Dịch vụ nhà cửa khác",
+   "slug": "dich-vu-nha-cua-khac",
+   "parent": 15000,
+   "aliases": [
+    "dich-vu-nha-cua-khac",
+    "dichvunhacuakhac",
+    "dvnck"
    ]
   }
  }

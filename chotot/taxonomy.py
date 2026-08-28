@@ -109,7 +109,10 @@ def _category_index() -> Dict[str, int]:
         ("car", "2010"), ("cars", "2010"),
         ("motorbike", "2020"), ("motorcycle", "2020"),
         ("property", "1000"), ("realestate", "1000"), ("real estate", "1000"),
-        ("job", "13010"), ("jobs", "13010"),
+        ("job", "13010"), ("jobs", "13010"), ("recruitment", "13010"),
+        ("home services", "15000"), ("home service", "15000"),
+        ("cleaning", "15010"), ("moving", "15020"),
+        ("appliance repair", "15030"),
     ):
         if target in categories():
             index.setdefault(_key(english), int(target))
