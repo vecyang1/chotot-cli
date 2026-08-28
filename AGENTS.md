@@ -45,6 +45,12 @@ modifying anything in `chotot/` or `tools/`.
    `bin/chotot` resolves its path through symlinks and injects `$root` into `PYTHONPATH`.
    CLI commands should be invoked directly via the `chotot` binary or `bin/chotot`, never via `cd <repo> && python3 -m chotot.cli`.
 
+7. **Proxy readiness and anti-scraping self-healing.**
+   `chotot/proxy.py` resolves explicit proxies (`--proxy <url>`), environment proxies (`CHOTOT_PROXY`, `HTTPS_PROXY`),
+   and auto-resolves residential proxy pools (DataImpulse with `--geo vn`) via `ultra-low-cost-scraper`.
+   When `--auto-proxy` (or `CHOTOT_AUTO_PROXY=1`) is active, rate-limited or blocked direct requests automatically
+   switch to residential proxy egress and self-heal.
+
 ## CLI Subcommands
 
 | Command | Description |

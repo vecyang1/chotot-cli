@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "chotot-cli"
-version = "2.0.0"
+version = "2.1.0"
 description = "Command-line client, market-price analyser and MCP server for Chợ Tốt, Vietnam's largest classifieds marketplace"
 readme = "README.md"
 requires-python = ">=3.9"

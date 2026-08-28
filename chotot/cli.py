@@ -70,7 +70,8 @@ PROG = "chotot"
 #: not overwritten by the subparser's copy of the same option.
 GLOBAL_DEFAULTS = {
     "no_colour": False, "timeout": 20.0, "min_interval": 0.2,
-    "retries": 3, "verbose": False,
+    "retries": 3, "verbose": False, "proxy": None, "auto_proxy": False,
+    "geo": "vn",
 }
 
 
@@ -101,7 +102,7 @@ examples:
   chotot export "ipad pro" --limit 200 --output ipad.csv
   chotot categories --parent 5000
   chotot regions --search "can tho"
-  chotot doctor
+  chotot doctor --proxy auto
   chotot mcp
 
 Prices are in Vietnamese dong (VND). Sorting, condition and seller-type filters
@@ -128,6 +129,12 @@ are applied locally because the gateway ignores them; every result says so.
                         help="Minimum delay between gateway requests (default: 0.2).")
     common.add_argument("--retries", type=int, default=argparse.SUPPRESS, metavar="N",
                         help="Attempts per request on a retryable failure (default: 3).")
+    common.add_argument("--proxy", default=argparse.SUPPRESS, metavar="URL",
+                        help="Proxy URL ('http://...', 'socks5://...', or 'auto' for residential proxy).")
+    common.add_argument("--auto-proxy", action="store_true", default=argparse.SUPPRESS,
+                        help="Automatically fall back to residential proxy on rate limits / anti-bot.")
+    common.add_argument("--geo", default=argparse.SUPPRESS, metavar="CC",
+                        help="Target country code for residential proxy (default: vn).")
     common.add_argument("--verbose", action="store_true", default=argparse.SUPPRESS,
                         help="Log gateway activity to stderr.")
     for action in common._actions:
@@ -237,8 +244,14 @@ are applied locally because the gateway ignores them; every result says so.
 # -- command handlers ------------------------------------------------------
 
 def _client(args: argparse.Namespace) -> ChototClient:
-    return ChototClient(timeout=args.timeout, max_retries=args.retries,
-                        min_interval=args.min_interval)
+    return ChototClient(
+        timeout=args.timeout,
+        max_retries=args.retries,
+        min_interval=args.min_interval,
+        proxy=getattr(args, "proxy", None),
+        auto_proxy=getattr(args, "auto_proxy", False),
+        geo=getattr(args, "geo", "vn"),
+    )
 
 
 def _search_kwargs(args: argparse.Namespace) -> Dict[str, Any]:
