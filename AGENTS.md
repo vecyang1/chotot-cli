@@ -64,13 +64,13 @@ modifying anything in `chotot/` or `tools/`.
 ## Verification Protocol
 
 ```bash
-# 1. Full unit test suite (388 tests)
-python3 -m pytest tests/
+# 1. Full unit test suite (391 tests)
+python3 -m pytest tests/ -rs   # -rs: a skipped gate must not read as a pass
 
 # 2. Packaging test (builds and validates wheel in isolated sandbox)
 python3 -m pytest tests/test_packaging.py
 
-# 3. Mutation test harness (54/54 mutants caught)
+# 3. Mutation test harness (55/55 mutants caught)
 python3 tools/mutate.py
 
 # 4. Upstream live contract check

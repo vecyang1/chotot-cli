@@ -68,12 +68,28 @@ def get_default_ssl_context() -> ssl.SSLContext:
     if _DEFAULT_SSL_CONTEXT is None:
         ctx = ssl.create_default_context()
         if not ctx.get_ca_certs():
+            # An empty trust store is not a warning sign, it is a certainty:
+            # every HTTPS request will fail verification. certifi carries a
+            # store, and is optional precisely because this path does not fire
+            # on a normally-installed Python (193 CAs on the reference machine,
+            # in the system interpreter and in a dependency-free venv alike).
+            #
+            # `except Exception: pass` used to swallow the absence, so the only
+            # symptom was a bare SSL error on every subsequent request with
+            # nothing naming the cause. The remedy has to be stated where the
+            # cause is known.
             try:
                 import certifi
-
+            except ImportError:
+                logger.warning(
+                    "This interpreter has an empty CA trust store and certifi is "
+                    "not installed, so HTTPS verification will fail. Install your "
+                    "Python's certificates (on macOS: 'Install Certificates.command' "
+                    "in the Python folder), or 'pip install certifi'."
+                )
+            else:
                 ctx = ssl.create_default_context(cafile=certifi.where())
-            except Exception:
-                pass
+                logger.debug("empty system trust store; using certifi at %s", certifi.where())
         _DEFAULT_SSL_CONTEXT = ctx
     return _DEFAULT_SSL_CONTEXT
 
