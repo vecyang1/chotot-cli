@@ -35,6 +35,7 @@ import urllib.error
 import urllib.parse
 import urllib.request
 import zlib
+import ssl
 from typing import Any, Callable, Dict, Optional
 
 from chotot.errors import (
@@ -42,6 +43,12 @@ from chotot.errors import (
 )
 
 logger = logging.getLogger("chotot.http")
+
+DEFAULT_TIMEOUT = 20.0
+DEFAULT_MAX_RETRIES = 3
+DEFAULT_BACKOFF_BASE = 0.5
+DEFAULT_MIN_INTERVAL = 0.2
+MAX_BACKOFF = 30.0
 
 DEFAULT_USER_AGENT = (
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
@@ -52,11 +59,27 @@ DEFAULT_USER_AGENT = (
 #: is an answer, not a transient fault, and retrying it wastes the user's time.
 RETRYABLE_STATUSES = frozenset({429, 500, 502, 503, 504})
 
-DEFAULT_TIMEOUT = 20.0
-DEFAULT_MAX_RETRIES = 3
-DEFAULT_BACKOFF_BASE = 0.5
-DEFAULT_MIN_INTERVAL = 0.2
-MAX_BACKOFF = 30.0
+_DEFAULT_SSL_CONTEXT: Optional[ssl.SSLContext] = None
+
+
+def get_default_ssl_context() -> ssl.SSLContext:
+    """Return a default SSLContext with certifi fallback for barren interpreters."""
+    global _DEFAULT_SSL_CONTEXT
+    if _DEFAULT_SSL_CONTEXT is None:
+        ctx = ssl.create_default_context()
+        if not ctx.get_ca_certs():
+            try:
+                import certifi
+
+                ctx = ssl.create_default_context(cafile=certifi.where())
+            except Exception:
+                pass
+        _DEFAULT_SSL_CONTEXT = ctx
+    return _DEFAULT_SSL_CONTEXT
+
+
+def _default_opener(req: urllib.request.Request, timeout: float = DEFAULT_TIMEOUT) -> Any:
+    return urllib.request.urlopen(req, timeout=timeout, context=get_default_ssl_context())
 
 
 class HttpTransport:
@@ -87,7 +110,7 @@ class HttpTransport:
         self.max_retries = max(1, max_retries)
         self.min_interval = max(0.0, min_interval)
         self.user_agent = user_agent
-        self._opener = opener or urllib.request.urlopen
+        self._opener = opener or _default_opener
         self._sleep = sleep or time.sleep
         self._last_request_at = 0.0
         #: Requests actually issued, so callers can report cost honestly.

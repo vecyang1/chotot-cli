@@ -32,21 +32,21 @@ modifying anything in `chotot/` or `tools/`.
 
 5. **Location-independent launcher.**
    `bin/chotot` resolves its path through symlinks and injects `$root` into `PYTHONPATH`.
-   Documented CLI commands must use `chotot <cmd>` or `bin/chotot <cmd>`, never `cd <repo> && python3 -m chotot.cli`.
+   CLI commands should be invoked directly via the `chotot` binary or `bin/chotot`, never via `cd <repo> && python3 -m chotot.cli`.
 
 ## CLI Subcommands
 
 | Command | Description |
 |---|---|
-| `chotot search <query>` | Search listings by keyword, region, category, price, condition, seller type |
-| `chotot detail <id\|url>` | Fetch complete listing record (images, specs, seller, location) |
-| `chotot analyze <query>` | Market price distribution (median, IQR, condition breakdown, histogram) |
-| `chotot seller <account_id>` | List live inventory and pricing summary for a seller |
-| `chotot shop <alias>` | Fetch professional storefront profile (redacted by default) |
-| `chotot facets <category>` | List probe-verified filter parameters for a category |
+| `chotot search "iphone 13"` | Search listings by keyword, region, category, price, condition, seller type |
+| `chotot detail 134348455` | Fetch complete listing record (images, specs, seller, location) |
+| `chotot analyze "iphone 13"` | Market price distribution (median, IQR, condition breakdown, histogram) |
+| `chotot seller 17864227` | List live inventory and pricing summary for a seller |
+| `chotot shop apple_store` | Fetch professional storefront profile (redacted by default) |
+| `chotot facets 5010` | List probe-verified filter parameters for a category |
 | `chotot categories` | Display category taxonomy and numeric codes |
 | `chotot regions` | Display province and district codes (including 2025 merger groups) |
-| `chotot export <query>` | Export search results to CSV, JSON, or Markdown |
+| `chotot export "ipad" -o out.csv` | Export search results to CSV, JSON, or Markdown |
 | `chotot doctor` | Re-measure upstream gateway contract and report API health |
 | `chotot mcp` | Serve FastMCP/JSON-RPC server over stdio for AI agent tool calling |
 
