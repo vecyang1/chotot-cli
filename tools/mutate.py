@@ -39,6 +39,15 @@ class Mutation(NamedTuple):
 
 MUTATIONS: List[Mutation] = [
     Mutation(
+        "empty TLS trust store fails silently again",
+        "chotot/http.py",
+        '                logger.warning(\n'
+        '                    "This interpreter has an empty CA trust store and certifi is "',
+        '                if False: logger.warning(\n'
+        '                    "This interpreter has an empty CA trust store and certifi is "',
+        "every request then fails with a bare SSL error and nothing names the cause",
+    ),
+    Mutation(
         "crawl budget counts fetched rows instead of surviving ones",
         "chotot/client.py",
         "            return sum(1 for x in buckets[target] if survives(x))",

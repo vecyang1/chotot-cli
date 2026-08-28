@@ -7,7 +7,15 @@ leaves the source tree, and runs the real entry point — including a failure pa
 because a packaging fault often first surfaces as an unhandled ImportError that
 reads like an application bug.
 
-Marked ``live`` only because building a wheel is slow; it needs no network.
+Marked ``live`` because building a wheel is slow AND because it needs pip's
+build backend: with ``PIP_NO_INDEX=1`` and no cached setuptools the build
+cannot start and all six tests skip. Measured 2026-08-28 -- the older claim
+that this needs no network was wrong.
+
+A gate that skips itself on failure reports the same green as a gate that
+passed, so the skip message says so in words a reader will notice: an
+editable-install .pth left in the system interpreter silently skipped all
+six here, and the run still read as '382 passed'. Run with ``-rs``.
 """
 from __future__ import annotations
 
@@ -38,7 +46,8 @@ def installed(tmp_path_factory):
 
     build = _run([sys.executable, "-m", "pip", "wheel", "--no-deps", "-w", str(dist), str(ROOT)])
     if build.returncode != 0:
-        pytest.skip(f"wheel build unavailable here: {build.stderr[-400:]}")
+        pytest.skip(f"PACKAGING GATE DID NOT RUN - wheel build unavailable here "
+                    f"(needs pip's build backend): {build.stderr[-300:]}")
     wheels = list(dist.glob("chotot_cli-*.whl"))
     assert wheels, f"no wheel produced: {build.stdout[-400:]}"
 

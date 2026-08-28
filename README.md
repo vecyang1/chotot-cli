@@ -231,14 +231,19 @@ Not affiliated with or endorsed by Chợ Tốt or Carousell.
 ## Development
 
 ```bash
-python3 -m pytest tests/ -m "not slow"   # 388 tests, no network
-python3 -m pytest tests/                 # adds the packaging check (377)
-python3 tools/mutate.py                  # 54 mutants; all must be caught
-python3 -m chotot.cli doctor             # re-measure the live contract
+python3 -m pytest tests/ -rs             # 391 tests; -rs so a skip cannot read as a pass
+python3 tools/mutate.py                  # 55 mutants; all must be caught
+python3 -m chotot.cli doctor             # re-measure the live contract against the gateway
 ```
 
 The suite is checked on Python 3.10 as well as 3.14 — an earlier revision could
 not be imported at all below 3.14, and passed its tests anyway.
+
+Use `-rs`. Six of those 391 build a wheel and install it into a clean
+virtualenv, and they **skip** rather than fail when pip's build backend is
+unavailable — an editable-install `.pth` left in a system interpreter was enough
+to skip all six, and the run still printed `382 passed`. A gate that skips
+itself reports the same green as one that passed.
 
 Refresh the bundled taxonomy and facet snapshots:
 

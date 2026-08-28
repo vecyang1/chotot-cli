@@ -182,3 +182,88 @@ def test_request_count_is_reported_honestly():
     transport.get_json("a")
     transport.get_json("b")
     assert transport.request_count == 2
+
+
+# -- the TLS trust-store fallback, which never fires on a healthy interpreter --
+#
+# 193 CAs are present in both the system interpreter and a dependency-free venv
+# on the reference machine, so this path had never executed. A branch that only
+# runs on a broken host is exactly the one that must be tested on a working one.
+
+def _forced_empty_store(monkeypatch, certifi_available):
+    import ssl as ssl_module
+    from chotot import http as http_module
+
+    monkeypatch.setattr(http_module, "_DEFAULT_SSL_CONTEXT", None)
+
+    class _EmptyContext:
+        def get_ca_certs(self):
+            return []
+
+    made = {"cafile": "unset"}
+
+    def fake_create(cafile=None, **kwargs):
+        made["cafile"] = cafile
+        return _EmptyContext()
+
+    monkeypatch.setattr(ssl_module, "create_default_context", fake_create)
+
+    real_import = __builtins__["__import__"] if isinstance(__builtins__, dict) else __builtins__.__import__
+
+    def guarded(name, *args, **kwargs):
+        if name == "certifi" and not certifi_available:
+            raise ImportError("No module named 'certifi'")
+        if name == "certifi":
+            import types
+
+            module = types.ModuleType("certifi")
+            module.where = lambda: "/fake/cacert.pem"
+            return module
+        return real_import(name, *args, **kwargs)
+
+    monkeypatch.setattr("builtins.__import__", guarded)
+    return made
+
+
+def test_empty_trust_store_uses_certifi_when_present(monkeypatch):
+    from chotot.http import get_default_ssl_context
+
+    made = _forced_empty_store(monkeypatch, certifi_available=True)
+    get_default_ssl_context()
+    assert made["cafile"] == "/fake/cacert.pem"
+
+
+def test_empty_trust_store_without_certifi_names_the_remedy(monkeypatch, caplog):
+    """Silence here produced a bare SSL error on every request and no cause."""
+    import logging
+
+    from chotot.http import get_default_ssl_context
+
+    _forced_empty_store(monkeypatch, certifi_available=False)
+    with caplog.at_level(logging.WARNING, logger="chotot.http"):
+        get_default_ssl_context()
+
+    message = " ".join(r.message for r in caplog.records)
+    assert "empty CA trust store" in message
+    assert "certifi" in message
+
+
+def test_healthy_interpreter_never_touches_certifi(monkeypatch):
+    """The other direction: a warning that fires on healthy input gets muted."""
+    import logging
+
+    from chotot import http as http_module
+
+    monkeypatch.setattr(http_module, "_DEFAULT_SSL_CONTEXT", None)
+    records = []
+    handler = logging.Handler()
+    handler.emit = records.append
+    logger = logging.getLogger("chotot.http")
+    logger.addHandler(handler)
+    try:
+        ctx = http_module.get_default_ssl_context()
+    finally:
+        logger.removeHandler(handler)
+
+    assert ctx.get_ca_certs(), "reference machine has a populated trust store"
+    assert not [r for r in records if r.levelno >= logging.WARNING]
