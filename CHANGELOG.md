@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **MCP Server**: Stdio Model Context Protocol integration exposing 6 core tools (`chotot_search`, `chotot_detail`, `chotot_analyze_market`, `chotot_seller_listings`, `chotot_shop_profile`, `chotot_list_categories`) for agentic workflows.
 - **Privacy Controls**: Default automatic redaction of seller and shop telephone numbers across CLI output and MCP responses, with explicit `--show-contact` bypass.
 - **2025 Vietnam Administrative Reforms**: Bundled taxonomy mapping for 34 merged administrative regions with automatic sub-code query fanout and balanced round-robin sampling.
-- **Category-Specific Facets**: Support for verified filters (brands, storage capacity, fuel, transmission, year, etc.) via `chotot facets` and `--facet key=value`.
+- **Category-Specific Facets**: Support for verified filters (brands, storage capacity, fuel, transmission, year, etc.) via `chotot facets 5010` and `--facet key=value`.
 - **Multi-Format Export**: Stream search results to CSV (with formula injection protection and UTF-8 BOM), JSON, or Markdown.
 - **Doctor Command**: Automated probe testing live upstream gateway endpoints and verifying API contract invariants.
 - **Mutation Testing Harness**: 54 mutation test cases in `tools/mutate.py` achieving 100% catch rate.
