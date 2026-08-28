@@ -113,4 +113,4 @@ def test_the_package_imports_without_the_source_tree(installed):
                   cwd=installed["cwd"])
     assert result.returncode == 0, result.stderr
     version, provinces = result.stdout.split()
-    assert version == "2.0.0" and int(provinces) > 60
+    assert version == "2.1.0" and int(provinces) > 60

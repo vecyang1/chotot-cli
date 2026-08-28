@@ -29,6 +29,7 @@ from __future__ import annotations
 import gzip
 import json
 import logging
+import os
 import random
 import time
 import urllib.error
@@ -41,6 +42,7 @@ from typing import Any, Callable, Dict, Optional
 from chotot.errors import (
     NotFoundError, RateLimitedError, TransportError, UpstreamContractError, UsageError,
 )
+from chotot.proxy import DEFAULT_GEO, mask_proxy, resolve_proxy
 
 logger = logging.getLogger("chotot.http")
 
@@ -98,8 +100,19 @@ def _default_opener(req: urllib.request.Request, timeout: float = DEFAULT_TIMEOU
     return urllib.request.urlopen(req, timeout=timeout, context=get_default_ssl_context())
 
 
+def _make_opener(proxy_url: Optional[str] = None) -> Callable[..., Any]:
+    if proxy_url:
+        handlers = [
+            urllib.request.ProxyHandler({"http": proxy_url, "https": proxy_url}),
+            urllib.request.HTTPSHandler(context=get_default_ssl_context()),
+        ]
+        opener = urllib.request.build_opener(*handlers)
+        return lambda req, timeout=DEFAULT_TIMEOUT: opener.open(req, timeout=timeout)
+    return _default_opener
+
+
 class HttpTransport:
-    """A small, polite JSON client.
+    """A small, polite JSON client with proxy & anti-scraping support.
 
     Args:
         base_url: Gateway root, without a trailing slash.
@@ -107,6 +120,9 @@ class HttpTransport:
         max_retries: Total attempts for a retryable failure (1 = no retry).
         min_interval: Minimum spacing between requests, applied automatically.
         user_agent: Sent verbatim; the gateway serves anonymous traffic.
+        proxy: Explicit proxy URL or 'auto' (default: None).
+        auto_proxy: If True, automatically resolve residential proxy on rate limits / 429 / 403.
+        geo: Country code for residential proxy (default: 'vn').
         opener: Injection point for tests. Must accept ``(request, timeout)``.
         sleep: Injection point for tests, so backoff is asserted, not waited on.
     """
@@ -118,6 +134,9 @@ class HttpTransport:
         max_retries: int = DEFAULT_MAX_RETRIES,
         min_interval: float = DEFAULT_MIN_INTERVAL,
         user_agent: str = DEFAULT_USER_AGENT,
+        proxy: Optional[str] = None,
+        auto_proxy: bool = False,
+        geo: str = DEFAULT_GEO,
         opener: Optional[Callable[..., Any]] = None,
         sleep: Optional[Callable[[float], None]] = None,
     ) -> None:
@@ -126,11 +145,35 @@ class HttpTransport:
         self.max_retries = max(1, max_retries)
         self.min_interval = max(0.0, min_interval)
         self.user_agent = user_agent
-        self._opener = opener or _default_opener
+        self.auto_proxy = auto_proxy or os.getenv("CHOTOT_AUTO_PROXY", "").lower() in ("1", "true", "yes")
+        self.geo = geo
+        self._proxy_arg = proxy
+        self._custom_opener_injected = opener is not None
+        self._proxy_url: Optional[str] = (
+            resolve_proxy(proxy_arg=proxy, geo=geo, auto=self.auto_proxy)
+            if opener is None
+            else None
+        )
+        self._opener = opener or _make_opener(self._proxy_url)
         self._sleep = sleep or time.sleep
         self._last_request_at = 0.0
         #: Requests actually issued, so callers can report cost honestly.
         self.request_count = 0
+
+    @property
+    def proxy_url(self) -> Optional[str]:
+        """The active proxy URL, or None if direct."""
+        return self._proxy_url
+
+    @property
+    def proxy_masked(self) -> str:
+        """Masked proxy for safe display."""
+        return mask_proxy(self._proxy_url)
+
+    @property
+    def is_proxied(self) -> bool:
+        """True when requests are routed through a proxy."""
+        return bool(self._proxy_url)
 
     # -- internals ---------------------------------------------------------
 
@@ -281,6 +324,22 @@ class HttpTransport:
                 ) from exc
 
             if attempt < self.max_retries:
+                if (
+                    self.auto_proxy
+                    and not self._custom_opener_injected
+                    and not self._proxy_url
+                    and (last_status in (403, 429) or "URLError" in str(last_error) or "Timeout" in str(last_error))
+                ):
+                    fallback = resolve_proxy(auto=True, geo=self.geo)
+                    if fallback and fallback != self._proxy_url:
+                        logger.warning(
+                            "Anti-bot/rate-limit error (%s) on direct connection; "
+                            "activating residential proxy %s (geo=%s)",
+                            last_error, mask_proxy(fallback), self.geo,
+                        )
+                        self._proxy_url = fallback
+                        self._opener = _make_opener(self._proxy_url)
+
                 delay = self._backoff(attempt, last_retry_after)
                 logger.warning(
                     "attempt %d/%d failed (%s); retrying in %.2fs",

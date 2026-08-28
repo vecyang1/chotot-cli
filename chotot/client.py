@@ -167,9 +167,18 @@ class ChototClient:
         timeout: float = 20.0,
         max_retries: int = 3,
         min_interval: float = 0.2,
+        proxy: Optional[str] = None,
+        auto_proxy: bool = False,
+        geo: str = "vn",
     ) -> None:
         self.transport = transport or HttpTransport(
-            base_url, timeout=timeout, max_retries=max_retries, min_interval=min_interval,
+            base_url,
+            timeout=timeout,
+            max_retries=max_retries,
+            min_interval=min_interval,
+            proxy=proxy,
+            auto_proxy=auto_proxy,
+            geo=geo,
         )
 
     # -- helpers -----------------------------------------------------------

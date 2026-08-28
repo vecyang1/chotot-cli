@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.0] - 2026-08-28
+
+### Added
+- **Proxy Readiness & Anti-Scraping Self-Healing**: Zero-dependency proxy support with `--proxy <url>`, `--proxy auto`, `--auto-proxy`, and `--geo <cc>`.
+- **Ultra-Low-Cost Scraper Integration**: Seamless resolution of DataImpulse residential proxy pools with Vietnam geotargeting (`__cr-vn`) from environment variables, local cache, or 1Password Agent Automation vault.
+- **Automatic Fallback on Anti-Bot/Rate Limits**: Transport automatically detects HTTP 429 / 403 / connection blocks on direct requests and activates residential proxy tunnel on the fly.
+- **Doctor Transport Telemetry**: `chotot doctor` displays masked proxy information and verifies contract health through proxy tunnels.
+
 ## [2.0.0] - 2026-08-28
 
 ### Added
