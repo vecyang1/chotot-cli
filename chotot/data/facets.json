@@ -1,0 +1,6052 @@
+{
+ "fetched_at": "2026-08-28T08:03:37Z",
+ "source": "https://gateway.chotot.com/v1/public/chapy-pro/ad-params + differential probe of /ad-listing",
+ "probed": true,
+ "facets": {
+  "1010": {
+   "apartment_feature": {
+    "param": "apartment_feature",
+    "label": "Đặc điểm căn hộ",
+    "type": "checkbox",
+    "options": {
+     "1": "Căn góc"
+    },
+    "listing_types": [
+     "s",
+     "u",
+     "k",
+     "h"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "1",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=2768 baseline_total=10000 matched=50"
+    },
+    "is_range": false
+   },
+   "apartment_type": {
+    "param": "apartment_type",
+    "label": "Loại hình căn hộ",
+    "type": "integer",
+    "options": {
+     "1": "Chung cư",
+     "3": "Duplex",
+     "4": "Penthouse",
+     "2": "Căn hộ dịch vụ, mini",
+     "5": "Tập thể, cư xá",
+     "6": "Officetel"
+    },
+    "listing_types": [
+     "s",
+     "u",
+     "k",
+     "h"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "2",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=8567 baseline_total=10000 matched=50"
+    },
+    "is_range": false
+   },
+   "balconydirection": {
+    "param": "balconydirection",
+    "label": "Hướng ban công",
+    "type": "integer",
+    "options": {
+     "1": "Đông",
+     "2": "Tây",
+     "3": "Nam",
+     "4": "Bắc",
+     "5": "Đông Bắc",
+     "6": "Đông Nam",
+     "7": "Tây Bắc",
+     "8": "Tây Nam"
+    },
+    "listing_types": [
+     "s",
+     "u"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "5",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=615 baseline_total=10000 matched=50"
+    },
+    "is_range": false
+   },
+   "block": {
+    "param": "block",
+    "label": "Block/Tháp",
+    "type": "string",
+    "options": {},
+    "listing_types": [
+     "s",
+     "u"
+    ],
+    "verified": {
+     "works": false,
+     "reason": "free-text field, not a searchable facet"
+    },
+    "is_range": false
+   },
+   "deposit": {
+    "param": "deposit",
+    "label": "Số tiền cọc",
+    "type": "string",
+    "options": {},
+    "listing_types": [
+     "u",
+     "h"
+    ],
+    "verified": {
+     "works": false,
+     "reason": "free-text field, not a searchable facet"
+    },
+    "is_range": false
+   },
+   "direction": {
+    "param": "direction",
+    "label": "Hướng cửa chính",
+    "type": "integer",
+    "options": {
+     "1": "Đông",
+     "2": "Tây",
+     "3": "Nam",
+     "4": "Bắc",
+     "5": "Đông Bắc",
+     "6": "Đông Nam",
+     "7": "Tây Bắc",
+     "8": "Tây Nam"
+    },
+    "listing_types": [
+     "s",
+     "u"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "5",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=358 baseline_total=10000 matched=50"
+    },
+    "is_range": false
+   },
+   "floornumber": {
+    "param": "floornumber",
+    "label": "Tầng số",
+    "type": "string",
+    "options": {},
+    "listing_types": [
+     "s",
+     "u"
+    ],
+    "verified": {
+     "works": false,
+     "reason": "free-text field, not a searchable facet"
+    },
+    "is_range": false
+   },
+   "furnishing_rent": {
+    "param": "furnishing_rent",
+    "label": "Tình trạng nội thất",
+    "type": "integer",
+    "options": {
+     "1": "Nội thất cao cấp",
+     "2": "Nội thất đầy đủ",
+     "3": "Nhà trống"
+    },
+    "listing_types": [
+     "u",
+     "h"
+    ],
+    "verified": {
+     "works": false,
+     "reason": "probe returned no rows",
+     "probed": "2"
+    },
+    "is_range": false
+   },
+   "furnishing_sell": {
+    "param": "furnishing_sell",
+    "label": "Tình trạng nội thất",
+    "type": "integer",
+    "options": {
+     "1": "Nội thất cao cấp",
+     "2": "Nội thất đầy đủ",
+     "3": "Hoàn thiện cơ bản",
+     "4": "Bàn giao thô"
+    },
+    "listing_types": [
+     "s",
+     "k"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "3",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=2035 baseline_total=10000 matched=50"
+    },
+    "is_range": false
+   },
+   "property_legal_document": {
+    "param": "property_legal_document",
+    "label": "Giấy tờ pháp lý",
+    "type": "integer",
+    "options": {
+     "1": "Đã có sổ",
+     "2": "Đang chờ sổ",
+     "3": "Giấy tờ khác"
+    },
+    "listing_types": [
+     "s",
+     "u"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "2",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=366 baseline_total=10000 matched=50"
+    },
+    "is_range": false
+   },
+   "property_status": {
+    "param": "property_status",
+    "label": "Tình trạng bất động sản",
+    "type": "integer",
+    "options": {
+     "1": "Chưa bàn giao",
+     "2": "Đã bàn giao"
+    },
+    "listing_types": [
+     "s",
+     "k"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "2",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=4224 baseline_total=10000 matched=50"
+    },
+    "is_range": false
+   },
+   "rooms": {
+    "param": "rooms",
+    "label": "Số phòng ngủ",
+    "type": "integer",
+    "options": {
+     "1": "1",
+     "2": "2",
+     "3": "3",
+     "4": "4",
+     "5": "5",
+     "6": "6",
+     "7": "7",
+     "8": "8",
+     "9": "9",
+     "10": "10",
+     "11": "nhiều hơn 10"
+    },
+    "listing_types": [
+     "s",
+     "u",
+     "k",
+     "h"
+    ],
+    "verified": {
+     "works": false,
+     "reason": "probe error: HTTP Error 400: Bad Request"
+    },
+    "is_range": false
+   },
+   "size": {
+    "param": "size",
+    "label": "Diện tích",
+    "type": "string",
+    "options": {},
+    "listing_types": [
+     "s",
+     "u",
+     "k",
+     "h"
+    ],
+    "verified": {
+     "works": true,
+     "range": true,
+     "probed": "20-25",
+     "reason": "range honoured",
+     "evidence": "n=50 total=1270"
+    },
+    "is_range": true
+   },
+   "toilets": {
+    "param": "toilets",
+    "label": "Số phòng vệ sinh",
+    "type": "integer",
+    "options": {
+     "1": "1",
+     "2": "2",
+     "3": "3",
+     "4": "4",
+     "5": "5",
+     "6": "6",
+     "7": "Nhiều hơn 6"
+    },
+    "listing_types": [
+     "s",
+     "u"
+    ],
+    "verified": {
+     "works": false,
+     "reason": "probe error: HTTP Error 400: Bad Request"
+    },
+    "is_range": false
+   },
+   "unitnumber": {
+    "param": "unitnumber",
+    "label": "Mã căn / Mã căn hộ",
+    "type": "string",
+    "options": {},
+    "listing_types": [
+     "s",
+     "u"
+    ],
+    "verified": {
+     "works": false,
+     "reason": "free-text field, not a searchable facet"
+    },
+    "is_range": false
+   },
+   "unitnumber_display": {
+    "param": "unitnumber_display",
+    "label": "Hiển thị công khai mã căn hộ",
+    "type": "checkbox",
+    "options": {
+     "1": "Hiển thị mã căn hộ trong tin rao"
+    },
+    "listing_types": [
+     "s",
+     "u"
+    ],
+    "verified": {
+     "works": false,
+     "probed": "1",
+     "reason": "accepted and ignored (mixed distribution)",
+     "evidence": "n=50 total=10000 baseline_total=10000 matched=2"
+    },
+    "is_range": false
+   }
+  },
+  "1020": {
+   "block": {
+    "param": "block",
+    "label": "Tên phân khu/Lô",
+    "type": "string",
+    "options": {},
+    "listing_types": [
+     "s",
+     "u"
+    ],
+    "verified": {
+     "works": false,
+     "reason": "free-text field, not a searchable facet"
+    },
+    "is_range": false
+   },
+   "deposit": {
+    "param": "deposit",
+    "label": "Số tiền cọc",
+    "type": "string",
+    "options": {},
+    "listing_types": [
+     "u",
+     "h"
+    ],
+    "verified": {
+     "works": false,
+     "reason": "free-text field, not a searchable facet"
+    },
+    "is_range": false
+   },
+   "direction": {
+    "param": "direction",
+    "label": "Hướng cửa chính",
+    "type": "integer",
+    "options": {
+     "1": "Đông",
+     "2": "Tây",
+     "3": "Nam",
+     "4": "Bắc",
+     "5": "Đông Bắc",
+     "6": "Đông Nam",
+     "7": "Tây Bắc",
+     "8": "Tây Nam"
+    },
+    "listing_types": [
+     "s",
+     "u"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "5",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=1141 baseline_total=10000 matched=50"
+    },
+    "is_range": false
+   },
+   "floors": {
+    "param": "floors",
+    "label": "Tổng số tầng",
+    "type": "string",
+    "options": {},
+    "listing_types": [
+     "s",
+     "u"
+    ],
+    "verified": {
+     "works": false,
+     "range": true,
+     "probed": "1-2",
+     "reason": "values outside the range",
+     "evidence": "n=50 total=10000"
+    },
+    "is_range": true
+   },
+   "furnishing_rent": {
+    "param": "furnishing_rent",
+    "label": "Tình trạng nội thất",
+    "type": "integer",
+    "options": {
+     "1": "Nội thất cao cấp",
+     "2": "Nội thất đầy đủ",
+     "3": "Nhà trống"
+    },
+    "listing_types": [
+     "u",
+     "h"
+    ],
+    "verified": {
+     "works": false,
+     "reason": "probe returned no rows",
+     "probed": "2"
+    },
+    "is_range": false
+   },
+   "furnishing_sell": {
+    "param": "furnishing_sell",
+    "label": "Tình trạng nội thất",
+    "type": "integer",
+    "options": {
+     "1": "Nội thất cao cấp",
+     "2": "Nội thất đầy đủ",
+     "3": "Hoàn thiện cơ bản",
+     "4": "Bàn giao thô"
+    },
+    "listing_types": [
+     "s",
+     "k"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "3",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=4884 baseline_total=10000 matched=50"
+    },
+    "is_range": false
+   },
+   "house_type": {
+    "param": "house_type",
+    "label": "Loại hình nhà ở",
+    "type": "integer",
+    "options": {
+     "1": "Nhà mặt phố, mặt tiền",
+     "3": "Nhà ngõ, hẻm",
+     "2": "Nhà biệt thự",
+     "4": "Nhà phố liền kề"
+    },
+    "listing_types": [
+     "s",
+     "u",
+     "k",
+     "h"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "2",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=1243 baseline_total=10000 matched=50"
+    },
+    "is_range": false
+   },
+   "length": {
+    "param": "length",
+    "label": "Chiều dài",
+    "type": "string",
+    "options": {},
+    "listing_types": [
+     "s",
+     "u"
+    ],
+    "verified": {
+     "works": false,
+     "reason": "free-text field, not a searchable facet"
+    },
+    "is_range": false
+   },
+   "living_size": {
+    "param": "living_size",
+    "label": "Diện tích sử dụng",
+    "type": "string",
+    "options": {},
+    "listing_types": [
+     "s",
+     "u",
+     "k",
+     "h"
+    ],
+    "verified": {
+     "works": false,
+     "reason": "free-text field, not a searchable facet"
+    },
+    "is_range": false
+   },
+   "property_back_condition": {
+    "param": "property_back_condition",
+    "label": "Đặc điểm nhà/đất",
+    "type": "integer",
+    "options": {
+     "1": "Nở hậu"
+    },
+    "listing_types": [
+     "s",
+     "u"
+    ],
+    "verified": {
+     "works": false,
+     "probed": "1",
+     "reason": "accepted and ignored (mixed distribution)",
+     "evidence": "n=50 total=10000 baseline_total=10000 matched=0"
+    },
+    "is_range": false
+   },
+   "property_legal_document": {
+    "param": "property_legal_document",
+    "label": "Giấy tờ pháp lý",
+    "type": "integer",
+    "options": {
+     "1": "Đã có sổ",
+     "2": "Đang chờ sổ",
+     "3": "Giấy tờ khác"
+    },
+    "listing_types": [
+     "s",
+     "u"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "2",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=318 baseline_total=10000 matched=50"
+    },
+    "is_range": false
+   },
+   "property_road_condition": {
+    "param": "property_road_condition",
+    "label": "Đặc điểm nhà/đất",
+    "type": "integer",
+    "options": {
+     "1": "Hẻm xe hơi"
+    },
+    "listing_types": [
+     "s",
+     "u"
+    ],
+    "verified": {
+     "works": false,
+     "probed": "1",
+     "reason": "accepted and ignored (mixed distribution)",
+     "evidence": "n=50 total=10000 baseline_total=10000 matched=0"
+    },
+    "is_range": false
+   },
+   "rooms": {
+    "param": "rooms",
+    "label": "Số phòng ngủ",
+    "type": "integer",
+    "options": {
+     "1": "1",
+     "2": "2",
+     "3": "3",
+     "4": "4",
+     "5": "5",
+     "6": "6",
+     "7": "7",
+     "8": "8",
+     "9": "9",
+     "10": "10",
+     "11": "nhiều hơn 10"
+    },
+    "listing_types": [
+     "s",
+     "u",
+     "k",
+     "h"
+    ],
+    "verified": {
+     "works": false,
+     "reason": "probe error: HTTP Error 400: Bad Request"
+    },
+    "is_range": false
+   },
+   "size": {
+    "param": "size",
+    "label": "Diện tích đất",
+    "type": "string",
+    "options": {},
+    "listing_types": [
+     "s",
+     "u",
+     "k",
+     "h"
+    ],
+    "verified": {
+     "works": true,
+     "range": true,
+     "probed": "15-20",
+     "reason": "range honoured",
+     "evidence": "n=50 total=977"
+    },
+    "is_range": true
+   },
+   "toilets": {
+    "param": "toilets",
+    "label": "Số phòng vệ sinh",
+    "type": "integer",
+    "options": {
+     "1": "1",
+     "2": "2",
+     "3": "3",
+     "4": "4",
+     "5": "5",
+     "6": "6",
+     "7": "Nhiều hơn 6"
+    },
+    "listing_types": [
+     "s",
+     "u"
+    ],
+    "verified": {
+     "works": false,
+     "reason": "probe error: HTTP Error 400: Bad Request"
+    },
+    "is_range": false
+   },
+   "unitnumber": {
+    "param": "unitnumber",
+    "label": "Mã căn / Mã căn hộ",
+    "type": "string",
+    "options": {},
+    "listing_types": [
+     "s",
+     "u"
+    ],
+    "verified": {
+     "works": false,
+     "reason": "free-text field, not a searchable facet"
+    },
+    "is_range": false
+   },
+   "unitnumber_display": {
+    "param": "unitnumber_display",
+    "label": "Hiển thị công khai mã căn hộ",
+    "type": "checkbox",
+    "options": {
+     "1": "Hiển thị mã căn hộ trong tin rao"
+    },
+    "listing_types": [
+     "s",
+     "u"
+    ],
+    "verified": {
+     "works": false,
+     "probed": "1",
+     "reason": "accepted and ignored (mixed distribution)",
+     "evidence": "n=50 total=10000 baseline_total=10000 matched=2"
+    },
+    "is_range": false
+   },
+   "width": {
+    "param": "width",
+    "label": "Chiều ngang",
+    "type": "string",
+    "options": {},
+    "listing_types": [
+     "s",
+     "u"
+    ],
+    "verified": {
+     "works": false,
+     "reason": "free-text field, not a searchable facet"
+    },
+    "is_range": false
+   }
+  },
+  "1030": {
+   "block": {
+    "param": "block",
+    "label": "Block/Tháp",
+    "type": "string",
+    "options": {},
+    "listing_types": [
+     "s",
+     "u"
+    ],
+    "verified": {
+     "works": false,
+     "reason": "free-text field, not a searchable facet"
+    },
+    "is_range": false
+   },
+   "commercial_type": {
+    "param": "commercial_type",
+    "label": "Loại hình văn phòng",
+    "type": "integer",
+    "options": {
+     "4": "Mặt bằng kinh doanh",
+     "3": "Văn phòng",
+     "1": "Shophouse",
+     "2": "Officetel"
+    },
+    "listing_types": [
+     "s",
+     "u",
+     "k",
+     "h"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "1",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=220 baseline_total=9822 matched=50"
+    },
+    "is_range": false
+   },
+   "deposit": {
+    "param": "deposit",
+    "label": "Số tiền cọc",
+    "type": "string",
+    "options": {},
+    "listing_types": [
+     "u",
+     "h"
+    ],
+    "verified": {
+     "works": false,
+     "reason": "free-text field, not a searchable facet"
+    },
+    "is_range": false
+   },
+   "direction": {
+    "param": "direction",
+    "label": "Hướng cửa chính",
+    "type": "integer",
+    "options": {
+     "1": "Đông",
+     "2": "Tây",
+     "3": "Nam",
+     "4": "Bắc",
+     "5": "Đông Bắc",
+     "6": "Đông Nam",
+     "7": "Tây Bắc",
+     "8": "Tây Nam"
+    },
+    "listing_types": [
+     "s",
+     "u"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "5",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=242 baseline_total=9822 matched=50"
+    },
+    "is_range": false
+   },
+   "floornumber": {
+    "param": "floornumber",
+    "label": "Tầng số",
+    "type": "string",
+    "options": {},
+    "listing_types": [
+     "s",
+     "u"
+    ],
+    "verified": {
+     "works": false,
+     "reason": "free-text field, not a searchable facet"
+    },
+    "is_range": false
+   },
+   "furnishing_rent": {
+    "param": "furnishing_rent",
+    "label": "Tình trạng nội thất",
+    "type": "integer",
+    "options": {
+     "1": "Nội thất cao cấp",
+     "2": "Nội thất đầy đủ",
+     "3": "Nhà trống"
+    },
+    "listing_types": [
+     "u",
+     "h"
+    ],
+    "verified": {
+     "works": false,
+     "reason": "probe returned no rows",
+     "probed": "2"
+    },
+    "is_range": false
+   },
+   "furnishing_sell": {
+    "param": "furnishing_sell",
+    "label": "Tình trạng nội thất",
+    "type": "integer",
+    "options": {
+     "1": "Nội thất cao cấp",
+     "2": "Nội thất đầy đủ",
+     "3": "Hoàn thiện cơ bản",
+     "4": "Bàn giao thô"
+    },
+    "listing_types": [
+     "s",
+     "k"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "3",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=1297 baseline_total=9822 matched=50"
+    },
+    "is_range": false
+   },
+   "property_legal_document": {
+    "param": "property_legal_document",
+    "label": "Giấy tờ pháp lý",
+    "type": "integer",
+    "options": {
+     "1": "Đã có sổ",
+     "2": "Đang chờ sổ",
+     "3": "Giấy tờ khác"
+    },
+    "listing_types": [
+     "s",
+     "u"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "2",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=80 baseline_total=9822 matched=50"
+    },
+    "is_range": false
+   },
+   "size": {
+    "param": "size",
+    "label": "Diện tích",
+    "type": "string",
+    "options": {},
+    "listing_types": [
+     "s",
+     "u",
+     "k",
+     "h"
+    ],
+    "verified": {
+     "works": true,
+     "range": true,
+     "probed": "20-25",
+     "reason": "range honoured",
+     "evidence": "n=50 total=256"
+    },
+    "is_range": true
+   },
+   "unitnumber": {
+    "param": "unitnumber",
+    "label": "Mã căn / Mã căn hộ",
+    "type": "string",
+    "options": {},
+    "listing_types": [
+     "s",
+     "u"
+    ],
+    "verified": {
+     "works": false,
+     "reason": "free-text field, not a searchable facet"
+    },
+    "is_range": false
+   },
+   "unitnumber_display": {
+    "param": "unitnumber_display",
+    "label": "Hiển thị công khai mã căn hộ",
+    "type": "checkbox",
+    "options": {
+     "1": "Hiển thị mã căn hộ trong tin rao"
+    },
+    "listing_types": [
+     "s",
+     "u"
+    ],
+    "verified": {
+     "works": false,
+     "probed": "1",
+     "reason": "accepted and ignored (mixed distribution)",
+     "evidence": "n=50 total=9822 baseline_total=9822 matched=2"
+    },
+    "is_range": false
+   }
+  },
+  "1040": {
+   "block": {
+    "param": "block",
+    "label": "Tên phân khu",
+    "type": "string",
+    "options": {},
+    "listing_types": [
+     "s",
+     "u"
+    ],
+    "verified": {
+     "works": false,
+     "reason": "free-text field, not a searchable facet"
+    },
+    "is_range": false
+   },
+   "deposit": {
+    "param": "deposit",
+    "label": "Số tiền cọc",
+    "type": "string",
+    "options": {},
+    "listing_types": [
+     "u",
+     "h"
+    ],
+    "verified": {
+     "works": false,
+     "reason": "free-text field, not a searchable facet"
+    },
+    "is_range": false
+   },
+   "direction": {
+    "param": "direction",
+    "label": "Hướng đất",
+    "type": "integer",
+    "options": {
+     "1": "Đông",
+     "2": "Tây",
+     "3": "Nam",
+     "4": "Bắc",
+     "5": "Đông Bắc",
+     "6": "Đông Nam",
+     "7": "Tây Bắc",
+     "8": "Tây Nam"
+    },
+    "listing_types": [
+     "s",
+     "u",
+     "k",
+     "h"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "5",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=607 baseline_total=10000 matched=50"
+    },
+    "is_range": false
+   },
+   "land_feature": {
+    "param": "land_feature",
+    "label": "Đặc điểm nhà/đất",
+    "type": "checkbox",
+    "options": {
+     "1": "Mặt tiền"
+    },
+    "listing_types": [
+     "s",
+     "u",
+     "k",
+     "h"
+    ],
+    "verified": {
+     "works": false,
+     "probed": "1",
+     "reason": "accepted and ignored (mixed distribution)",
+     "evidence": "n=50 total=10000 baseline_total=10000 matched=0"
+    },
+    "is_range": false
+   },
+   "land_type": {
+    "param": "land_type",
+    "label": "Loại hình đất",
+    "type": "integer",
+    "options": {
+     "1": "Đất thổ cư",
+     "2": "Đất nền dự án",
+     "3": "Đất công nghiệp",
+     "4": "Đất nông nghiệp"
+    },
+    "listing_types": [
+     "s",
+     "u",
+     "k",
+     "h"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "3",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=117 baseline_total=10000 matched=50"
+    },
+    "is_range": false
+   },
+   "length": {
+    "param": "length",
+    "label": "Chiều dài",
+    "type": "string",
+    "options": {},
+    "listing_types": [
+     "s",
+     "u"
+    ],
+    "verified": {
+     "works": false,
+     "reason": "free-text field, not a searchable facet"
+    },
+    "is_range": false
+   },
+   "property_back_condition": {
+    "param": "property_back_condition",
+    "label": "Đặc điểm nhà/đất",
+    "type": "integer",
+    "options": {
+     "1": "Nở hậu"
+    },
+    "listing_types": [
+     "s",
+     "u",
+     "k",
+     "h"
+    ],
+    "verified": {
+     "works": false,
+     "probed": "1",
+     "reason": "accepted and ignored (mixed distribution)",
+     "evidence": "n=50 total=10000 baseline_total=10000 matched=0"
+    },
+    "is_range": false
+   },
+   "property_legal_document": {
+    "param": "property_legal_document",
+    "label": "Giấy tờ pháp lý",
+    "type": "integer",
+    "options": {
+     "1": "Đã có sổ",
+     "2": "Đang chờ sổ",
+     "3": "Giấy tờ khác"
+    },
+    "listing_types": [
+     "s",
+     "u",
+     "k",
+     "h"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "2",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=120 baseline_total=10000 matched=50"
+    },
+    "is_range": false
+   },
+   "property_road_condition": {
+    "param": "property_road_condition",
+    "label": "Đặc điểm nhà/đất",
+    "type": "integer",
+    "options": {
+     "1": "Hẻm xe hơi"
+    },
+    "listing_types": [
+     "s",
+     "u",
+     "k",
+     "h"
+    ],
+    "verified": {
+     "works": false,
+     "probed": "1",
+     "reason": "accepted and ignored (mixed distribution)",
+     "evidence": "n=50 total=10000 baseline_total=10000 matched=0"
+    },
+    "is_range": false
+   },
+   "size": {
+    "param": "size",
+    "label": "Diện tích đất",
+    "type": "string",
+    "options": {},
+    "listing_types": [
+     "s",
+     "u",
+     "k"
+    ],
+    "verified": {
+     "works": true,
+     "range": true,
+     "probed": "48-50",
+     "reason": "range honoured",
+     "evidence": "n=50 total=159"
+    },
+    "is_range": true
+   },
+   "unitnumber": {
+    "param": "unitnumber",
+    "label": "Mã lô",
+    "type": "string",
+    "options": {},
+    "listing_types": [
+     "s",
+     "u"
+    ],
+    "verified": {
+     "works": false,
+     "reason": "free-text field, not a searchable facet"
+    },
+    "is_range": false
+   },
+   "unitnumber_display": {
+    "param": "unitnumber_display",
+    "label": " Hiển thị mã lô trong tin rao",
+    "type": "checkbox",
+    "options": {
+     "1": "Hiển thị mã lô trong tin rao"
+    },
+    "listing_types": [
+     "s",
+     "u"
+    ],
+    "verified": {
+     "works": false,
+     "probed": "1",
+     "reason": "accepted and ignored (mixed distribution)",
+     "evidence": "n=50 total=10000 baseline_total=10000 matched=1"
+    },
+    "is_range": false
+   },
+   "width": {
+    "param": "width",
+    "label": "Chiều ngang",
+    "type": "string",
+    "options": {},
+    "listing_types": [
+     "s",
+     "u"
+    ],
+    "verified": {
+     "works": false,
+     "reason": "free-text field, not a searchable facet"
+    },
+    "is_range": false
+   }
+  },
+  "1050": {
+   "deposit": {
+    "param": "deposit",
+    "label": "Số tiền cọc",
+    "type": "string",
+    "options": {},
+    "listing_types": [
+     "u",
+     "h"
+    ],
+    "verified": {
+     "works": false,
+     "reason": "free-text field, not a searchable facet"
+    },
+    "is_range": false
+   },
+   "furnishing_rent": {
+    "param": "furnishing_rent",
+    "label": "Tình trạng nội thất",
+    "type": "integer",
+    "options": {
+     "1": "Nội thất cao cấp",
+     "2": "Nội thất đầy đủ",
+     "3": "Nhà trống"
+    },
+    "listing_types": [
+     "u",
+     "h"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "2",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=9020 baseline_total=10000 matched=50"
+    },
+    "is_range": false
+   },
+   "size": {
+    "param": "size",
+    "label": "Diện tích",
+    "type": "string",
+    "options": {},
+    "listing_types": [
+     "u",
+     "h"
+    ],
+    "verified": {
+     "works": true,
+     "range": true,
+     "probed": "12-16",
+     "reason": "range honoured",
+     "evidence": "n=50 total=1301"
+    },
+    "is_range": true
+   }
+  },
+  "2010": {
+   "carbrand": {
+    "param": "carbrand",
+    "label": "Hãng",
+    "type": "integer",
+    "options": {
+     "1": "Kia",
+     "2": "Toyota",
+     "3": "Ford",
+     "4": "Chevrolet",
+     "5": "Hyundai",
+     "6": "Honda",
+     "7": "Mazda",
+     "18": "Mitsubishi",
+     "25": "Acura",
+     "26": "Alfa Romeo",
+     "27": "Asia",
+     "28": "Aston Martin",
+     "8": "Audi",
+     "29": "Baic",
+     "30": "Bentley",
+     "9": "BMW",
+     "31": "Buick",
+     "32": "BYD",
+     "33": "Cadillac",
+     "34": "Changan",
+     "35": "Chery",
+     "36": "Chrysler",
+     "37": "Citroen",
+     "10": "Daewoo",
+     "11": "Daihatsu",
+     "38": "Dodge",
+     "39": "Ferrari",
+     "12": "Fiat",
+     "41": "Gaz",
+     "42": "Geely",
+     "43": "GMC",
+     "44": "Haima",
+     "46": "Hummer",
+     "47": "Infiniti",
+     "13": "Isuzu",
+     "48": "Jaguar",
+     "14": "Jeep",
+     "49": "Lada",
+     "50": "Lamborghini",
+     "51": "LandRover",
+     "15": "Lexus",
+     "52": "Lifan",
+     "53": "Lincoln",
+     "54": "Luxgen",
+     "55": "Man",
+     "56": "Maserati",
+     "57": "Maybach",
+     "58": "Mekong",
+     "16": "Mercedes Benz",
+     "59": "Mercury",
+     "60": "MG",
+     "17": "Mini",
+     "19": "Nissan",
+     "61": "Opel",
+     "20": "Peugeot",
+     "62": "Pontiac",
+     "63": "Porsche",
+     "64": "Proton",
+     "65": "Renault",
+     "79": "Reult",
+     "66": "Rolls Royce",
+     "67": "Rover",
+     "68": "Samsung",
+     "69": "Scion",
+     "21": "Smart",
+     "70": "Ssangyong",
+     "71": "Subaru",
+     "22": "Suzuki",
+     "72": "SYM",
+     "73": "Tesla",
+     "78": "UAZ",
+     "80": "Vinfast",
+     "23": "Volkswagen",
+     "76": "Volvo",
+     "77": "Zotye",
+     "24": "Hãng khác"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "50",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=1 total=1 baseline_total=10000 matched=1"
+    },
+    "is_range": false
+   },
+   "carcolor": {
+    "param": "carcolor",
+    "label": "Màu sắc",
+    "type": "integer",
+    "options": {
+     "2": "Trắng",
+     "1": "Đen",
+     "3": "Bạc",
+     "8": "Cam",
+     "5": "Đỏ",
+     "6": "Xanh dương",
+     "7": "Vàng",
+     "10": "Xanh lá",
+     "11": "Hồng",
+     "4": "Xám",
+     "9": "Nâu",
+     "12": "Màu khác"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "7",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=738 baseline_total=10000 matched=50"
+    },
+    "is_range": false
+   },
+   "carorigin": {
+    "param": "carorigin",
+    "label": "Xuất xứ",
+    "type": "integer",
+    "options": {
+     "1": "Việt Nam",
+     "2": "Ấn Độ",
+     "3": "Hàn Quốc",
+     "4": "Thái Lan",
+     "5": "Nhật Bản",
+     "6": "Trung Quốc",
+     "8": "Mỹ",
+     "9": "Đức",
+     "10": "Đài Loan",
+     "7": "Nước khác"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "6",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=190 baseline_total=10000 matched=50"
+    },
+    "is_range": false
+   },
+   "carseats": {
+    "param": "carseats",
+    "label": "Số chỗ",
+    "type": "integer",
+    "options": {
+     "5": "2",
+     "1": "4",
+     "2": "5",
+     "12": "6",
+     "3": "7",
+     "6": "8",
+     "7": "9",
+     "8": "10",
+     "9": "12",
+     "10": "14",
+     "11": "16",
+     "4": "Khác"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "7",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=72 baseline_total=10000 matched=50"
+    },
+    "is_range": false
+   },
+   "cartype": {
+    "param": "cartype",
+    "label": "Kiểu dáng",
+    "type": "integer",
+    "options": {
+     "1": "Sedan",
+     "3": "SUV / Cross over",
+     "4": "Hatchback",
+     "6": "Pick-up (bán tải)",
+     "8": "Minivan (MPV)",
+     "9": "Van",
+     "2": "Coupe (2 cửa)",
+     "7": "Mui trần",
+     "5": "Kiểu dáng khác"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "8",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=1282 baseline_total=10000 matched=50"
+    },
+    "is_range": false
+   },
+   "condition_ad": {
+    "param": "condition_ad",
+    "label": "Tình trạng",
+    "type": "radio",
+    "options": {
+     "1": "Đã sử dụng",
+     "2": "Mới"
+    },
+    "listing_types": [
+     "s",
+     "k"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "2",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=2162 baseline_total=10000 matched=50"
+    },
+    "is_range": false
+   },
+   "fuel": {
+    "param": "fuel",
+    "label": "Nhiên liệu",
+    "type": "integer",
+    "options": {
+     "1": "Xăng",
+     "2": "Dầu",
+     "3": "Động cơ Hybrid",
+     "4": "Điện"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "3",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=351 baseline_total=10000 matched=50"
+    },
+    "is_range": false
+   },
+   "gearbox": {
+    "param": "gearbox",
+    "label": "Hộp số",
+    "type": "integer",
+    "options": {
+     "1": "Tự động",
+     "2": "Số sàn",
+     "3": "Bán tự động"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "2",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=3383 baseline_total=10000 matched=50"
+    },
+    "is_range": false
+   },
+   "mfdate": {
+    "param": "mfdate",
+    "label": "Năm sản xuất",
+    "type": "integer",
+    "options": {
+     "2023": "2023",
+     "2022": "2022",
+     "2021": "2021",
+     "2020": "2020",
+     "2019": "2019",
+     "2018": "2018",
+     "2017": "2017",
+     "2016": "2016",
+     "2015": "2015",
+     "2014": "2014",
+     "2013": "2013",
+     "2012": "2012",
+     "2011": "2011",
+     "2010": "2010",
+     "2009": "2009",
+     "2008": "2008",
+     "2007": "2007",
+     "2006": "2006",
+     "2005": "2005",
+     "2004": "2004",
+     "2003": "2003",
+     "2002": "2002",
+     "2001": "2001",
+     "2000": "2000",
+     "1999": "1999",
+     "1998": "1998",
+     "1997": "1997",
+     "1996": "1996",
+     "1995": "1995",
+     "1994": "1994",
+     "1993": "1993",
+     "1992": "1992",
+     "1991": "1991",
+     "1990": "1990",
+     "1989": "1989",
+     "1988": "1988",
+     "1987": "1987",
+     "1986": "1986",
+     "1985": "1985",
+     "1984": "1984",
+     "1983": "1983",
+     "1982": "1982",
+     "1981": "1981",
+     "1980": "trước năm 1980"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "range": true,
+     "probed": "2004-2005",
+     "reason": "range honoured",
+     "evidence": "n=50 total=311"
+    },
+    "is_range": true
+   },
+   "mileage_v2": {
+    "param": "mileage_v2",
+    "label": "Số Km đã đi",
+    "type": "string",
+    "options": {},
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "range": true,
+     "probed": "10-53",
+     "reason": "range honoured",
+     "evidence": "n=50 total=285"
+    },
+    "is_range": true
+   },
+   "plate": {
+    "param": "plate",
+    "label": "Biển số xe",
+    "type": "string",
+    "options": {},
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": false,
+     "reason": "free-text field, not a searchable facet"
+    },
+    "is_range": false
+   },
+   "service_sendvideo": {
+    "param": "service_sendvideo",
+    "label": "Người bán gửi Video",
+    "type": "integer",
+    "options": {
+     "1": "Có hỗ trợ",
+     "2": "Không hỗ trợ"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": false,
+     "probed": "2",
+     "reason": "accepted and ignored (mixed distribution)",
+     "evidence": "n=50 total=10000 baseline_total=10000 matched=0"
+    },
+    "is_range": false
+   }
+  },
+  "2020": {
+   "condition_ad": {
+    "param": "condition_ad",
+    "label": "Tình trạng",
+    "type": "radio",
+    "options": {
+     "1": "Đã sử dụng",
+     "2": "Mới"
+    },
+    "listing_types": [
+     "s",
+     "k"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "2",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=557 baseline_total=10000 matched=50"
+    },
+    "is_range": false
+   },
+   "mileage_v2": {
+    "param": "mileage_v2",
+    "label": "Số Km đã đi",
+    "type": "string",
+    "options": {},
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "range": true,
+     "probed": "10-13",
+     "reason": "range honoured",
+     "evidence": "n=50 total=674"
+    },
+    "is_range": true
+   },
+   "motorbikebrand": {
+    "param": "motorbikebrand",
+    "label": "Hãng xe",
+    "type": "integer",
+    "options": {
+     "1": "Honda",
+     "2": "Yamaha",
+     "3": "Piaggio",
+     "4": "Suzuki",
+     "5": "SYM",
+     "6": "Aprilia",
+     "7": "Bazan",
+     "8": "Benelli",
+     "9": "BMW",
+     "35": "Brixton",
+     "10": "CR&S",
+     "11": "Daelim",
+     "41": "Detech",
+     "12": "Ducati",
+     "13": "Euro Reibel",
+     "38": "GPX",
+     "14": "Halim",
+     "15": "Harley Davidson",
+     "16": "Hyosung",
+     "17": "Kawasaki",
+     "18": "Keeway",
+     "19": "Kengo",
+     "20": "KTM",
+     "21": "Kymco",
+     "22": "Lambretta",
+     "23": "Malaguti",
+     "36": "Moto Guzzi",
+     "24": "MV Agusta",
+     "40": "Nioshima",
+     "25": "Norton",
+     "37": "Peugeot",
+     "26": "RebelUSA",
+     "27": "Regal Raptor",
+     "42": "Royal Enfield",
+     "28": "Sachs",
+     "29": "Sanda",
+     "39": "Taya",
+     "30": "Triumph",
+     "31": "Vento",
+     "32": "Victory",
+     "33": "Visitor",
+     "34": "Hãng khác"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "19",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=1 total=1 baseline_total=10000 matched=1"
+    },
+    "is_range": false
+   },
+   "motorbikecapacity": {
+    "param": "motorbikecapacity",
+    "label": "Dung tích xe",
+    "type": "integer",
+    "options": {
+     "1": "Dưới 50 cc",
+     "2": "50 - 100 cc",
+     "3": "100 - 175 cc",
+     "4": "Trên 175 cc",
+     "5": "Không biết rõ"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "3",
+     "reason": "distribution collapsed and the result set changed",
+     "evidence": "n=50 total=10000 baseline_total=10000 matched=50"
+    },
+    "is_range": false
+   },
+   "motorbiketype": {
+    "param": "motorbiketype",
+    "label": "Loại xe",
+    "type": "integer",
+    "options": {
+     "1": "Tay ga",
+     "2": "Xe số",
+     "3": "Tay côn/Moto"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "2",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=7125 baseline_total=10000 matched=50"
+    },
+    "is_range": false
+   },
+   "plate": {
+    "param": "plate",
+    "label": "Biển số xe",
+    "type": "string",
+    "options": {},
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": false,
+     "reason": "free-text field, not a searchable facet"
+    },
+    "is_range": false
+   },
+   "regdate": {
+    "param": "regdate",
+    "label": "Năm đăng ký",
+    "type": "integer",
+    "options": {
+     "2023": "2023",
+     "2022": "2022",
+     "2021": "2021",
+     "2020": "2020",
+     "2019": "2019",
+     "2018": "2018",
+     "2017": "2017",
+     "2016": "2016",
+     "2015": "2015",
+     "2014": "2014",
+     "2013": "2013",
+     "2012": "2012",
+     "2011": "2011",
+     "2010": "2010",
+     "2009": "2009",
+     "2008": "2008",
+     "2007": "2007",
+     "2006": "2006",
+     "2005": "2005",
+     "2004": "2004",
+     "2003": "2003",
+     "2002": "2002",
+     "2001": "2001",
+     "2000": "2000",
+     "1999": "1999",
+     "1998": "1998",
+     "1997": "1997",
+     "1996": "1996",
+     "1995": "1995",
+     "1994": "1994",
+     "1993": "1993",
+     "1992": "1992",
+     "1991": "1991",
+     "1990": "1990",
+     "1989": "1989",
+     "1988": "1988",
+     "1987": "1987",
+     "1986": "1986",
+     "1985": "1985",
+     "1984": "1984",
+     "1983": "1983",
+     "1982": "1982",
+     "1981": "1981",
+     "1980": "trước năm 1980"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "range": true,
+     "probed": "2003-2007",
+     "reason": "range honoured",
+     "evidence": "n=50 total=1193"
+    },
+    "is_range": true
+   },
+   "service_sendvideo": {
+    "param": "service_sendvideo",
+    "label": "Người bán gửi Video",
+    "type": "integer",
+    "options": {
+     "1": "Có hỗ trợ",
+     "2": "Không hỗ trợ"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": false,
+     "probed": "2",
+     "reason": "accepted and ignored (mixed distribution)",
+     "evidence": "n=50 total=10000 baseline_total=10000 matched=0"
+    },
+    "is_range": false
+   }
+  },
+  "2030": {
+   "condition_ad": {
+    "param": "condition_ad",
+    "label": "Tình trạng",
+    "type": "radio",
+    "options": {
+     "1": "Đã sử dụng",
+     "2": "Mới"
+    },
+    "listing_types": [
+     "s",
+     "k"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "2",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=1266 baseline_total=5664 matched=50"
+    },
+    "is_range": false
+   },
+   "parts_accessories_type": {
+    "param": "parts_accessories_type",
+    "label": "Loại phụ tùng",
+    "type": "integer",
+    "options": {
+     "1": "Phụ tùng xe máy",
+     "2": "Phụ tùng ô tô",
+     "3": "Phụ tùng xe đạp",
+     "4": "Phụ tùng xe điện",
+     "5": "Phụ tùng xe tải/xe ben",
+     "6": "Phụ tùng khác"
+    },
+    "listing_types": [
+     "s",
+     "k"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "4",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=220 baseline_total=5664 matched=50"
+    },
+    "is_range": false
+   },
+   "service_sendvideo": {
+    "param": "service_sendvideo",
+    "label": "Người bán gửi Video",
+    "type": "integer",
+    "options": {
+     "1": "Có hỗ trợ",
+     "2": "Không hỗ trợ"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": false,
+     "probed": "2",
+     "reason": "accepted and ignored (mixed distribution)",
+     "evidence": "n=50 total=5664 baseline_total=5664 matched=0"
+    },
+    "is_range": false
+   }
+  },
+  "2050": {
+   "condition_ad": {
+    "param": "condition_ad",
+    "label": "Tình trạng",
+    "type": "radio",
+    "options": {
+     "1": "Đã sử dụng",
+     "2": "Mới"
+    },
+    "listing_types": [
+     "s",
+     "k"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "2",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=525 baseline_total=3467 matched=50"
+    },
+    "is_range": false
+   },
+   "fuel": {
+    "param": "fuel",
+    "label": "Nhiên liệu",
+    "type": "integer",
+    "options": {
+     "1": "Xăng",
+     "2": "Dầu",
+     "3": "Động cơ Hybrid",
+     "4": "Điện"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "3",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=24 total=24 baseline_total=3467 matched=24"
+    },
+    "is_range": false
+   },
+   "mfdate": {
+    "param": "mfdate",
+    "label": "Năm sản xuất",
+    "type": "integer",
+    "options": {
+     "2023": "2023",
+     "2022": "2022",
+     "2021": "2021",
+     "2020": "2020",
+     "2019": "2019",
+     "2018": "2018",
+     "2017": "2017",
+     "2016": "2016",
+     "2015": "2015",
+     "2014": "2014",
+     "2013": "2013",
+     "2012": "2012",
+     "2011": "2011",
+     "2010": "2010",
+     "2009": "2009",
+     "2008": "2008",
+     "2007": "2007",
+     "2006": "2006",
+     "2005": "2005",
+     "2004": "2004",
+     "2003": "2003",
+     "2002": "2002",
+     "2001": "2001",
+     "2000": "2000",
+     "1999": "1999",
+     "1998": "1998",
+     "1997": "1997",
+     "1996": "1996",
+     "1995": "1995",
+     "1994": "1994",
+     "1993": "1993",
+     "1992": "1992",
+     "1991": "1991",
+     "1990": "1990",
+     "1989": "1989",
+     "1988": "1988",
+     "1987": "1987",
+     "1986": "1986",
+     "1985": "1985",
+     "1984": "1984",
+     "1983": "1983",
+     "1982": "1982",
+     "1981": "1981",
+     "1980": "trước năm 1980"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "range": true,
+     "probed": "2004-2006",
+     "reason": "range honoured",
+     "evidence": "n=50 total=134"
+    },
+    "is_range": true
+   },
+   "mileage_v2": {
+    "param": "mileage_v2",
+    "label": "Số Km đã đi",
+    "type": "string",
+    "options": {},
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "range": true,
+     "probed": "10-90",
+     "reason": "range honoured",
+     "evidence": "n=50 total=54"
+    },
+    "is_range": true
+   },
+   "ovehicleorigin": {
+    "param": "ovehicleorigin",
+    "label": "Xuất xứ",
+    "type": "integer",
+    "options": {
+     "1": "Nhật Bản",
+     "2": "Đức",
+     "3": "Hàn Quốc",
+     "4": "Mỹ",
+     "5": "Trung Quốc",
+     "6": "Viêt Nam",
+     "7": "Khác"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "4",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=11 total=11 baseline_total=3467 matched=11"
+    },
+    "is_range": false
+   },
+   "plate": {
+    "param": "plate",
+    "label": "Biển số xe",
+    "type": "string",
+    "options": {},
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": false,
+     "reason": "free-text field, not a searchable facet"
+    },
+    "is_range": false
+   },
+   "service_sendvideo": {
+    "param": "service_sendvideo",
+    "label": "Người bán gửi Video",
+    "type": "integer",
+    "options": {
+     "1": "Có hỗ trợ",
+     "2": "Không hỗ trợ"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": false,
+     "probed": "2",
+     "reason": "accepted and ignored (mixed distribution)",
+     "evidence": "n=50 total=3467 baseline_total=3467 matched=0"
+    },
+    "is_range": false
+   },
+   "truckbrand": {
+    "param": "truckbrand",
+    "label": "Hãng xe tải",
+    "type": "integer",
+    "options": {
+     "1": "Hino",
+     "2": "Chiến Thắng",
+     "3": "Cửu Long",
+     "4": "Daewoo",
+     "5": "Dongben",
+     "6": "Dongfeng",
+     "7": "FAW",
+     "8": "Forcia",
+     "9": "Fusin",
+     "10": "Fuso",
+     "11": "Hoa Mai",
+     "12": "Howo",
+     "13": "Hyundai",
+     "14": "Isuzu",
+     "15": "JAC",
+     "16": "KIA",
+     "17": "Mitsubishi",
+     "18": "Samco",
+     "19": "Shacman",
+     "20": "Sinotruk",
+     "21": "Suzuki",
+     "22": "SYM",
+     "23": "TATA",
+     "24": "Thaco",
+     "25": "Thành Hưng",
+     "26": "TMT",
+     "27": "Trường Giang",
+     "28": "Veam",
+     "29": "Vinaxuki",
+     "31": "Kamaz",
+     "32": "Vinamotor",
+     "33": "Teraco",
+     "30": "Khác"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "17",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=64 baseline_total=3467 matched=50"
+    },
+    "is_range": false
+   },
+   "truckweight": {
+    "param": "truckweight",
+    "label": "Trọng tải",
+    "type": "integer",
+    "options": {
+     "1": "< 1 tấn",
+     "2": "2 tấn",
+     "3": "3 tấn",
+     "4": "4 tấn",
+     "5": "5 tấn",
+     "6": "6 tấn",
+     "7": "7 tấn",
+     "8": "8 tấn",
+     "9": "9 tấn",
+     "10": "10 tấn",
+     "11": "11 tấn",
+     "12": "12 tấn",
+     "13": "13 tấn",
+     "14": "14 tấn",
+     "15": "15 tấn",
+     "16": "16 tấn",
+     "17": "17 tấn",
+     "18": "18 tấn",
+     "19": "> 18 tấn"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "10",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=13 total=13 baseline_total=3467 matched=13"
+    },
+    "is_range": false
+   },
+   "vehiclecolor": {
+    "param": "vehiclecolor",
+    "label": "Màu sắc",
+    "type": "integer",
+    "options": {
+     "1": "Đen",
+     "2": "Trắng",
+     "6": "Xanh dương",
+     "10": "Xanh lá",
+     "9": "Nâu",
+     "4": "Xám",
+     "8": "Cam",
+     "11": "Hồng",
+     "13": "Tím",
+     "5": "Đỏ",
+     "3": "Bạc",
+     "7": "Vàng",
+     "14": "Phối hợp"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "8",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=4 total=4 baseline_total=3467 matched=4"
+    },
+    "is_range": false
+   }
+  },
+  "2060": {
+   "bicyclebrand": {
+    "param": "bicyclebrand",
+    "label": "Hãng xe",
+    "type": "integer",
+    "options": {
+     "1": "Ander",
+     "2": "Asama",
+     "3": "Baileys",
+     "25": "Bianchi",
+     "4": "Cannondale",
+     "28": "Dahon",
+     "5": "Fornix",
+     "6": "Fury",
+     "7": "Galaxy",
+     "8": "Giant",
+     "26": "Gitane",
+     "9": "Jett",
+     "27": "Look",
+     "10": "Martin",
+     "11": "Maruishi",
+     "24": "Peugeot",
+     "12": "Phượng Hoàng",
+     "29": "Puch",
+     "13": "Royal baby",
+     "14": "Sportlink",
+     "15": "Starider",
+     "16": "Stitch",
+     "17": "Strongman",
+     "18": "Tacke",
+     "19": "Thống Nhất",
+     "20": "Totem",
+     "21": "Trinx",
+     "22": "Twitter",
+     "23": "Khác"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "11",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=29 total=29 baseline_total=4079 matched=29"
+    },
+    "is_range": false
+   },
+   "bicyclematerial": {
+    "param": "bicyclematerial",
+    "label": "Chất liệu khung",
+    "type": "integer",
+    "options": {
+     "1": "Thép",
+     "2": "Carbon",
+     "3": "Inox",
+     "4": "Nhôm",
+     "5": "Sắt",
+     "6": "Titanium"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "4",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=730 baseline_total=4079 matched=50"
+    },
+    "is_range": false
+   },
+   "bicycleorigin": {
+    "param": "bicycleorigin",
+    "label": "Xuất xứ",
+    "type": "integer",
+    "options": {
+     "1": "Nhật Bản",
+     "2": "Đài Loan",
+     "3": "Đức",
+     "4": "Mỹ",
+     "5": "Pháp",
+     "6": "Thái Lan",
+     "7": "Trung Quốc",
+     "8": "Viêt Nam",
+     "9": "Ý",
+     "10": "Khác"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "6",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=12 total=12 baseline_total=4079 matched=12"
+    },
+    "is_range": false
+   },
+   "bicyclesize": {
+    "param": "bicyclesize",
+    "label": "Kích thước khung",
+    "type": "integer",
+    "options": {
+     "1": "XS (43 cm)",
+     "2": "S (46.5 cm)",
+     "3": "M ( 50 cm)",
+     "4": "L (55.5 cm)",
+     "5": "XL ( 58.5 cm)"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "3",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=243 baseline_total=4079 matched=50"
+    },
+    "is_range": false
+   },
+   "bicyclesport": {
+    "param": "bicyclesport",
+    "label": "Dòng xe đạp thể thao",
+    "type": "integer",
+    "options": {
+     "1": "Xe đạp địa hình",
+     "2": "Fixed gear",
+     "3": "Xe đạp đua",
+     "4": "Touring",
+     "5": "BMX",
+     "6": "Xe đạp đường phố",
+     "7": "Xe thể thao mini",
+     "8": "Khác"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "5",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=14 total=14 baseline_total=4079 matched=14"
+    },
+    "is_range": false
+   },
+   "bicycletype": {
+    "param": "bicycletype",
+    "label": "Loại xe đạp",
+    "type": "integer",
+    "options": {
+     "1": "Xe đạp thể thao",
+     "2": "Xe đạp trẻ em",
+     "3": "Xe đạp phổ thông",
+     "8": "Xe đạp khác"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "3",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=569 baseline_total=4079 matched=50"
+    },
+    "is_range": false
+   },
+   "condition_ad": {
+    "param": "condition_ad",
+    "label": "Tình trạng",
+    "type": "radio",
+    "options": {
+     "1": "Đã sử dụng",
+     "2": "Mới"
+    },
+    "listing_types": [
+     "s",
+     "k"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "2",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=371 baseline_total=4079 matched=50"
+    },
+    "is_range": false
+   },
+   "service_sendvideo": {
+    "param": "service_sendvideo",
+    "label": "Người bán gửi Video",
+    "type": "integer",
+    "options": {
+     "1": "Có hỗ trợ",
+     "2": "Không hỗ trợ"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": false,
+     "probed": "2",
+     "reason": "accepted and ignored (mixed distribution)",
+     "evidence": "n=50 total=4079 baseline_total=4079 matched=0"
+    },
+    "is_range": false
+   },
+   "vehiclecolor": {
+    "param": "vehiclecolor",
+    "label": "Màu sắc",
+    "type": "integer",
+    "options": {
+     "1": "Đen",
+     "2": "Trắng",
+     "6": "Xanh dương",
+     "10": "Xanh lá",
+     "9": "Nâu",
+     "4": "Xám",
+     "8": "Cam",
+     "11": "Hồng",
+     "13": "Tím",
+     "5": "Đỏ",
+     "3": "Bạc",
+     "7": "Vàng",
+     "14": "Phối hợp"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "8",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=64 baseline_total=4079 matched=50"
+    },
+    "is_range": false
+   },
+   "vehicleguarantee": {
+    "param": "vehicleguarantee",
+    "label": "Bảo hành",
+    "type": "integer",
+    "options": {
+     "1": "Hết bảo hành",
+     "2": "<3 tháng",
+     "3": "3 tháng",
+     "4": "6 tháng",
+     "5": "12 tháng",
+     "6": "18 tháng",
+     "7": "24 tháng",
+     "8": "> 24 tháng"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "5",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=146 baseline_total=4079 matched=50"
+    },
+    "is_range": false
+   }
+  },
+  "2080": {
+   "busslot": {
+    "param": "busslot",
+    "label": "Số chỗ",
+    "type": "integer",
+    "options": {
+     "1": "7 chỗ",
+     "2": "9 chỗ",
+     "3": "10 chỗ",
+     "4": "16 chỗ",
+     "5": "29 chỗ",
+     "6": "36 chỗ",
+     "7": "45 chỗ",
+     "8": "Khác"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "5",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=15 total=15 baseline_total=767 matched=15"
+    },
+    "is_range": false
+   },
+   "condition_ad": {
+    "param": "condition_ad",
+    "label": "Tình trạng",
+    "type": "radio",
+    "options": {
+     "1": "Đã sử dụng",
+     "2": "Mới"
+    },
+    "listing_types": [
+     "s",
+     "k"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "2",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=106 baseline_total=767 matched=50"
+    },
+    "is_range": false
+   },
+   "fuel": {
+    "param": "fuel",
+    "label": "Nhiên liệu",
+    "type": "integer",
+    "options": {
+     "1": "Xăng",
+     "2": "Dầu",
+     "3": "Động cơ Hybrid",
+     "4": "Điện"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "3",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=8 total=8 baseline_total=767 matched=8"
+    },
+    "is_range": false
+   },
+   "mfdate": {
+    "param": "mfdate",
+    "label": "Năm sản xuất",
+    "type": "integer",
+    "options": {
+     "2023": "2023",
+     "2022": "2022",
+     "2021": "2021",
+     "2020": "2020",
+     "2019": "2019",
+     "2018": "2018",
+     "2017": "2017",
+     "2016": "2016",
+     "2015": "2015",
+     "2014": "2014",
+     "2013": "2013",
+     "2012": "2012",
+     "2011": "2011",
+     "2010": "2010",
+     "2009": "2009",
+     "2008": "2008",
+     "2007": "2007",
+     "2006": "2006",
+     "2005": "2005",
+     "2004": "2004",
+     "2003": "2003",
+     "2002": "2002",
+     "2001": "2001",
+     "2000": "2000",
+     "1999": "1999",
+     "1998": "1998",
+     "1997": "1997",
+     "1996": "1996",
+     "1995": "1995",
+     "1994": "1994",
+     "1993": "1993",
+     "1992": "1992",
+     "1991": "1991",
+     "1990": "1990",
+     "1989": "1989",
+     "1988": "1988",
+     "1987": "1987",
+     "1986": "1986",
+     "1985": "1985",
+     "1984": "1984",
+     "1983": "1983",
+     "1982": "1982",
+     "1981": "1981",
+     "1980": "trước năm 1980"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "range": true,
+     "probed": "1990-1991",
+     "reason": "range honoured",
+     "evidence": "n=23 total=23"
+    },
+    "is_range": true
+   },
+   "mileage_v2": {
+    "param": "mileage_v2",
+    "label": "Số Km đã đi",
+    "type": "string",
+    "options": {},
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "range": true,
+     "probed": "200-3900",
+     "reason": "range honoured",
+     "evidence": "n=29 total=29"
+    },
+    "is_range": true
+   },
+   "ovehicleorigin": {
+    "param": "ovehicleorigin",
+    "label": "Xuất xứ",
+    "type": "integer",
+    "options": {
+     "1": "Nhật Bản",
+     "2": "Đức",
+     "3": "Hàn Quốc",
+     "4": "Mỹ",
+     "5": "Trung Quốc",
+     "6": "Viêt Nam",
+     "7": "Khác"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "4",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=9 total=9 baseline_total=767 matched=9"
+    },
+    "is_range": false
+   },
+   "ovehicletype": {
+    "param": "ovehicletype",
+    "label": "Loại xe",
+    "type": "integer",
+    "options": {
+     "1": "Xe chuyên dụng",
+     "2": "Xe khách, xe buýt",
+     "3": "Khác"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "2",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=42 total=42 baseline_total=767 matched=42"
+    },
+    "is_range": false
+   },
+   "plate": {
+    "param": "plate",
+    "label": "Biển số xe",
+    "type": "string",
+    "options": {},
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": false,
+     "reason": "free-text field, not a searchable facet"
+    },
+    "is_range": false
+   },
+   "service_sendvideo": {
+    "param": "service_sendvideo",
+    "label": "Người bán gửi Video",
+    "type": "integer",
+    "options": {
+     "1": "Có hỗ trợ",
+     "2": "Không hỗ trợ"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": false,
+     "probed": "2",
+     "reason": "accepted and ignored (mixed distribution)",
+     "evidence": "n=50 total=767 baseline_total=767 matched=0"
+    },
+    "is_range": false
+   },
+   "svehicletype": {
+    "param": "svehicletype",
+    "label": "Loại xe chuyên dụng",
+    "type": "integer",
+    "options": {
+     "16": "Xe ba gác, xe lôi",
+     "1": "Xe bồn",
+     "2": "Xe chở rác",
+     "3": "Xe công nông",
+     "4": "Xe đầu kéo",
+     "5": "Xe đông lạnh",
+     "6": "Xe hút chất thải",
+     "8": "Xe lam",
+     "10": "Xe lu",
+     "11": "Xe máy cày",
+     "12": "Xe nâng",
+     "13": "Xe phun nước",
+     "14": "Xe xúc",
+     "15": "Khác"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": false,
+     "reason": "probe returned no rows",
+     "probed": "8"
+    },
+    "is_range": false
+   },
+   "vehiclecolor": {
+    "param": "vehiclecolor",
+    "label": "Màu sắc",
+    "type": "integer",
+    "options": {
+     "1": "Đen",
+     "2": "Trắng",
+     "6": "Xanh dương",
+     "10": "Xanh lá",
+     "9": "Nâu",
+     "4": "Xám",
+     "8": "Cam",
+     "11": "Hồng",
+     "13": "Tím",
+     "5": "Đỏ",
+     "3": "Bạc",
+     "7": "Vàng",
+     "14": "Phối hợp"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "8",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=55 baseline_total=767 matched=50"
+    },
+    "is_range": false
+   }
+  },
+  "2090": {
+   "condition_ad": {
+    "param": "condition_ad",
+    "label": "Tình trạng",
+    "type": "radio",
+    "options": {
+     "1": "Đã sử dụng",
+     "2": "Mới"
+    },
+    "listing_types": [
+     "s",
+     "k"
+    ],
+    "verified": {
+     "works": false,
+     "reason": "probe returned no rows",
+     "probed": "2"
+    },
+    "is_range": false
+   },
+   "evehiclebrand": {
+    "param": "evehiclebrand",
+    "label": "Hãng xe",
+    "type": "integer",
+    "options": {
+     "1": "Aima",
+     "25": "Anbico",
+     "2": "Asama",
+     "3": "BMX",
+     "4": "Bridgestone",
+     "26": "Detech",
+     "5": "Dibao",
+     "23": "DKBike",
+     "6": "Giant",
+     "7": "Hitasa",
+     "8": "HK bike",
+     "9": "Honda",
+     "10": "Hyundai",
+     "11": "Jett",
+     "27": "Kingda",
+     "29": "MBI",
+     "12": "Nijia",
+     "24": "Nioshima",
+     "13": "Pega",
+     "14": "Sonsu",
+     "15": "Suzika",
+     "16": "Trinx",
+     "28": "Vinfast",
+     "17": "Xiaomi",
+     "18": "Xmen",
+     "22": "Yadea",
+     "19": "Yamaha",
+     "20": "Zoomer",
+     "21": "Khác"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": false,
+     "reason": "probe returned no rows",
+     "probed": "27"
+    },
+    "is_range": false
+   },
+   "evehiclemotor": {
+    "param": "evehiclemotor",
+    "label": "Động cơ",
+    "type": "integer",
+    "options": {
+     "1": "< 200W",
+     "2": "200 - 250W",
+     "3": "251 - 350 W",
+     "4": "351 - 500 W",
+     "5": "501 - 1000 W",
+     "6": "> 1000 W"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": false,
+     "reason": "probe returned no rows",
+     "probed": "4"
+    },
+    "is_range": false
+   },
+   "evehicleorigin": {
+    "param": "evehicleorigin",
+    "label": "Xuất xứ",
+    "type": "integer",
+    "options": {
+     "1": "Nhật Bản",
+     "2": "Đài Loan",
+     "3": "Trung Quốc",
+     "4": "Mỹ",
+     "5": "Pháp",
+     "6": "Đức",
+     "7": "Ý",
+     "8": "Lắp ráp tại Viêt Nam",
+     "9": "Thái Lan"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": false,
+     "reason": "probe returned no rows",
+     "probed": "5"
+    },
+    "is_range": false
+   },
+   "evehicletype": {
+    "param": "evehicletype",
+    "label": "Loại xe",
+    "type": "integer",
+    "options": {
+     "1": "Xe đạp điện",
+     "2": "Xe máy điện",
+     "3": "Xe điện khác"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": false,
+     "reason": "probe returned no rows",
+     "probed": "2"
+    },
+    "is_range": false
+   },
+   "service_sendvideo": {
+    "param": "service_sendvideo",
+    "label": "Người bán gửi Video",
+    "type": "integer",
+    "options": {
+     "1": "Có hỗ trợ",
+     "2": "Không hỗ trợ"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": false,
+     "reason": "probe returned no rows",
+     "probed": "2"
+    },
+    "is_range": false
+   },
+   "vehiclecolor": {
+    "param": "vehiclecolor",
+    "label": "Màu sắc",
+    "type": "integer",
+    "options": {
+     "1": "Đen",
+     "2": "Trắng",
+     "6": "Xanh dương",
+     "10": "Xanh lá",
+     "9": "Nâu",
+     "4": "Xám",
+     "8": "Cam",
+     "11": "Hồng",
+     "13": "Tím",
+     "5": "Đỏ",
+     "3": "Bạc",
+     "7": "Vàng",
+     "14": "Phối hợp"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": false,
+     "reason": "probe returned no rows",
+     "probed": "8"
+    },
+    "is_range": false
+   },
+   "vehicleguarantee": {
+    "param": "vehicleguarantee",
+    "label": "Bảo hành",
+    "type": "integer",
+    "options": {
+     "1": "Hết bảo hành",
+     "2": "<3 tháng",
+     "3": "3 tháng",
+     "4": "6 tháng",
+     "5": "12 tháng",
+     "6": "18 tháng",
+     "7": "24 tháng",
+     "8": "> 24 tháng"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": false,
+     "reason": "probe returned no rows",
+     "probed": "5"
+    },
+    "is_range": false
+   }
+  },
+  "3030": {
+   "condition_ad": {
+    "param": "condition_ad",
+    "label": "Tình trạng",
+    "type": "radio",
+    "options": {
+     "1": "Đã sử dụng",
+     "2": "Mới"
+    },
+    "listing_types": [
+     "s",
+     "k"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "2",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=8585 baseline_total=10000 matched=50"
+    },
+    "is_range": false
+   }
+  },
+  "3050": {
+   "condition_ad": {
+    "param": "condition_ad",
+    "label": "Tình trạng",
+    "type": "radio",
+    "options": {
+     "1": "Đã sử dụng",
+     "2": "Mới"
+    },
+    "listing_types": [
+     "s",
+     "k"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "2",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=1726 baseline_total=10000 matched=50"
+    },
+    "is_range": false
+   },
+   "itemconsumer": {
+    "param": "itemconsumer",
+    "label": "Loại sản phẩm",
+    "type": "integer",
+    "options": {
+     "2": "Đồ nữ",
+     "3": "Đồ nam",
+     "1": "Cả nam và nữ"
+    },
+    "listing_types": [
+     "s",
+     "k"
+    ],
+    "verified": {
+     "works": false,
+     "probed": "3",
+     "reason": "accepted and ignored (mixed distribution)",
+     "evidence": "n=50 total=10000 baseline_total=10000 matched=22"
+    },
+    "is_range": false
+   }
+  },
+  "3060": {
+   "condition_ad": {
+    "param": "condition_ad",
+    "label": "Tình trạng",
+    "type": "radio",
+    "options": {
+     "1": "Đã sử dụng",
+     "2": "Mới"
+    },
+    "listing_types": [
+     "s",
+     "k"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "2",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=3853 baseline_total=10000 matched=50"
+    },
+    "is_range": false
+   },
+   "itemconsumer": {
+    "param": "itemconsumer",
+    "label": "Loại sản phẩm",
+    "type": "integer",
+    "options": {
+     "2": "Đồ nữ",
+     "3": "Đồ nam",
+     "1": "Cả nam và nữ"
+    },
+    "listing_types": [
+     "s",
+     "k"
+    ],
+    "verified": {
+     "works": false,
+     "probed": "3",
+     "reason": "accepted and ignored (mixed distribution)",
+     "evidence": "n=50 total=10000 baseline_total=10000 matched=17"
+    },
+    "is_range": false
+   }
+  },
+  "3070": {
+   "condition_ad": {
+    "param": "condition_ad",
+    "label": "Tình trạng",
+    "type": "radio",
+    "options": {
+     "1": "Đã sử dụng",
+     "2": "Mới"
+    },
+    "listing_types": [
+     "s",
+     "k"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "2",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=3431 baseline_total=7609 matched=50"
+    },
+    "is_range": false
+   },
+   "itemconsumer": {
+    "param": "itemconsumer",
+    "label": "Loại sản phẩm",
+    "type": "integer",
+    "options": {
+     "2": "Đồ nữ",
+     "3": "Đồ nam",
+     "1": "Cả nam và nữ"
+    },
+    "listing_types": [
+     "s",
+     "k"
+    ],
+    "verified": {
+     "works": false,
+     "probed": "3",
+     "reason": "accepted and ignored (mixed distribution)",
+     "evidence": "n=50 total=7609 baseline_total=7609 matched=12"
+    },
+    "is_range": false
+   }
+  },
+  "3080": {
+   "condition_ad": {
+    "param": "condition_ad",
+    "label": "Tình trạng",
+    "type": "radio",
+    "options": {
+     "1": "Đã sử dụng",
+     "2": "Mới"
+    },
+    "listing_types": [
+     "s",
+     "k"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "2",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=1046 baseline_total=1863 matched=50"
+    },
+    "is_range": false
+   },
+   "itemconsumer": {
+    "param": "itemconsumer",
+    "label": "Loại sản phẩm",
+    "type": "integer",
+    "options": {
+     "2": "Đồ nữ",
+     "3": "Đồ nam",
+     "1": "Cả nam và nữ"
+    },
+    "listing_types": [
+     "s",
+     "k"
+    ],
+    "verified": {
+     "works": false,
+     "probed": "3",
+     "reason": "accepted and ignored (mixed distribution)",
+     "evidence": "n=50 total=1863 baseline_total=1863 matched=23"
+    },
+    "is_range": false
+   }
+  },
+  "3090": {
+   "condition_ad": {
+    "param": "condition_ad",
+    "label": "Tình trạng",
+    "type": "radio",
+    "options": {
+     "1": "Đã sử dụng",
+     "2": "Mới"
+    },
+    "listing_types": [
+     "s",
+     "k"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "2",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=6399 baseline_total=10000 matched=50"
+    },
+    "is_range": false
+   },
+   "itemconsumer": {
+    "param": "itemconsumer",
+    "label": "Loại sản phẩm",
+    "type": "integer",
+    "options": {
+     "2": "Đồ nữ",
+     "3": "Đồ nam",
+     "1": "Cả nam và nữ"
+    },
+    "listing_types": [
+     "s",
+     "k"
+    ],
+    "verified": {
+     "works": false,
+     "probed": "3",
+     "reason": "accepted and ignored (mixed distribution)",
+     "evidence": "n=50 total=10000 baseline_total=10000 matched=14"
+    },
+    "is_range": false
+   }
+  },
+  "4010": {
+   "collection_type": {
+    "param": "collection_type",
+    "label": "Loại sản phẩm",
+    "type": "int",
+    "options": {
+     "1": "Thạch, đá quí",
+     "2": "Tranh ảnh, khung tranh",
+     "3": "Bật lửa",
+     "4": "Tượng trang trí",
+     "5": "Đồ gốm sứ",
+     "6": "Các loại khác"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "4",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=1020 baseline_total=6686 matched=50"
+    },
+    "is_range": false
+   },
+   "condition_ad": {
+    "param": "condition_ad",
+    "label": "Tình trạng",
+    "type": "radio",
+    "options": {
+     "1": "Đã sử dụng",
+     "2": "Mới"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "2",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=1377 baseline_total=6686 matched=50"
+    },
+    "is_range": false
+   }
+  },
+  "4020": {
+   "condition_ad": {
+    "param": "condition_ad",
+    "label": "Tình trạng",
+    "type": "radio",
+    "options": {
+     "1": "Đã sử dụng",
+     "2": "Mới"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "2",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=1261 baseline_total=5340 matched=50"
+    },
+    "is_range": false
+   }
+  },
+  "4040": {
+   "condition_ad": {
+    "param": "condition_ad",
+    "label": "Tình trạng",
+    "type": "radio",
+    "options": {
+     "1": "Đã sử dụng",
+     "2": "Mới"
+    },
+    "listing_types": [
+     "s",
+     "k"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "2",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=308 baseline_total=2152 matched=50"
+    },
+    "is_range": false
+   },
+   "instrument_type": {
+    "param": "instrument_type",
+    "label": "Loại nhạc cụ",
+    "type": "int",
+    "options": {
+     "1": "Guitar",
+     "2": "Piano",
+     "3": "Organ",
+     "4": "Nhạc cụ khác"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": false,
+     "probed": "3",
+     "reason": "accepted and ignored (mixed distribution)",
+     "evidence": "n=50 total=2152 baseline_total=2152 matched=4"
+    },
+    "is_range": false
+   }
+  },
+  "4050": {
+   "condition_ad": {
+    "param": "condition_ad",
+    "label": "Tình trạng",
+    "type": "radio",
+    "options": {
+     "1": "Đã sử dụng",
+     "2": "Mới"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "2",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=177 baseline_total=1503 matched=50"
+    },
+    "is_range": false
+   }
+  },
+  "4060": {
+   "condition_ad": {
+    "param": "condition_ad",
+    "label": "Tình trạng",
+    "type": "radio",
+    "options": {
+     "1": "Đã sử dụng",
+     "2": "Mới"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "2",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=1206 baseline_total=3006 matched=50"
+    },
+    "is_range": false
+   }
+  },
+  "4070": {
+   "condition_ad": {
+    "param": "condition_ad",
+    "label": "Tình trạng",
+    "type": "radio",
+    "options": {
+     "1": "Đã sử dụng",
+     "2": "Mới"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "2",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=852 baseline_total=3519 matched=50"
+    },
+    "is_range": false
+   }
+  },
+  "5010": {
+   "elt_condition": {
+    "param": "elt_condition",
+    "label": "Tình trạng",
+    "type": "integer",
+    "options": {
+     "1": "Mới",
+     "2": "Đã sử dụng (chưa sửa chữa)",
+     "3": "Đã sử dụng (qua sửa chữa)"
+    },
+    "listing_types": [
+     "s",
+     "k"
+    ],
+    "verified": {
+     "works": false,
+     "probed": "2",
+     "reason": "accepted and ignored (mixed distribution)",
+     "evidence": "n=50 total=10000 baseline_total=10000 matched=40"
+    },
+    "is_range": false
+   },
+   "elt_lock": {
+    "param": "elt_lock",
+    "label": "Phiên bản",
+    "type": "integer",
+    "options": {
+     "1": "Phiên bản quốc tế",
+     "2": "Phiên bản khoá mạng (lock)"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": false,
+     "probed": "2",
+     "reason": "accepted and ignored (mixed distribution)",
+     "evidence": "n=50 total=10000 baseline_total=10000 matched=1"
+    },
+    "is_range": false
+   },
+   "elt_warranty": {
+    "param": "elt_warranty",
+    "label": "Chính sách bảo hành",
+    "type": "integer",
+    "options": {
+     "1": "Hết bảo hành",
+     "3": "1 tháng",
+     "4": "2 tháng",
+     "5": "3 tháng",
+     "6": "4-6 tháng",
+     "7": "7-12 tháng",
+     "8": ">12 tháng",
+     "2": "Còn bảo hành"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": false,
+     "probed": "6",
+     "reason": "accepted and ignored (mixed distribution)",
+     "evidence": "n=50 total=10000 baseline_total=10000 matched=2"
+    },
+    "is_range": false
+   },
+   "mobile_brand": {
+    "param": "mobile_brand",
+    "label": "Hãng",
+    "type": "integer",
+    "options": {
+     "35": "Alcatel",
+     "1": "Apple",
+     "36": "Aquos",
+     "37": "Arbutus",
+     "38": "Asanzo",
+     "3": "Asus",
+     "21": "BKAV",
+     "4": "Blackberry",
+     "39": "Bluboo",
+     "40": "Coolpad",
+     "41": "Dopod",
+     "42": "Elephone",
+     "43": "Epic",
+     "44": "Essential",
+     "45": "Fujitsu",
+     "46": "Gionee",
+     "22": "Google",
+     "47": "Hero",
+     "5": "HTC",
+     "6": "Huawei",
+     "32": "Intel",
+     "48": "Itel",
+     "49": "Kechaoda",
+     "50": "Kyocera",
+     "17": "Land Rover",
+     "51": "Leagoo",
+     "7": "Lenovo",
+     "8": "LG",
+     "16": "Masstel",
+     "52": "Meitu",
+     "19": "Meizu",
+     "53": "Microsoft",
+     "23": "Mobell",
+     "54": "Mobiado",
+     "9": "Mobiistar",
+     "24": "Motorola",
+     "18": "Nokia phổ thông",
+     "10": "Nokia thông minh",
+     "55": "Nubia",
+     "56": "Obi",
+     "29": "OnePlus",
+     "11": "Oppo",
+     "57": "Oukitel",
+     "58": "Palm",
+     "27": "Philips",
+     "59": "Pocophone",
+     "60": "Q Mobile",
+     "25": "Razer",
+     "34": "Realme",
+     "2": "Samsung",
+     "28": "Sharp",
+     "13": "Sky",
+     "14": "Sony",
+     "61": "Uimi",
+     "62": "Ulefone",
+     "63": "Umidigi",
+     "31": "Vertu",
+     "12": "Vivo",
+     "30": "Vsmart",
+     "33": "Wiko",
+     "64": "Wing",
+     "15": "Xiaomi",
+     "65": "ZiP",
+     "20": "Hãng khác"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "23",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=4 total=4 baseline_total=10000 matched=4"
+    },
+    "is_range": false
+   },
+   "mobile_capacity": {
+    "param": "mobile_capacity",
+    "label": "Dung lượng",
+    "type": "integer",
+    "options": {
+     "1": "< 8GB",
+     "2": "8 GB",
+     "3": "16 GB",
+     "4": "32 GB",
+     "5": "64 GB",
+     "6": "128 GB",
+     "7": "256 GB",
+     "8": "> 256 GB"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "5",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=7449 baseline_total=10000 matched=50"
+    },
+    "is_range": false
+   },
+   "mobile_color": {
+    "param": "mobile_color",
+    "label": "Màu sắc",
+    "type": "integer",
+    "options": {
+     "3": "Bạc",
+     "1": "Đen",
+     "13": "Đen bóng - Jet black",
+     "5": "Đỏ",
+     "11": "Hồng",
+     "2": "Trắng",
+     "7": "Vàng",
+     "14": "Vàng hồng",
+     "4": "Xám",
+     "6": "Xanh dương",
+     "10": "Xanh lá",
+     "12": "Màu khác"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "7",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=5629 baseline_total=10000 matched=50"
+    },
+    "is_range": false
+   },
+   "mobile_type": {
+    "param": "mobile_type",
+    "label": "Loại điện thoại",
+    "type": "integer",
+    "options": {
+     "1": "Điện thoại thông minh",
+     "2": "Điện thoại phổ thông"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": false,
+     "probed": "2",
+     "reason": "accepted and ignored (mixed distribution)",
+     "evidence": "n=50 total=10000 baseline_total=10000 matched=0"
+    },
+    "is_range": false
+   }
+  },
+  "5020": {
+   "amply_origin": {
+    "param": "amply_origin",
+    "label": "Xuất xứ thương hiệu",
+    "type": "integer",
+    "options": {
+     "1": "Việt Nam",
+     "2": "Trung Quốc",
+     "3": "Nhật Bản",
+     "4": "Hàn Quốc",
+     "5": "Ý",
+     "6": "Mỹ",
+     "7": "Khác"
+    },
+    "listing_types": [
+     "s",
+     "k"
+    ],
+    "verified": {
+     "works": false,
+     "probed": "4",
+     "reason": "accepted and ignored (mixed distribution)",
+     "evidence": "n=50 total=10000 baseline_total=10000 matched=0"
+    },
+    "is_range": false
+   },
+   "amply_sound_capacity": {
+    "param": "amply_sound_capacity",
+    "label": "Công suất âm thanh",
+    "type": "integer",
+    "options": {
+     "1": "Dưới 100W",
+     "2": "101 - 300W",
+     "3": "301 - 600W",
+     "4": "601 - 1000W",
+     "5": "Trên 1000W"
+    },
+    "listing_types": [
+     "s",
+     "k"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "3",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=286 baseline_total=10000 matched=50"
+    },
+    "is_range": false
+   },
+   "auvi_internet": {
+    "param": "auvi_internet",
+    "label": "Kết nối internet",
+    "type": "int",
+    "options": {
+     "1": "Có",
+     "2": "Không"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "2",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=180 baseline_total=10000 matched=50"
+    },
+    "is_range": false
+   },
+   "auvi_resolution": {
+    "param": "auvi_resolution",
+    "label": "Kích thước",
+    "type": "int",
+    "options": {
+     "1": "Dưới 32 inch",
+     "2": "32 – 43 inch",
+     "3": "44 – 54 inch",
+     "4": "55 – 64 inch",
+     "5": "Trên 64 inch"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "3",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=434 baseline_total=10000 matched=50"
+    },
+    "is_range": false
+   },
+   "auvi_type": {
+    "param": "auvi_type",
+    "label": "Thiết bị",
+    "type": "integer",
+    "options": {
+     "1": "Tivi",
+     "2": "Loa",
+     "3": "Amply",
+     "4": "Tai nghe",
+     "5": "Micro",
+     "6": "Dàn âm thanh / karaoke",
+     "7": "Khác"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "4",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=2767 baseline_total=10000 matched=50"
+    },
+    "is_range": false
+   },
+   "elt_condition": {
+    "param": "elt_condition",
+    "label": "Tình trạng",
+    "type": "integer",
+    "options": {
+     "1": "Mới",
+     "2": "Đã sử dụng (chưa sửa chữa)",
+     "3": "Đã sử dụng (qua sửa chữa)"
+    },
+    "listing_types": [
+     "s",
+     "k"
+    ],
+    "verified": {
+     "works": false,
+     "probed": "2",
+     "reason": "accepted and ignored (mixed distribution)",
+     "evidence": "n=50 total=10000 baseline_total=10000 matched=42"
+    },
+    "is_range": false
+   },
+   "speaker_capacity": {
+    "param": "speaker_capacity",
+    "label": "Công suất",
+    "type": "integer",
+    "options": {
+     "1": "Dưới 100W",
+     "2": "101 - 300W",
+     "3": "301 - 600W",
+     "4": "601 - 1000W",
+     "5": "Trên 1000W"
+    },
+    "listing_types": [
+     "s",
+     "k"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "3",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=435 baseline_total=10000 matched=50"
+    },
+    "is_range": false
+   },
+   "speaker_type": {
+    "param": "speaker_type",
+    "label": "Loại loa",
+    "type": "integer",
+    "options": {
+     "1": "Loa Bluetooth",
+     "2": "Loa Vi Tính",
+     "3": "Loa Thùng",
+     "4": "Loa Hi-Fi, Loa Thanh",
+     "5": "Loa Kéo",
+     "6": "Khác"
+    },
+    "listing_types": [
+     "s",
+     "k"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "4",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=539 baseline_total=10000 matched=50"
+    },
+    "is_range": false
+   },
+   "stereo_capacity": {
+    "param": "stereo_capacity",
+    "label": "Công suất",
+    "type": "integer",
+    "options": {
+     "1": "Dưới 500W",
+     "2": "501 - 900W",
+     "3": "901 - 1200W",
+     "4": "1201 - 1500W",
+     "5": "Trên 1500W"
+    },
+    "listing_types": [
+     "s",
+     "k"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "3",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=37 total=37 baseline_total=10000 matched=37"
+    },
+    "is_range": false
+   },
+   "stereo_origin": {
+    "param": "stereo_origin",
+    "label": "Xuất xứ thương hiệu",
+    "type": "integer",
+    "options": {
+     "1": "Việt Nam",
+     "2": "Trung Quốc",
+     "3": "Nhật Bản",
+     "4": "Hàn Quốc",
+     "5": "Ý",
+     "6": "Mỹ",
+     "7": "Khác"
+    },
+    "listing_types": [
+     "s",
+     "k"
+    ],
+    "verified": {
+     "works": false,
+     "probed": "4",
+     "reason": "accepted and ignored (mixed distribution)",
+     "evidence": "n=50 total=10000 baseline_total=10000 matched=0"
+    },
+    "is_range": false
+   },
+   "tivi_display_resolution": {
+    "param": "tivi_display_resolution",
+    "label": "Độ phân giải",
+    "type": "integer",
+    "options": {
+     "1": "Ultra HD 8K",
+     "2": "Ultra HD 4K",
+     "3": "Full HD",
+     "4": "HD",
+     "5": "Khác"
+    },
+    "listing_types": [
+     "s",
+     "k"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "3",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=350 baseline_total=10000 matched=50"
+    },
+    "is_range": false
+   },
+   "tivi_type": {
+    "param": "tivi_type",
+    "label": "Loại Tivi",
+    "type": "integer",
+    "options": {
+     "1": "LED",
+     "2": "Smart/Internet",
+     "3": "OLED/4K",
+     "4": "Khác"
+    },
+    "listing_types": [
+     "s",
+     "k"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "3",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=394 baseline_total=10000 matched=50"
+    },
+    "is_range": false
+   }
+  },
+  "5030": {
+   "elt_condition": {
+    "param": "elt_condition",
+    "label": "Tình trạng",
+    "type": "integer",
+    "options": {
+     "1": "Mới",
+     "2": "Đã sử dụng (chưa sửa chữa)",
+     "3": "Đã sử dụng (qua sửa chữa)"
+    },
+    "listing_types": [
+     "s",
+     "k"
+    ],
+    "verified": {
+     "works": false,
+     "probed": "2",
+     "reason": "accepted and ignored (mixed distribution)",
+     "evidence": "n=50 total=10000 baseline_total=10000 matched=48"
+    },
+    "is_range": false
+   },
+   "elt_warranty": {
+    "param": "elt_warranty",
+    "label": "Chính sách bảo hành",
+    "type": "integer",
+    "options": {
+     "1": "Hết bảo hành",
+     "3": "1 tháng",
+     "4": "2 tháng",
+     "5": "3 tháng",
+     "6": "4-6 tháng",
+     "7": "7-12 tháng",
+     "8": ">12 tháng",
+     "2": "Còn bảo hành"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": false,
+     "probed": "6",
+     "reason": "accepted and ignored (mixed distribution)",
+     "evidence": "n=50 total=10000 baseline_total=10000 matched=4"
+    },
+    "is_range": false
+   },
+   "laptop_screen_size": {
+    "param": "laptop_screen_size",
+    "label": "Kích cỡ màn hình",
+    "type": "integer",
+    "options": {
+     "1": "< 9 inch",
+     "2": "9 - 10.9 inch",
+     "3": "11 - 12.9 inch",
+     "4": "13 - 14.9 inch",
+     "5": "15 - 16.9 inch",
+     "6": "17 - 18.9 inch",
+     "7": "19 - 20.9 inch",
+     "8": ">= 21 inch"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "5",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=6972 baseline_total=10000 matched=50"
+    },
+    "is_range": false
+   },
+   "pc_brand": {
+    "param": "pc_brand",
+    "label": "Hãng",
+    "type": "integer",
+    "options": {
+     "3": "Apple",
+     "4": "Asus",
+     "6": "HP",
+     "5": "Dell",
+     "7": "Lenovo",
+     "1": "Acer",
+     "9": "Samsung",
+     "11": "Toshiba",
+     "13": "MSI",
+     "10": "Sony",
+     "15": "Razer",
+     "8": "LG",
+     "14": "Panasonic",
+     "12": "Hãng Khác"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "11",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=130 baseline_total=10000 matched=50"
+    },
+    "is_range": false
+   },
+   "pc_cpu": {
+    "param": "pc_cpu",
+    "label": "Bộ vi xử lý",
+    "type": "integer",
+    "options": {
+     "1": "AMD",
+     "11": "Athlon",
+     "2": "Intel Atom",
+     "3": "Intel Celeron",
+     "4": "Intel Core 2 Duo",
+     "5": "Intel Core 2 Quad",
+     "6": "Intel Core i3",
+     "7": "Intel Core i5",
+     "8": "Intel Core i7",
+     "12": "Intel Core i9",
+     "9": "Intel Pentium",
+     "13": "Intel Quark",
+     "14": "Intel Xeon",
+     "15": "Ryzen 3",
+     "16": "Ryzen 5",
+     "17": "Ryzen 7",
+     "18": "Ryzen 9",
+     "10": "Khác"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "12",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=420 baseline_total=10000 matched=50"
+    },
+    "is_range": false
+   },
+   "pc_drive_capacity": {
+    "param": "pc_drive_capacity",
+    "label": "Ổ cứng",
+    "type": "integer",
+    "options": {
+     "1": "< 128 GB",
+     "2": "128 GB",
+     "3": "250 GB",
+     "4": "256 GB",
+     "5": "320 GB",
+     "6": "480 GB",
+     "7": "500 GB",
+     "8": "512 GB",
+     "9": "640 GB",
+     "10": "700 GB",
+     "11": "750 GB",
+     "12": "1 TB",
+     "13": "> 1 TB"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "7",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=452 baseline_total=10000 matched=50"
+    },
+    "is_range": false
+   },
+   "pc_drive_type": {
+    "param": "pc_drive_type",
+    "label": "Loại ổ cứng",
+    "type": "integer",
+    "options": {
+     "1": "HDD",
+     "2": "SSD"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "2",
+     "reason": "distribution collapsed and the result set changed",
+     "evidence": "n=50 total=10000 baseline_total=10000 matched=50"
+    },
+    "is_range": false
+   },
+   "pc_ram": {
+    "param": "pc_ram",
+    "label": "RAM",
+    "type": "integer",
+    "options": {
+     "1": "< 1 GB",
+     "2": "1 GB",
+     "3": "2 GB",
+     "4": "4 GB",
+     "5": "6 GB",
+     "6": "8 GB",
+     "7": "16 GB",
+     "8": "32 GB",
+     "9": "> 32GB"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "5",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=87 baseline_total=10000 matched=50"
+    },
+    "is_range": false
+   },
+   "pc_vga": {
+    "param": "pc_vga",
+    "label": "Card màn hình",
+    "type": "integer",
+    "options": {
+     "1": "Onboard",
+     "2": "AMD",
+     "3": "NVIDIA",
+     "4": "Khác"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "3",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=4722 baseline_total=10000 matched=50"
+    },
+    "is_range": false
+   }
+  },
+  "5040": {
+   "elt_cellular_type": {
+    "param": "elt_cellular_type",
+    "label": "Sử dụng simcard 3G/4G",
+    "type": "integer",
+    "options": {
+     "1": "Không có 3G/4G",
+     "2": "Sử dụng simcard 3G/4G"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": false,
+     "probed": "2",
+     "reason": "accepted and ignored (mixed distribution)",
+     "evidence": "n=50 total=6033 baseline_total=6033 matched=9"
+    },
+    "is_range": false
+   },
+   "elt_condition": {
+    "param": "elt_condition",
+    "label": "Tình trạng",
+    "type": "integer",
+    "options": {
+     "1": "Mới",
+     "2": "Đã sử dụng (chưa sửa chữa)",
+     "3": "Đã sử dụng (qua sửa chữa)"
+    },
+    "listing_types": [
+     "s",
+     "k"
+    ],
+    "verified": {
+     "works": false,
+     "probed": "2",
+     "reason": "accepted and ignored (mixed distribution)",
+     "evidence": "n=50 total=6033 baseline_total=6033 matched=46"
+    },
+    "is_range": false
+   },
+   "elt_lock": {
+    "param": "elt_lock",
+    "label": "Phiên bản",
+    "type": "integer",
+    "options": {
+     "1": "Phiên bản quốc tế",
+     "2": "Phiên bản khoá mạng (lock)"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": false,
+     "probed": "2",
+     "reason": "accepted and ignored (mixed distribution)",
+     "evidence": "n=50 total=6033 baseline_total=6033 matched=1"
+    },
+    "is_range": false
+   },
+   "elt_warranty": {
+    "param": "elt_warranty",
+    "label": "Chính sách bảo hành",
+    "type": "integer",
+    "options": {
+     "1": "Hết bảo hành",
+     "3": "1 tháng",
+     "4": "2 tháng",
+     "5": "3 tháng",
+     "6": "4-6 tháng",
+     "7": "7-12 tháng",
+     "8": ">12 tháng",
+     "2": "Còn bảo hành"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": false,
+     "probed": "6",
+     "reason": "accepted and ignored (mixed distribution)",
+     "evidence": "n=50 total=6033 baseline_total=6033 matched=6"
+    },
+    "is_range": false
+   },
+   "tablet_brand": {
+    "param": "tablet_brand",
+    "label": "Hãng",
+    "type": "integer",
+    "options": {
+     "1": "Apple",
+     "4": "Samsung",
+     "2": "Asus",
+     "9": "Acer",
+     "6": "HUAWEI",
+     "3": "Lenovo",
+     "7": "Masstel",
+     "8": "Mobell",
+     "5": "Hãng Khác"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "6",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=108 baseline_total=6033 matched=50"
+    },
+    "is_range": false
+   },
+   "tablet_capacity": {
+    "param": "tablet_capacity",
+    "label": "Dung lượng",
+    "type": "integer",
+    "options": {
+     "1": "< 8GB",
+     "2": "8 GB",
+     "3": "16 GB",
+     "4": "32 GB",
+     "5": "64 GB",
+     "6": "128 GB",
+     "7": "256 GB",
+     "8": "> 256 GB"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "5",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=948 baseline_total=6033 matched=50"
+    },
+    "is_range": false
+   },
+   "tablet_screen_size": {
+    "param": "tablet_screen_size",
+    "label": "Kích cỡ màn hình",
+    "type": "integer",
+    "options": {
+     "1": "< 7 inch",
+     "2": "7 - 7.9 inch",
+     "3": "8 - 8.9 inch",
+     "4": "9 - 9.9 inch",
+     "5": "10 - 10.9 inch",
+     "6": "> 10.9 inch"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "4",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=241 baseline_total=6033 matched=50"
+    },
+    "is_range": false
+   }
+  },
+  "5050": {
+   "camera_brand": {
+    "param": "camera_brand",
+    "label": "Máy ảnh",
+    "type": "integer",
+    "options": {
+     "1": "Canon",
+     "2": "Fujifilm",
+     "3": "Sony",
+     "4": "Nikon",
+     "5": "Olympus",
+     "6": "Lomography",
+     "7": "Panasonic",
+     "8": "Ricoh",
+     "9": "Khác"
+    },
+    "listing_types": [
+     "s",
+     "k"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "5",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=146 baseline_total=9873 matched=50"
+    },
+    "is_range": false
+   },
+   "camera_type": {
+    "param": "camera_type",
+    "label": "Thiết bị",
+    "type": "integer",
+    "options": {
+     "1": "Máy ảnh",
+     "2": "Máy Quay",
+     "3": "Ống kính",
+     "4": "Khác"
+    },
+    "listing_types": [
+     "s",
+     "k"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "3",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=1753 baseline_total=9873 matched=50"
+    },
+    "is_range": false
+   },
+   "elt_condition": {
+    "param": "elt_condition",
+    "label": "Tình trạng",
+    "type": "integer",
+    "options": {
+     "1": "Mới",
+     "2": "Đã sử dụng (chưa sửa chữa)",
+     "3": "Đã sử dụng (qua sửa chữa)"
+    },
+    "listing_types": [
+     "s",
+     "k"
+    ],
+    "verified": {
+     "works": false,
+     "probed": "2",
+     "reason": "accepted and ignored (mixed distribution)",
+     "evidence": "n=50 total=9873 baseline_total=9873 matched=47"
+    },
+    "is_range": false
+   },
+   "lens_brand": {
+    "param": "lens_brand",
+    "label": "Ống kính",
+    "type": "integer",
+    "options": {
+     "1": "Panasonic",
+     "2": "Tamron",
+     "3": "Samyang",
+     "4": "Olympus",
+     "5": "Fujifilm",
+     "6": "Nikon",
+     "7": "Sony",
+     "8": "Canon",
+     "9": "Sigma",
+     "10": "Khác"
+    },
+    "listing_types": [
+     "s",
+     "k"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "6",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=221 baseline_total=9873 matched=50"
+    },
+    "is_range": false
+   },
+   "video_camera_brand": {
+    "param": "video_camera_brand",
+    "label": "Máy quay",
+    "type": "integer",
+    "options": {
+     "1": "Canon",
+     "2": "Sony",
+     "3": "Fly",
+     "4": "JJRC",
+     "5": "Bugs",
+     "6": "DJI",
+     "7": "Gitup",
+     "8": "Xiaomi",
+     "9": "Ezviz",
+     "10": "Vava",
+     "11": "ThiEYE",
+     "12": "Remax",
+     "13": "Qihoo",
+     "14": "Eken",
+     "15": "Transcend",
+     "16": "SJCAM",
+     "17": "GoPro",
+     "18": "VietMap",
+     "19": "Khác"
+    },
+    "listing_types": [
+     "s",
+     "k"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "10",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=5 total=5 baseline_total=9873 matched=5"
+    },
+    "is_range": false
+   }
+  },
+  "5060": {
+   "accessories_class": {
+    "param": "accessories_class",
+    "label": "Loại phụ kiện",
+    "type": "integer",
+    "options": {
+     "1": "Phụ kiện máy tính",
+     "2": "Phụ kiện điện thoại",
+     "3": "Khác"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "2",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=5583 baseline_total=10000 matched=50"
+    },
+    "is_range": false
+   },
+   "elt_condition": {
+    "param": "elt_condition",
+    "label": "Tình trạng",
+    "type": "integer",
+    "options": {
+     "1": "Mới",
+     "2": "Đã sử dụng (chưa sửa chữa)",
+     "3": "Đã sử dụng (qua sửa chữa)"
+    },
+    "listing_types": [
+     "s",
+     "k"
+    ],
+    "verified": {
+     "works": false,
+     "probed": "2",
+     "reason": "accepted and ignored (mixed distribution)",
+     "evidence": "n=50 total=10000 baseline_total=10000 matched=36"
+    },
+    "is_range": false
+   }
+  },
+  "5070": {
+   "desktop_screen_size": {
+    "param": "desktop_screen_size",
+    "label": "Kích cỡ màn hình",
+    "type": "integer",
+    "options": {
+     "1": "Không bán kèm màn hình",
+     "2": "15 - 16.9 inch",
+     "3": "17 - 18.9 inch",
+     "4": "19 - 20.9 inch",
+     "5": ">= 21 inch"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "3",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=51 baseline_total=5089 matched=50"
+    },
+    "is_range": false
+   },
+   "elt_condition": {
+    "param": "elt_condition",
+    "label": "Tình trạng",
+    "type": "integer",
+    "options": {
+     "1": "Mới",
+     "2": "Đã sử dụng (chưa sửa chữa)",
+     "3": "Đã sử dụng (qua sửa chữa)"
+    },
+    "listing_types": [
+     "s",
+     "k"
+    ],
+    "verified": {
+     "works": false,
+     "probed": "2",
+     "reason": "accepted and ignored (mixed distribution)",
+     "evidence": "n=50 total=5089 baseline_total=5089 matched=49"
+    },
+    "is_range": false
+   },
+   "elt_warranty": {
+    "param": "elt_warranty",
+    "label": "Chính sách bảo hành",
+    "type": "integer",
+    "options": {
+     "1": "Hết bảo hành",
+     "3": "1 tháng",
+     "4": "2 tháng",
+     "5": "3 tháng",
+     "6": "4-6 tháng",
+     "7": "7-12 tháng",
+     "8": ">12 tháng",
+     "2": "Còn bảo hành"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": false,
+     "probed": "6",
+     "reason": "accepted and ignored (mixed distribution)",
+     "evidence": "n=50 total=5089 baseline_total=5089 matched=4"
+    },
+    "is_range": false
+   },
+   "pc_cpu": {
+    "param": "pc_cpu",
+    "label": "Bộ vi xử lý",
+    "type": "integer",
+    "options": {
+     "1": "AMD",
+     "11": "Athlon",
+     "2": "Intel Atom",
+     "3": "Intel Celeron",
+     "4": "Intel Core 2 Duo",
+     "5": "Intel Core 2 Quad",
+     "6": "Intel Core i3",
+     "7": "Intel Core i5",
+     "8": "Intel Core i7",
+     "12": "Intel Core i9",
+     "9": "Intel Pentium",
+     "13": "Intel Quark",
+     "14": "Intel Xeon",
+     "15": "Ryzen 3",
+     "16": "Ryzen 5",
+     "17": "Ryzen 7",
+     "18": "Ryzen 9",
+     "10": "Khác"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "12",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=73 baseline_total=5089 matched=50"
+    },
+    "is_range": false
+   },
+   "pc_drive_capacity": {
+    "param": "pc_drive_capacity",
+    "label": "Ổ cứng",
+    "type": "integer",
+    "options": {
+     "1": "< 128 GB",
+     "2": "128 GB",
+     "3": "250 GB",
+     "4": "256 GB",
+     "5": "320 GB",
+     "6": "480 GB",
+     "7": "500 GB",
+     "8": "512 GB",
+     "9": "640 GB",
+     "10": "700 GB",
+     "11": "750 GB",
+     "12": "1 TB",
+     "13": "> 1 TB"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "7",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=482 baseline_total=5089 matched=50"
+    },
+    "is_range": false
+   },
+   "pc_drive_type": {
+    "param": "pc_drive_type",
+    "label": "Loại ổ cứng",
+    "type": "integer",
+    "options": {
+     "1": "HDD",
+     "2": "SSD"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "2",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=4068 baseline_total=5089 matched=50"
+    },
+    "is_range": false
+   },
+   "pc_ram": {
+    "param": "pc_ram",
+    "label": "RAM",
+    "type": "integer",
+    "options": {
+     "1": "< 1 GB",
+     "2": "1 GB",
+     "3": "2 GB",
+     "4": "4 GB",
+     "5": "6 GB",
+     "6": "8 GB",
+     "7": "16 GB",
+     "8": "32 GB",
+     "9": "> 32GB"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "5",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=31 total=31 baseline_total=5089 matched=31"
+    },
+    "is_range": false
+   },
+   "pc_vga": {
+    "param": "pc_vga",
+    "label": "Card màn hình",
+    "type": "integer",
+    "options": {
+     "1": "Onboard",
+     "2": "AMD",
+     "3": "NVIDIA",
+     "4": "Khác"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "3",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=2276 baseline_total=5089 matched=50"
+    },
+    "is_range": false
+   }
+  },
+  "5080": {
+   "component_class": {
+    "param": "component_class",
+    "label": "Loại linh kiện",
+    "type": "integer",
+    "options": {
+     "1": "Linh kiện máy tính",
+     "2": "Linh kiện điện thoại",
+     "3": "Khác"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "2",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=2030 baseline_total=10000 matched=50"
+    },
+    "is_range": false
+   },
+   "elt_condition": {
+    "param": "elt_condition",
+    "label": "Tình trạng",
+    "type": "integer",
+    "options": {
+     "1": "Mới",
+     "2": "Đã sử dụng (chưa sửa chữa)",
+     "3": "Đã sử dụng (qua sửa chữa)"
+    },
+    "listing_types": [
+     "s",
+     "k"
+    ],
+    "verified": {
+     "works": false,
+     "probed": "2",
+     "reason": "accepted and ignored (mixed distribution)",
+     "evidence": "n=50 total=10000 baseline_total=10000 matched=49"
+    },
+    "is_range": false
+   }
+  },
+  "5090": {
+   "elt_condition": {
+    "param": "elt_condition",
+    "label": "Tình trạng",
+    "type": "integer",
+    "options": {
+     "1": "Mới",
+     "2": "Đã sử dụng (chưa sửa chữa)",
+     "3": "Đã sử dụng (qua sửa chữa)"
+    },
+    "listing_types": [
+     "s",
+     "k"
+    ],
+    "verified": {
+     "works": false,
+     "probed": "2",
+     "reason": "accepted and ignored (mixed distribution)",
+     "evidence": "n=50 total=3675 baseline_total=3675 matched=45"
+    },
+    "is_range": false
+   },
+   "swatch_brand": {
+    "param": "swatch_brand",
+    "label": "Hãng",
+    "type": "integer",
+    "options": {
+     "1": "Apple",
+     "2": "Samsung",
+     "3": "Xiaomi",
+     "4": "Fitbit",
+     "5": "Misfit",
+     "6": "Garmin",
+     "7": "Hãng khác"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "4",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=15 total=15 baseline_total=3675 matched=15"
+    },
+    "is_range": false
+   },
+   "swatch_type": {
+    "param": "swatch_type",
+    "label": "Thiết bị",
+    "type": "int",
+    "options": {
+     "1": "Đồng hồ thông minh",
+     "2": "Vòng tay thông minh",
+     "3": "Khác"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "2",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=57 baseline_total=3675 matched=50"
+    },
+    "is_range": false
+   }
+  },
+  "8010": {
+   "condition_ad": {
+    "param": "condition_ad",
+    "label": "Tình trạng",
+    "type": "radio",
+    "options": {
+     "1": "Đã sử dụng",
+     "2": "Mới"
+    },
+    "listing_types": [
+     "s",
+     "k"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "2",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=2578 baseline_total=10000 matched=50"
+    },
+    "is_range": false
+   }
+  },
+  "8030": {
+   "condition_ad": {
+    "param": "condition_ad",
+    "label": "Tình trạng",
+    "type": "radio",
+    "options": {
+     "1": "Đã sử dụng",
+     "2": "Mới"
+    },
+    "listing_types": [
+     "s",
+     "k"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "2",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=6549 baseline_total=10000 matched=50"
+    },
+    "is_range": false
+   }
+  },
+  "9030": {
+   "condition_ad": {
+    "param": "condition_ad",
+    "label": "Tình trạng",
+    "type": "radio",
+    "options": {
+     "1": "Đã sử dụng",
+     "2": "Mới"
+    },
+    "listing_types": [
+     "s",
+     "k"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "2",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=556 baseline_total=8154 matched=50"
+    },
+    "is_range": false
+   },
+   "fridgebrand": {
+    "param": "fridgebrand",
+    "label": "Hãng",
+    "type": "integer",
+    "options": {
+     "1": "Sanyo",
+     "2": "Toshiba",
+     "3": "Panasonic",
+     "4": "Sanaky",
+     "5": "Samsung",
+     "6": "LG",
+     "7": "Sharp",
+     "8": "Alaska",
+     "9": "Hitachi",
+     "10": "Electrolux",
+     "11": "Daikin",
+     "12": "Funiki",
+     "13": "Daewoo",
+     "14": "Beko",
+     "15": "Mitsubishi",
+     "16": "National",
+     "17": "Midea",
+     "18": "Darling",
+     "19": "Fujitsu",
+     "20": "Kangaroo",
+     "21": "Hoà Phát",
+     "22": "Haier",
+     "23": "Denver",
+     "24": "Hafele",
+     "25": "Bosch",
+     "26": "Teka",
+     "27": "Gorenje",
+     "28": "Malloca",
+     "29": "Lenovo",
+     "30": "Fedders",
+     "31": "Fagor",
+     "32": "Oem",
+     "33": "Hải Âu",
+     "34": "AQUA",
+     "35": "Hãng khác",
+     "36": "Dàn nóng, phụ kiện"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "19",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=1 total=1 baseline_total=8154 matched=1"
+    },
+    "is_range": false
+   },
+   "fridgevolume": {
+    "param": "fridgevolume",
+    "label": "Thể tích",
+    "type": "integer",
+    "options": {
+     "1": "< 100 lít",
+     "2": "100 - 149 lít",
+     "3": "150 - 199 lít",
+     "4": "200 - 299 lít",
+     "5": "300 - 399 lít",
+     "6": "400 - 499 lít",
+     "7": "> 500 lít"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "4",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=1650 baseline_total=8154 matched=50"
+    },
+    "is_range": false
+   }
+  },
+  "9060": {
+   "airconbrand": {
+    "param": "airconbrand",
+    "label": "Hãng",
+    "type": "integer",
+    "options": {
+     "1": "Daikin",
+     "2": "Panasonic",
+     "3": "Toshiba",
+     "4": "LG",
+     "5": "Mitsubishi",
+     "6": "Sharp",
+     "7": "Samsung",
+     "8": "Sanyo",
+     "9": "Fujitsu",
+     "10": "Midea",
+     "11": "Reetech",
+     "12": "Nagakawa",
+     "13": "National",
+     "14": "Funiki",
+     "15": "Electrolux",
+     "16": "Hitachi",
+     "17": "Gree",
+     "18": "Sumikura",
+     "19": "Casper",
+     "20": "Asanzo",
+     "21": "TCL",
+     "22": "Aqua",
+     "23": "Kangaroo",
+     "24": "Alaska",
+     "25": "Sunhouse",
+     "26": "Haier",
+     "27": "General",
+     "28": "Aikibi",
+     "29": "Beko",
+     "30": "Galanz",
+     "31": "Oem",
+     "32": "Ariston",
+     "33": "Fujiaire",
+     "34": "Teco",
+     "35": "Hãng khác",
+     "36": "Dàn nóng, phụ kiện"
+    },
+    "listing_types": [
+     "s",
+     "k"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "19",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=184 baseline_total=3133 matched=50"
+    },
+    "is_range": false
+   },
+   "airconcapacity": {
+    "param": "airconcapacity",
+    "label": "Công suất",
+    "type": "integer",
+    "options": {
+     "1": "1 HP (ngựa)",
+     "2": "1.5 HP (ngựa)",
+     "3": "2 HP (ngựa)",
+     "4": "> 2 HP (ngựa)",
+     "5": "< 10,000 BTU",
+     "6": "10,000 - 20,000 BTU",
+     "7": "> 20,000 BTU"
+    },
+    "listing_types": [
+     "s",
+     "k"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "4",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=129 baseline_total=3133 matched=50"
+    },
+    "is_range": false
+   },
+   "condition_ad": {
+    "param": "condition_ad",
+    "label": "Tình trạng",
+    "type": "radio",
+    "options": {
+     "1": "Đã sử dụng",
+     "2": "Mới"
+    },
+    "listing_types": [
+     "s",
+     "k"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "2",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=455 baseline_total=3133 matched=50"
+    },
+    "is_range": false
+   }
+  },
+  "9070": {
+   "condition_ad": {
+    "param": "condition_ad",
+    "label": "Tình trạng",
+    "type": "radio",
+    "options": {
+     "1": "Đã sử dụng",
+     "2": "Mới"
+    },
+    "listing_types": [
+     "s",
+     "k"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "2",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=437 baseline_total=3980 matched=50"
+    },
+    "is_range": false
+   },
+   "washingmachinebrand": {
+    "param": "washingmachinebrand",
+    "label": "Hãng",
+    "type": "integer",
+    "options": {
+     "1": "Toshiba",
+     "2": "Samsung",
+     "3": "Electrolux",
+     "4": "LG",
+     "5": "Panasonic",
+     "6": "Aqua",
+     "7": "Sharp",
+     "8": "Candy",
+     "9": "Hitachi",
+     "10": "Beko",
+     "11": "Midea",
+     "12": "Sumikura",
+     "13": "Whirlpool",
+     "14": "Cảnh Phong",
+     "15": "Gorenje",
+     "16": "Hafele",
+     "17": "Ariston",
+     "18": "Bosch",
+     "19": "Fagor",
+     "20": "Malloca",
+     "21": "Oem",
+     "22": "Speed Queen",
+     "23": "Teka",
+     "24": "Hãng khác",
+     "25": "Dàn nóng, phụ kiện"
+    },
+    "listing_types": [
+     "s",
+     "k"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "13",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=12 total=12 baseline_total=3980 matched=12"
+    },
+    "is_range": false
+   },
+   "washingmachineloadingposition": {
+    "param": "washingmachineloadingposition",
+    "label": "Cửa máy giặt",
+    "type": "integer",
+    "options": {
+     "1": "Cửa trước (lồng ngang)",
+     "2": "Cửa trên (lồng đứng)"
+    },
+    "listing_types": [
+     "s",
+     "k"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "2",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=1280 baseline_total=3980 matched=50"
+    },
+    "is_range": false
+   },
+   "washingmachineweight": {
+    "param": "washingmachineweight",
+    "label": "Khối lượng giặt",
+    "type": "integer",
+    "options": {
+     "1": "< 7 kg",
+     "2": "7 - 7.9 kg",
+     "3": "8 - 8.9 kg",
+     "4": "9 - 9.9 kg",
+     "5": "> 10 kg"
+    },
+    "listing_types": [
+     "s",
+     "k"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "3",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=990 baseline_total=3980 matched=50"
+    },
+    "is_range": false
+   }
+  },
+  "11010": {
+   "condition_ad": {
+    "param": "condition_ad",
+    "label": "Tình trạng",
+    "type": "radio",
+    "options": {
+     "1": "Đã sử dụng",
+     "2": "Mới"
+    },
+    "listing_types": [
+     "s",
+     "k"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "2",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=1754 baseline_total=6416 matched=50"
+    },
+    "is_range": false
+   },
+   "consumer": {
+    "param": "consumer",
+    "label": "Loại sản phẩm",
+    "type": "integer",
+    "options": {
+     "2": "Đồ cho bé",
+     "3": "Đồ cho mẹ",
+     "1": "Đồ cho mẹ và bé"
+    },
+    "listing_types": [
+     "s",
+     "k"
+    ],
+    "verified": {
+     "works": false,
+     "probed": "3",
+     "reason": "accepted and ignored (mixed distribution)",
+     "evidence": "n=50 total=6416 baseline_total=6416 matched=7"
+    },
+    "is_range": false
+   }
+  },
+  "12010": {
+   "pet_age": {
+    "param": "pet_age",
+    "label": "Độ tuổi",
+    "type": "integer",
+    "options": {
+     "1": "Gà lớn (từ 3 tháng tuổi)",
+     "2": "Gà con (dưới 3 tháng tuổi)"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "2",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=642 baseline_total=4661 matched=50"
+    },
+    "is_range": false
+   },
+   "pet_breed": {
+    "param": "pet_breed",
+    "label": "Giống thú cưng",
+    "type": "integer",
+    "options": {
+     "1": "Gà Ác",
+     "2": "Gà Brahma",
+     "3": "Gà Bướm",
+     "4": "Gà Đông Tảo",
+     "5": "Gà Mặt Quỷ",
+     "6": "Gà Nòi (gà Chọi)",
+     "7": "Gà Quý Phi",
+     "9": "Gà Serama",
+     "10": "Gà Ta",
+     "11": "Gà Tre",
+     "12": "Gà Vảy Cá",
+     "13": "Gà Vảy Rồng",
+     "14": "Giống Gà Khác"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "7",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=3 total=3 baseline_total=4661 matched=3"
+    },
+    "is_range": false
+   }
+  },
+  "12020": {
+   "pet_age": {
+    "param": "pet_age",
+    "label": "Độ tuổi",
+    "type": "integer",
+    "options": {
+     "1": "Chó con (dưới 3 tháng tuổi)",
+     "2": "Chó nhỏ (dưới 1 năm tuổi)",
+     "3": "Chó trưởng thành (hơn 1 tuổi)",
+     "4": "Khác (không xác định được)"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "3",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=412 baseline_total=2882 matched=50"
+    },
+    "is_range": false
+   },
+   "pet_breed": {
+    "param": "pet_breed",
+    "label": "Giống thú cưng",
+    "type": "integer",
+    "options": {
+     "1": "Chó Alaska",
+     "2": "Chó Bắc Kinh",
+     "3": "Chó Becgie",
+     "4": "Chó Bull",
+     "5": "Chó Chihuahua",
+     "6": "Chó Chow Chow",
+     "7": "Chó Corgi",
+     "9": "Chó Đốm",
+     "10": "Chó gấu Bắc Hà",
+     "11": "Chó Golden",
+     "12": "Chó Husky",
+     "13": "Chó Labrador",
+     "14": "Chó Lạp Xưởng",
+     "15": "Chó Nhật",
+     "16": "Chó Phốc Hươu",
+     "17": "Chó Phốc Sóc",
+     "18": "Chó Phú Quốc",
+     "19": "Chó Pitpull",
+     "20": "Chó Poodle",
+     "21": "Chó Pug",
+     "22": "Chó Rottweiler",
+     "23": "Chó Samoyed",
+     "24": "Chó Ta (chó cỏ, chó Việt Nam, chó Lài)",
+     "25": "Giống Chó Khác"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "14",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=95 baseline_total=2882 matched=50"
+    },
+    "is_range": false
+   },
+   "pet_size": {
+    "param": "pet_size",
+    "label": "Kích cỡ thú cưng",
+    "type": "integer",
+    "options": {
+     "1": "Siêu nhỏ (tiny, teacup)",
+     "2": "Nhỏ",
+     "3": "Trung bình",
+     "4": "Lớn"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "3",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=857 baseline_total=2882 matched=50"
+    },
+    "is_range": false
+   }
+  },
+  "12030": {
+   "pet_age": {
+    "param": "pet_age",
+    "label": "Độ tuổi",
+    "type": "integer",
+    "options": {
+     "1": "Chim lớn (từ 3 tháng tuổi)",
+     "2": "Chim non (dưới 3 tháng tuổi)"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "2",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=855 baseline_total=2813 matched=50"
+    },
+    "is_range": false
+   },
+   "pet_breed": {
+    "param": "pet_breed",
+    "label": "Giống thú cưng",
+    "type": "integer",
+    "options": {
+     "1": "Chim Bồ Câu",
+     "2": "Chim Chào Mào",
+     "3": "Chim Chích Choè",
+     "4": "Chim Cu Gáy",
+     "5": "Chim Họa Mi",
+     "6": "Chim Hoàng Yến",
+     "7": "Chim Khướu",
+     "9": "Chim Sáo",
+     "10": "Chim Sâu",
+     "11": "Chim Sẻ",
+     "12": "Chim Sơn Ca",
+     "13": "Chim Vàng Anh",
+     "14": "Chim Vành Khuyên",
+     "15": "Chim Vẹt",
+     "16": "Giống Chim Khác"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "9",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=57 baseline_total=2813 matched=50"
+    },
+    "is_range": false
+   },
+   "pet_gender": {
+    "param": "pet_gender",
+    "label": "Giới tính",
+    "type": "integer",
+    "options": {
+     "1": "Chim trống",
+     "2": "Chim mái",
+     "3": "Khác (không xác định được)"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "2",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=147 baseline_total=2813 matched=50"
+    },
+    "is_range": false
+   }
+  },
+  "12040": {
+   "condition_ad": {
+    "param": "condition_ad",
+    "label": "Tình trạng",
+    "type": "radio",
+    "options": {
+     "1": "Đã sử dụng",
+     "2": "Mới"
+    },
+    "listing_types": [
+     "s",
+     "k"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "2",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=730 baseline_total=2973 matched=50"
+    },
+    "is_range": false
+   }
+  },
+  "12050": {
+   "pet_age": {
+    "param": "pet_age",
+    "label": "Độ tuổi",
+    "type": "integer",
+    "options": {
+     "1": "Mèo con (dưới 3 tháng tuổi)",
+     "2": "Mèo nhỏ (dưới 1 năm tuổi)",
+     "3": "Mèo trưởng thành (hơn 1 tuổi)",
+     "4": "Khác (không xác định được)"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "3",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=357 baseline_total=2407 matched=50"
+    },
+    "is_range": false
+   },
+   "pet_breed": {
+    "param": "pet_breed",
+    "label": "Giống thú cưng",
+    "type": "integer",
+    "options": {
+     "1": "Mèo Anh Lông Dài",
+     "2": "Mèo Anh Lông Ngắn",
+     "3": "Mèo Ba Tư",
+     "4": "Mèo Munchkin",
+     "5": "Mèo Mướp",
+     "6": "Mèo Mỹ",
+     "7": "Mèo Nga",
+     "9": "Mèo ta",
+     "10": "Mèo Tam Thể",
+     "11": "Mèo Xiêm",
+     "12": "Giống Mèo Khác"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "6",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=5 total=5 baseline_total=2407 matched=5"
+    },
+    "is_range": false
+   }
+  },
+  "12060": {
+   "pet_breed": {
+    "param": "pet_breed",
+    "label": "Giống thú cưng",
+    "type": "integer",
+    "options": {
+     "1": "Cá Cảnh",
+     "2": "Chuột Cảnh",
+     "3": "Nhím Cảnh",
+     "4": "Thỏ",
+     "5": "Thú Cưng Khác"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "3",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=12 total=12 baseline_total=3256 matched=12"
+    },
+    "is_range": false
+   }
+  },
+  "14010": {
+   "condition_ad": {
+    "param": "condition_ad",
+    "label": "Tình trạng",
+    "type": "radio",
+    "options": {
+     "1": "Đã sử dụng",
+     "2": "Mới"
+    },
+    "listing_types": [
+     "s",
+     "k"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "2",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=3618 baseline_total=10000 matched=50"
+    },
+    "is_range": false
+   },
+   "product_brand": {
+    "param": "product_brand",
+    "label": "Thương hiệu",
+    "type": "integer",
+    "options": {
+     "1": "Sharp",
+     "2": "Panasonic",
+     "3": "Toshiba",
+     "4": "Sunhouse",
+     "5": "Bluestone",
+     "6": "Midea",
+     "7": "Philips",
+     "8": "Kangaroo",
+     "9": "Hitachi",
+     "10": "Zojirushi",
+     "11": "Electrolux",
+     "12": "Sanaky",
+     "13": "Rinnai",
+     "101": "Khác"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "8",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=436 baseline_total=10000 matched=50"
+    },
+    "is_range": false
+   },
+   "product_type": {
+    "param": "product_type",
+    "label": "Loại sản phẩm",
+    "type": "integer",
+    "options": {
+     "1": "Máy pha cà phê",
+     "2": "Nồi cơm điện",
+     "3": "Nồi áp suất",
+     "4": "Nồi lẩu điện",
+     "5": "Nồi chiên không dầu",
+     "6": "Lò nướng",
+     "7": "Lò vi sóng",
+     "8": "Máy xay",
+     "9": "Máy ép trái cây",
+     "10": "Máy đánh trứng",
+     "11": "Bình đun, bình thủy điện",
+     "12": "Bếp",
+     "13": "Bếp từ",
+     "14": "Bếp hồng ngoại",
+     "15": "Bếp nướng điện",
+     "16": "Máy lọc nước",
+     "17": "Máy hút mùi",
+     "101": "Khác"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "10",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=85 baseline_total=10000 matched=50"
+    },
+    "is_range": false
+   }
+  },
+  "14020": {
+   "condition_ad": {
+    "param": "condition_ad",
+    "label": "Tình trạng",
+    "type": "radio",
+    "options": {
+     "1": "Đã sử dụng",
+     "2": "Mới"
+    },
+    "listing_types": [
+     "s",
+     "k"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "2",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=2231 baseline_total=4401 matched=50"
+    },
+    "is_range": false
+   },
+   "product_type": {
+    "param": "product_type",
+    "label": "Loại sản phẩm",
+    "type": "integer",
+    "options": {
+     "1": "Nồi",
+     "2": "Chảo",
+     "3": "Dao, kéo, thớt",
+     "4": "Tô, chén, đĩa",
+     "5": "Đũa, muỗng",
+     "6": "Ly",
+     "7": "Bình giữ nhiệt",
+     "8": "Hộp đựng thực phẩm",
+     "9": "Thau, rổ",
+     "10": "Thùng đá, ca đá",
+     "11": "Khay, kệ đựng đồ",
+     "101": "Khác"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "7",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=328 baseline_total=4401 matched=50"
+    },
+    "is_range": false
+   }
+  },
+  "14030": {
+   "condition_ad": {
+    "param": "condition_ad",
+    "label": "Tình trạng",
+    "type": "radio",
+    "options": {
+     "1": "Đã sử dụng",
+     "2": "Mới"
+    },
+    "listing_types": [
+     "s",
+     "k"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "2",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=8287 baseline_total=10000 matched=50"
+    },
+    "is_range": false
+   },
+   "product_size": {
+    "param": "product_size",
+    "label": "Kích cỡ",
+    "type": "integer",
+    "options": {
+     "1": "Giường đôi lớn 2m x 2.2m",
+     "2": "Giường đôi 1.8m x 2m",
+     "3": "Giường đôi 1.6m x 2m",
+     "4": "Giường đôi 1.5m x 1.9m",
+     "5": "Giường đơn 1.2m x 1.9m",
+     "6": "Giường tầng 1m x 1.9m",
+     "101": "Khác"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "4",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=154 baseline_total=10000 matched=50"
+    },
+    "is_range": false
+   },
+   "product_type": {
+    "param": "product_type",
+    "label": "Loại sản phẩm",
+    "type": "integer",
+    "options": {
+     "1": "Giường",
+     "2": "Nệm",
+     "3": "Chăn, ga, vỏ gối",
+     "4": "Ruột gối",
+     "101": "Khác"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "3",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=350 baseline_total=10000 matched=50"
+    },
+    "is_range": false
+   }
+  },
+  "14040": {
+   "condition_ad": {
+    "param": "condition_ad",
+    "label": "Tình trạng",
+    "type": "radio",
+    "options": {
+     "1": "Đã sử dụng",
+     "2": "Mới"
+    },
+    "listing_types": [
+     "s",
+     "k"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "2",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=2284 baseline_total=5045 matched=50"
+    },
+    "is_range": false
+   },
+   "product_brand": {
+    "param": "product_brand",
+    "label": "Thương hiệu",
+    "type": "integer",
+    "options": {
+     "1": "Ariston",
+     "2": "Electrolux",
+     "3": "Panasonic",
+     "4": "Picenza",
+     "5": "Kangaroo",
+     "6": "Ferroli",
+     "7": "Rossi",
+     "8": "Inax",
+     "9": "Toto",
+     "101": "Khác"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "6",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=69 baseline_total=5045 matched=50"
+    },
+    "is_range": false
+   },
+   "product_type": {
+    "param": "product_type",
+    "label": "Loại sản phẩm",
+    "type": "integer",
+    "options": {
+     "1": "Bình nóng lạnh",
+     "2": "Bồn cầu",
+     "3": "Bồn rửa (lavabo)",
+     "4": "Bồn tắm",
+     "5": "Vòi sen",
+     "6": "Vòi rửa",
+     "7": "Máy hút bụi",
+     "101": "Khác"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "5",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=300 baseline_total=5045 matched=50"
+    },
+    "is_range": false
+   }
+  },
+  "14050": {
+   "condition_ad": {
+    "param": "condition_ad",
+    "label": "Tình trạng",
+    "type": "radio",
+    "options": {
+     "1": "Đã sử dụng",
+     "2": "Mới"
+    },
+    "listing_types": [
+     "s",
+     "k"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "2",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=1058 baseline_total=4294 matched=50"
+    },
+    "is_range": false
+   },
+   "product_brand": {
+    "param": "product_brand",
+    "label": "Thương hiệu",
+    "type": "integer",
+    "options": {
+     "1": "Asia",
+     "2": "Sunhouse",
+     "3": "Toshiba",
+     "4": "Midea",
+     "5": "Mitsubishi",
+     "6": "Boss",
+     "7": "Senko",
+     "8": "Panasonic",
+     "9": "Midea",
+     "10": "Kangaroo",
+     "101": "Khác"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "6",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=130 baseline_total=4294 matched=50"
+    },
+    "is_range": false
+   },
+   "product_type": {
+    "param": "product_type",
+    "label": "Loại sản phẩm",
+    "type": "integer",
+    "options": {
+     "1": "Quạt hơi nước",
+     "2": "Quạt điều hòa",
+     "3": "Quạt đứng",
+     "4": "Quạt treo tường",
+     "5": "Quạt hộp",
+     "6": "Quạt trần",
+     "7": "Quạt sạc điện/Quạt mini",
+     "101": "Khác"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "5",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=67 baseline_total=4294 matched=50"
+    },
+    "is_range": false
+   }
+  },
+  "14060": {
+   "condition_ad": {
+    "param": "condition_ad",
+    "label": "Tình trạng",
+    "type": "radio",
+    "options": {
+     "1": "Đã sử dụng",
+     "2": "Mới"
+    },
+    "listing_types": [
+     "s",
+     "k"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "2",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=1198 baseline_total=2520 matched=50"
+    },
+    "is_range": false
+   },
+   "product_type": {
+    "param": "product_type",
+    "label": "Loại sản phẩm",
+    "type": "integer",
+    "options": {
+     "1": "Đèn thả",
+     "2": "Đèn chùm",
+     "3": "Đèn ốp",
+     "4": "Đèn ngoài trời",
+     "5": "Đèn trang trí",
+     "6": "Đèn ngủ",
+     "7": "Đèn pin",
+     "8": "Đèn bàn",
+     "9": "Đèn năng lượng mặt trời",
+     "101": "Khác"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "6",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=112 baseline_total=2520 matched=50"
+    },
+    "is_range": false
+   }
+  },
+  "14070": {
+   "condition_ad": {
+    "param": "condition_ad",
+    "label": "Tình trạng",
+    "type": "radio",
+    "options": {
+     "1": "Đã sử dụng",
+     "2": "Mới"
+    },
+    "listing_types": [
+     "s",
+     "k"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "2",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=2511 baseline_total=7922 matched=50"
+    },
+    "is_range": false
+   },
+   "product_material": {
+    "param": "product_material",
+    "label": "Chất liệu",
+    "type": "integer",
+    "options": {
+     "1": "Gỗ",
+     "2": "Nhựa",
+     "3": "Sắt",
+     "4": "Inox",
+     "5": "Đá",
+     "6": "Kính",
+     "7": "Nệm",
+     "8": "Da",
+     "9": "Vải",
+     "10": "Mây",
+     "101": "Khác"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "6",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=107 baseline_total=7922 matched=50"
+    },
+    "is_range": false
+   },
+   "product_type": {
+    "param": "product_type",
+    "label": "Loại sản phẩm",
+    "type": "integer",
+    "options": {
+     "1": "Ghế đẩu",
+     "2": "Ghế dựa",
+     "3": "Ghế văn phòng",
+     "4": "Ghế massage",
+     "5": "Sofa",
+     "6": "Bàn cà phê",
+     "7": "Bàn ăn",
+     "8": "Bàn làm việc",
+     "101": "Khác"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "5",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=1275 baseline_total=7922 matched=50"
+    },
+    "is_range": false
+   }
+  },
+  "14080": {
+   "condition_ad": {
+    "param": "condition_ad",
+    "label": "Tình trạng",
+    "type": "radio",
+    "options": {
+     "1": "Đã sử dụng",
+     "2": "Mới"
+    },
+    "listing_types": [
+     "s",
+     "k"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "2",
+     "reason": "distribution collapsed and the result set changed",
+     "evidence": "n=50 total=10000 baseline_total=10000 matched=50"
+    },
+    "is_range": false
+   },
+   "product_material": {
+    "param": "product_material",
+    "label": "Chất liệu",
+    "type": "integer",
+    "options": {
+     "1": "Gỗ",
+     "2": "Nhựa",
+     "3": "Sắt",
+     "4": "Inox",
+     "5": "Đá",
+     "6": "Kính",
+     "7": "Vải",
+     "101": "Khác"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "5",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=7 total=7 baseline_total=10000 matched=7"
+    },
+    "is_range": false
+   },
+   "product_type": {
+    "param": "product_type",
+    "label": "Loại sản phẩm",
+    "type": "integer",
+    "options": {
+     "1": "Tủ, kệ quần áo",
+     "2": "Tủ, kệ giày dép",
+     "3": "Tủ, kệ sách",
+     "4": "Tủ, kệ tivi",
+     "5": "Tủ, kệ bếp",
+     "6": "Tủ, kệ đầu giường",
+     "7": "Tủ, kệ trưng bày",
+     "101": "Khác"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "5",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=2145 baseline_total=10000 matched=50"
+    },
+    "is_range": false
+   }
+  },
+  "14090": {
+   "condition_ad": {
+    "param": "condition_ad",
+    "label": "Tình trạng",
+    "type": "radio",
+    "options": {
+     "1": "Đã sử dụng",
+     "2": "Mới"
+    },
+    "listing_types": [
+     "s",
+     "k"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "2",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=2359 baseline_total=5741 matched=50"
+    },
+    "is_range": false
+   },
+   "product_type": {
+    "param": "product_type",
+    "label": "Loại sản phẩm",
+    "type": "integer",
+    "options": {
+     "1": "Cây cảnh trong nhà",
+     "2": "Cây cảnh ngoài trời",
+     "3": "Chậu cây cảnh",
+     "4": "Đồ trang trí trong nhà",
+     "5": "Đồ trang trí ngoài trời",
+     "101": "Khác"
+    },
+    "listing_types": [
+     "s"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "4",
+     "reason": "distribution collapsed and the total changed",
+     "evidence": "n=50 total=1287 baseline_total=5741 matched=50"
+    },
+    "is_range": false
+   }
+  },
+  "14110": {
+   "condition_ad": {
+    "param": "condition_ad",
+    "label": "Tình trạng",
+    "type": "radio",
+    "options": {
+     "1": "Đã sử dụng",
+     "2": "Mới"
+    },
+    "listing_types": [
+     "s",
+     "k"
+    ],
+    "verified": {
+     "works": true,
+     "probed": "2",
+     "reason": "distribution collapsed and the result set changed",
+     "evidence": "n=50 total=10000 baseline_total=10000 matched=50"
+    },
+    "is_range": false
+   }
+  }
+ }
+}

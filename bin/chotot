@@ -1,0 +1,29 @@
+#!/bin/sh
+# Location-independent entry point for chotot-cli.
+#
+# Resolves its own path through symlinks and puts the repo on PYTHONPATH,
+# allowing execution from any directory without requiring prior `cd` or
+# pre-installed package modules.
+#
+# Install:  ln -sf "$PWD/bin/chotot" ~/.local/bin/chotot
+# Verify:   zsh -lc 'cd / && chotot --version'
+
+target=$0
+while [ -L "$target" ]; do
+    link=$(readlink "$target")
+    case $link in
+        /*) target=$link ;;
+        *)  target=$(dirname "$target")/$link ;;
+    esac
+done
+root=$(cd "$(dirname "$target")/.." && pwd -P)
+
+if [ ! -d "$root/chotot" ]; then
+    echo "chotot: cannot find the chotot package next to $root." >&2
+    echo "The launcher was moved away from its repo; re-link it from the checkout:" >&2
+    echo "  ln -sf <repo>/bin/chotot ~/.local/bin/chotot" >&2
+    exit 78   # EX_CONFIG
+fi
+
+PYTHONPATH="$root${PYTHONPATH:+:$PYTHONPATH}" export PYTHONPATH
+exec python3 -m chotot.cli "$@"

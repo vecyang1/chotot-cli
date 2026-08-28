@@ -1,0 +1,196 @@
+{
+  "ad": {
+    "account_id": 85558138,
+    "account_name": "Vũ Quang Hải",
+    "account_oid": "3cc4f7b9c2743c61b5f60c6f62063743",
+    "ad_features": [],
+    "ad_id": 178432145,
+    "ad_labels": [],
+    "area": 64,
+    "area_name": "Huyện Đại Từ",
+    "area_v2": 1006407,
+    "avatar": "https://cdn.chotot.com/uac2/32068064",
+    "body": "Em cần tìm iPhone từ 1 triệu đổ xuống ạ 📱",
+    "business_days": [],
+    "category": 5010,
+    "category_name": "Điện thoại",
+    "contain_videos": 2,
+    "cta_buttons": [],
+    "date": "2 giờ trước",
+    "elt_condition": 2,
+    "escrow_can_buy_now": false,
+    "escrow_can_cod": false,
+    "escrow_can_delivery": false,
+    "escrow_can_deposit": 2,
+    "fee_type": [],
+    "full_name": "Vũ Quang Hải",
+    "gds_inspected": 2,
+    "giveaway": false,
+    "image": "https://cdn.chotot.com/xAiJ2Q3-r2kMhnlivdS2wX_M3H37dDvbxwkvm2KEN9A/preset:listing/plain/08665e516a85d40d8044d6f21f19a679-2999586199494439874.jpg",
+    "image_thumbnails": [
+      {
+        "image": "https://cdn.chotot.com/216MagE07-F1lirwP3VSRwv7wftuUyg4RbNyOVa59Ag/preset:view/plain/08665e516a85d40d8044d6f21f19a679-2999586199494439874.jpg",
+        "thumbnail": "https://cdn.chotot.com/xAiJ2Q3-r2kMhnlivdS2wX_M3H37dDvbxwkvm2KEN9A/preset:listing/plain/08665e516a85d40d8044d6f21f19a679-2999586199494439874.jpg"
+      }
+    ],
+    "images": [
+      "https://cdn.chotot.com/216MagE07-F1lirwP3VSRwv7wftuUyg4RbNyOVa59Ag/preset:view/plain/08665e516a85d40d8044d6f21f19a679-2999586199494439874.jpg"
+    ],
+    "inspection_images": [],
+    "is_price_not_valid": false,
+    "is_shop_verified": false,
+    "is_sticky": false,
+    "is_zalo_show": false,
+    "job_tier": 0,
+    "label_campaigns": [],
+    "latitude": 21.59,
+    "list_id": 134397861,
+    "list_time": 1787892561000,
+    "location": "21.5903907,105.6353878",
+    "longitude": 105.64,
+    "mobile_brand": 1,
+    "mobile_model": 591,
+    "number_of_images": 1,
+    "official_store": 2,
+    "params": [
+      {
+        "id": "mobile_model",
+        "label": "Dòng máy",
+        "value": "iPhone XR"
+      }
+    ],
+    "phone": "034492****",
+    "price": 1000000,
+    "price_string": "1.000.000 đ",
+    "protection_entitlement": false,
+    "pty_characteristics": [],
+    "region": 10,
+    "region_name": "Thái Nguyên",
+    "region_name_v3": "Thái Nguyên",
+    "region_v2": 10064,
+    "special_display_images": [],
+    "specific_service_offered": [],
+    "state": "accepted",
+    "status": "active",
+    "sticky_ad_platinum": 0,
+    "subject": "iPhone ",
+    "thumbnail_image": "https://cdn.chotot.com/xAiJ2Q3-r2kMhnlivdS2wX_M3H37dDvbxwkvm2KEN9A/preset:listing/plain/08665e516a85d40d8044d6f21f19a679-2999586199494439874.jpg",
+    "type": "s",
+    "videos": [],
+    "ward": 2373,
+    "ward_name": "Xã Lục Ba",
+    "ward_name_v3": "Xã Đại Từ",
+    "webp_image": "https://cdn.chotot.com/q5noyLfYLUiTyJplHkV5nsOLq4vE4zrLQQRrxgfclQc/preset:listing/plain/08665e516a85d40d8044d6f21f19a679-2999586199494439874.webp"
+  },
+  "ad_params": {
+    "address": {
+      "id": "address",
+      "label": "Địa chỉ",
+      "value": "Xã Lục Ba, Huyện Đại Từ, Thái Nguyên"
+    },
+    "area": {
+      "id": "area",
+      "label": "Quận, Huyện",
+      "value": "Huyện Đại Từ"
+    },
+    "elt_condition": {
+      "id": "elt_condition",
+      "label": "Tình trạng",
+      "value": "Đã sử dụng (chưa sửa chữa)"
+    },
+    "elt_origin": {
+      "id": "elt_origin",
+      "label": "Xuất xứ",
+      "value": "Đang cập nhật"
+    },
+    "elt_warranty": {
+      "id": "elt_warranty",
+      "label": "Chính sách bảo hành",
+      "value": "Bảo hành hãng"
+    },
+    "mobile_brand": {
+      "id": "mobile_brand",
+      "label": "Hãng",
+      "value": "Apple"
+    },
+    "mobile_model": {
+      "id": "mobile_model",
+      "label": "Dòng máy",
+      "value": "iPhone XR"
+    },
+    "region": {
+      "id": "region",
+      "label": "Tỉnh, thành phố",
+      "value": "Thái Nguyên"
+    },
+    "usage_information": {
+      "id": "usage_information",
+      "label": "Thông tin sử dụng",
+      "value": "In trên bao bì"
+    },
+    "ward": {
+      "id": "ward",
+      "label": "Phường, thị xã, thị trấn",
+      "value": "Xã Lục Ba"
+    }
+  },
+  "parameters": [
+    {
+      "id": "ward",
+      "label": "Phường, thị xã, thị trấn",
+      "value": "Xã Lục Ba"
+    },
+    {
+      "id": "mobile_brand",
+      "label": "Hãng",
+      "value": "Apple"
+    },
+    {
+      "id": "mobile_model",
+      "label": "Dòng máy",
+      "value": "iPhone XR"
+    },
+    {
+      "id": "elt_condition",
+      "label": "Tình trạng",
+      "value": "Đã sử dụng (chưa sửa chữa)"
+    },
+    {
+      "id": "elt_warranty",
+      "label": "Chính sách bảo hành",
+      "value": "Bảo hành hãng"
+    },
+    {
+      "id": "area",
+      "label": "Quận, Huyện",
+      "value": "Huyện Đại Từ"
+    },
+    {
+      "id": "region",
+      "label": "Tỉnh, thành phố",
+      "value": "Thái Nguyên"
+    },
+    {
+      "id": "address",
+      "label": "Địa chỉ",
+      "value": "Xã Lục Ba, Huyện Đại Từ, Thái Nguyên"
+    },
+    {
+      "id": "elt_origin",
+      "label": "Xuất xứ",
+      "value": "Đang cập nhật"
+    },
+    {
+      "id": "usage_information",
+      "label": "Thông tin sử dụng",
+      "value": "In trên bao bì"
+    }
+  ],
+  "params": [
+    {
+      "id": "mobile_model",
+      "label": "Dòng máy",
+      "value": "iPhone XR"
+    }
+  ]
+}
