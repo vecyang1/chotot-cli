@@ -142,11 +142,23 @@ def test_english_category_aliases_name_the_right_category():
         "phone": "Điện thoại", "laptop": "Laptop", "tablet": "Máy tính bảng",
         "desktop": "Máy tính để bàn", "pc": "Máy tính để bàn",
         "camera": "Máy ảnh, Máy quay", "car": "Ô tô", "motorbike": "Xe máy",
+        "job": "Việc làm", "jobs": "Việc làm",
+        "cleaning": "Dịch vụ dọn dẹp nhà", "moving": "Dịch vụ chuyển nhà",
     }
     for english, vietnamese in expected.items():
         code = taxonomy.resolve_category(english)
         assert taxonomy.category_name(code) == vietnamese, \
             f"{english!r} -> {taxonomy.category_name(code)!r}, expected {vietnamese!r}"
+
+
+def test_job_and_service_categories_resolve():
+    assert taxonomy.resolve_category("13010") == 13010
+    assert taxonomy.resolve_category("viec-lam") == 13010
+    assert taxonomy.resolve_category("vieclam") == 13010
+    assert taxonomy.resolve_category("15000") == 15000
+    assert taxonomy.resolve_category("dich-vu-nha-cua") == 15000
+    assert taxonomy.resolve_category("15010") == 15010
+    assert taxonomy.resolve_category("dich-vu-don-dep-nha") == 15010
 
 
 def test_an_ambiguous_english_word_is_refused_rather_than_guessed():

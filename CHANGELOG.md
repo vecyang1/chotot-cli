@@ -21,5 +21,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   ₫17,500,000 median for a product with zero local listings. Every search now verifies the
   returned rows against the query text and warns; `--match-all` keeps only rows carrying
   every term, and the crawl budget counts survivors so the filter cannot starve the result.
+- **Expanded Category Taxonomy**: Added support for standalone `Việc làm` (Jobs - `13010`) and `Dịch vụ nhà cửa` (Home Services - `15000..15040`) categories with English/Vietnamese alias resolution (`job`, `jobs`, `recruitment`, `cleaning`, `moving`, `appliance repair`).
 - **Mutation Testing Harness**: 55 mutation test cases in `tools/mutate.py` achieving 100% catch rate.
-- **Unit & Packaging Tests**: 388 comprehensive test cases covering client, analyzer, parser, error handling, taxonomy, facets, doctor, formatting, MCP, and isolated wheel installation.
+- **Unit & Packaging Tests**: 392 comprehensive test cases covering client, analyzer, parser, error handling, taxonomy, facets, doctor, formatting, MCP, and isolated wheel installation.
