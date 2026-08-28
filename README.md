@@ -182,10 +182,10 @@ $ chotot doctor
 │ PASS │ listing type filter (st)   │ unfiltered {u:38, s:12} vs st=s {s:50}     │
 │ PASS │ merged provinces expand    │ HCM = [2010, 2011, 13000], all populated   │
 │ PASS │ listing phone stays masked │ masked as 0399****                         │
-Graded 16 subjects · 16 passed · 0 warned · 0 failed
+Graded 17 subjects · 16 passed · 0 warned · 0 failed
 ```
 
-(Abridged — 16 subjects are graded, covering every claim in the list above.)
+(Abridged — 17 subjects are graded, covering every claim in the list above.)
 
 A `FAIL` means upstream changed and results may be wrong until the contract is
 re-measured — and each check has a negative side, so it can actually fail: it
@@ -231,9 +231,9 @@ Not affiliated with or endorsed by Chợ Tốt or Carousell.
 ## Development
 
 ```bash
-python3 -m pytest tests/ -m "not slow"   # 371 tests, no network
+python3 -m pytest tests/ -m "not slow"   # 388 tests, no network
 python3 -m pytest tests/                 # adds the packaging check (377)
-python3 tools/mutate.py                  # 49 mutants; all must be caught
+python3 tools/mutate.py                  # 54 mutants; all must be caught
 python3 -m chotot.cli doctor             # re-measure the live contract
 ```
 
