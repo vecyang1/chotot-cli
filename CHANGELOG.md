@@ -4,6 +4,46 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.2.0] - 2026-09-02
+
+### Fixed
+- **`--auto-proxy` now actually falls back.** 2.1.0 resolved the residential proxy in the
+  transport constructor whenever the flag was set, so every request was proxied (and paid)
+  from the first one and the fallback branch could never run; without a credential it had
+  nothing to switch to. The first request is now always direct; the proxy is resolved once,
+  after a block, and announced on stderr.
+- **HTTP 403 triggers the fallback.** It was raised as non-retryable before the fallback code
+  was reached, so the one status an anti-bot block actually returns never switched. The set
+  is configurable: `CHOTOT_PROXY_FALLBACK_STATUSES=403,429`.
+- **`--proxy auto` that cannot resolve is an error**, not a silent direct connection.
+- **The proxy mask no longer leaks.** `mask_proxy` kept four characters of the login and only
+  masked `http(s)://`; a `socks5://user:pass@` URL was printed whole. Every scheme is masked to
+  `***:***@host:port`, and a test grades every prefix of the credential.
+- **SOCKS URLs are refused with the cause named.** `--help` advertised `socks5://`, which the
+  standard library cannot speak; it failed deep in `urllib` as "unknown url type".
+- `--retries 1 --auto-proxy` gets one proxied attempt after the switch instead of none.
+
+### Changed
+- **One credential owner.** The DataImpulse readers (`DATAIMPULSE_*`, `SCRAPER_PROXY_URL`, the
+  scraper's `proxy_cache.json`, provider URL formatting) are gone from this repo. A resolver
+  command owns the credential: `CHOTOT_PROXY_RESOLVER` (stdout = URL, `{geo}` substituted),
+  else the installed `ultra-low-cost-scraper` `proxy_resolver.py`. Generic proxies still work
+  through `--proxy http://...` and `CHOTOT_PROXY`.
+- `--geo` no longer defaults inside the CLI, so pairing it with an explicit `--proxy URL` warns
+  that it does not apply. `CHOTOT_PROXY=none` now forces direct even when `HTTPS_PROXY` is set.
+- `chotot doctor` reports the transport as an object: mode, masked proxy, source, when the
+  switch fired, and how many requests were proxied.
+
+### Added
+- `tests/test_e2e_proxy_fallback.py`: the real entry point run as a process against local
+  servers (a gateway that blocks, a proxy that forwards, an upstream that answers), covering
+  the switch, the refusal paths, and the telemetry — no residential byte spent.
+- `CHOTOT_BASE_URL` to point the CLI at another gateway root.
+- Docs gates: every shared option and every `CHOTOT_*` variable must appear in the README;
+  `pyproject.toml`, `chotot.__version__` and the CHANGELOG must agree on the version.
+- `tools/mutate.py` mutates a scratch copy of the tree, so a concurrent reader or test run
+  never observes a mutant (one was read mid-run and nearly filed as a defect).
+
 ## [2.1.0] - 2026-08-28
 
 ### Added

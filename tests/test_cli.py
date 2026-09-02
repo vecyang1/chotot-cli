@@ -294,3 +294,78 @@ def test_facet_without_category_is_refused_before_any_request(patched, capsys):
     code, _, err = run(["search", "iphone", "--facet", "mobile_brand=apple"], capsys)
     assert code == cli.EXIT_USAGE
     assert "category" in err.lower()
+
+
+# -- proxy flags reach the transport, and refusals happen before any request ----
+
+def test_socks_proxy_exits_usage_before_any_request(capsys):
+    """The transport is constructed before the first request; a SOCKS URL must
+    be refused there, not deep inside urllib as 'unknown url type'. Unpatched
+    on purpose: the refusal happens before anything could reach the network."""
+    code, _, err = run(["search", "iphone", "--proxy", "socks5://127.0.0.1:1080"], capsys)
+    assert code == cli.EXIT_USAGE
+    assert "SOCKS" in err and "--proxy" in err
+
+
+def test_unresolvable_explicit_auto_exits_usage(monkeypatch, capsys):
+    import sys
+    monkeypatch.setenv("CHOTOT_PROXY_RESOLVER", f"{sys.executable} -c 'raise SystemExit(1)'")
+    code, _, err = run(["search", "iphone", "--proxy", "auto"], capsys)
+    assert code == cli.EXIT_USAGE
+    assert "CHOTOT_PROXY_RESOLVER" in err
+
+
+def test_proxy_flags_reach_the_transport(monkeypatch):
+    calls = {}
+
+    def fake_transport_ctor(base_url, **kwargs):
+        calls.update(kwargs, base_url=base_url)
+        return object()
+
+    monkeypatch.setattr("chotot.client.HttpTransport", fake_transport_ctor)
+    args = cli.build_parser().parse_args(
+        ["--proxy", "http://127.0.0.1:8080", "--auto-proxy", "--geo", "jp", "search", "x"])
+    for name, value in cli.GLOBAL_DEFAULTS.items():
+        if not hasattr(args, name):
+            setattr(args, name, value)
+    cli._client(args)
+    assert calls["proxy"] == "http://127.0.0.1:8080"
+    assert calls["auto_proxy"] is True and calls["geo"] == "jp"
+
+
+def test_geo_is_unset_unless_given(monkeypatch):
+    """A default of 'vn' made 'given explicitly' indistinguishable from
+    'defaulted', so the transport could not warn when --geo was paired with a
+    proxy URL it cannot apply to."""
+    calls = {}
+    monkeypatch.setattr("chotot.client.HttpTransport",
+                        lambda base_url, **kw: calls.update(kw) or object())
+    args = cli.build_parser().parse_args(["search", "x"])
+    for name, value in cli.GLOBAL_DEFAULTS.items():
+        if not hasattr(args, name):
+            setattr(args, name, value)
+    cli._client(args)
+    assert calls["geo"] is None
+
+
+def test_base_url_is_overridable_from_the_environment(monkeypatch):
+    """The hook the end-to-end suite stands on: point the CLI at a local server."""
+    calls = {}
+    monkeypatch.setattr("chotot.client.HttpTransport",
+                        lambda base_url, **kw: calls.update(base_url=base_url) or object())
+    monkeypatch.setenv("CHOTOT_BASE_URL", "http://127.0.0.1:1/v1/public")
+    args = cli.build_parser().parse_args(["search", "x"])
+    for name, value in cli.GLOBAL_DEFAULTS.items():
+        if not hasattr(args, name):
+            setattr(args, name, value)
+    cli._client(args)
+    assert calls["base_url"] == "http://127.0.0.1:1/v1/public"
+
+
+def test_mcp_serves_the_cli_configured_client(monkeypatch, capsys):
+    """`chotot mcp --proxy ...` accepted the flags and served a default client."""
+    seen = {}
+    monkeypatch.setattr("chotot.mcp_server.serve_stdio", lambda client: seen.update(client=client) or 0)
+    monkeypatch.setattr(cli, "_client", lambda args: ("configured", args.proxy))
+    assert cli.main(["mcp", "--proxy", "http://127.0.0.1:1"]) == 0
+    assert seen["client"] == ("configured", "http://127.0.0.1:1")

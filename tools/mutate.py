@@ -17,16 +17,32 @@ Bytecode caching is disabled throughout. CPython decides a ``.pyc`` is stale by
 comparing mtime in WHOLE SECONDS plus size, and a mutation loop rewrites a
 module several times a second, so a cached mutant can be executed during the
 restore run — producing verdicts decided by the cache rather than the code.
+
+Mutants are applied to a SCRATCH COPY of the tree, never to the working tree.
+Measured 2026-09-02: a reviewer read ``chotot/http.py`` while this harness was
+running in the background, saw mutant #1 (``if False: logger.warning``) in the
+file, and drafted it as a shipped defect. A harness that edits the tree in
+place also leaves a mutant behind if it is killed mid-run — and the commit that
+follows sweeps it in. Copying costs a second; both hazards go away.
 """
 from __future__ import annotations
 
 import os
+import shutil
 import subprocess
 import sys
+import tempfile
 from pathlib import Path
 from typing import List, NamedTuple
 
 ROOT = Path(__file__).resolve().parent.parent
+
+#: Never copied into the scratch tree: build products and caches would only
+#: slow the copy, and a nested ``.git`` would make the copy look like a repo.
+SCRATCH_IGNORE = shutil.ignore_patterns(
+    ".git", "build", "dist", "*.egg-info", "__pycache__", ".pytest_cache",
+    "graphify-out", ".mypy_cache", ".ruff_cache",
+)
 
 
 class Mutation(NamedTuple):
@@ -435,29 +451,115 @@ MUTATIONS: List[Mutation] = [
         "return listing.condition_code in wanted or listing.condition_code is None",
         "an unstated condition is not evidence for 'new'",
     ),
+    # -- the residential-proxy fallback (2.2.0) ---------------------------------
+    Mutation(
+        'auto-proxy resolves the residential proxy before the first request again',
+        'chotot/http.py',
+        '                else resolve_proxy(proxy, geo=self.geo, resolver=self._resolver))',
+        '                else resolve_proxy("auto" if self.auto_proxy else proxy, geo=self.geo, resolver=self._resolver))',
+        'every request is paid from the first one and the fallback branch is dead (the 2.1.0 defect)',
+    ),
+    Mutation(
+        '403 no longer triggers the fallback',
+        'chotot/http.py',
+        'PROXY_FALLBACK_STATUSES: FrozenSet[int] = frozenset({403, 429})',
+        'PROXY_FALLBACK_STATUSES: FrozenSet[int] = frozenset({429})',
+        'the one status an anti-bot block actually returns never switches (the 2.1.0 defect)',
+    ),
+    Mutation(
+        'the fallback is resolved on every attempt',
+        'chotot/http.py',
+        '        self._fallback_attempted = True\n        url = self._resolver(self.geo)',
+        '        url = self._resolver(self.geo)',
+        'a resolver that had nothing is re-run and re-warned on every retry',
+    ),
+    Mutation(
+        'the switch to a paid proxy is not announced',
+        'chotot/http.py',
+        '        logger.warning(\n            "%s on the direct connection; switching to the residential proxy',
+        '        logger.debug(\n            "%s on the direct connection; switching to the residential proxy',
+        'money is spent with nothing on stderr saying so',
+    ),
+    Mutation(
+        'a user-named proxy is replaced by the paid one',
+        'chotot/http.py',
+        '        if not self.auto_proxy or self._proxy_url or self._fallback_attempted:',
+        '        if not self.auto_proxy or self._fallback_attempted:',
+        "the user's own proxy gets swapped for a residential one behind their back",
+    ),
+    Mutation(
+        'a switch on the final attempt gets no proxied try',
+        'chotot/http.py',
+        '                budget += 1\n            if attempt < budget:',
+        '                pass\n            if attempt < budget:',
+        '--retries 1 --auto-proxy resolves a proxy and never uses it',
+    ),
+    Mutation(
+        'the proxy mask keeps the login again',
+        'chotot/proxy.py',
+        '        return f"{parts.scheme or \'proxy\'}://***:***@{hostport}"',
+        '        return f"{parts.scheme or \'proxy\'}://{parts.netloc.split(\':\', 1)[0][:4]}***:***@{hostport}"',
+        'four characters of a residential login reach every log line and doctor report (the 2.1.0 defect)',
+    ),
+    Mutation(
+        'SOCKS refusal loses its named cause',
+        'chotot/proxy.py',
+        '    if scheme in SOCKS_SCHEMES:',
+        '    if False:',
+        "a socks5:// URL is refused as 'not an http URL' and the user does not learn why",
+    ),
+    Mutation(
+        'explicit --proxy auto degrades silently to direct',
+        'chotot/proxy.py',
+        '            if not url:\n                raise UsageError(\n                    f"--proxy auto could not resolve',
+        '            if not url:\n                return ProxyPlan(None, "direct")\n            if False:\n                raise UsageError(\n                    f"--proxy auto could not resolve',
+        'the user asked for a proxy, paid nothing, and got their own address blocked (the 2.1.0 defect)',
+    ),
+    Mutation(
+        'CHOTOT_PROXY=none no longer outranks HTTPS_PROXY',
+        'chotot/proxy.py',
+        '        if value.strip().lower() in DIRECT_WORDS:\n            return None, name',
+        '        if value.strip().lower() in DIRECT_WORDS:\n            continue',
+        'there is no way to escape a global proxy for one tool',
+    ),
 ]
 
 
-def run_suite() -> bool:
-    env = dict(os.environ, PYTHONDONTWRITEBYTECODE="1")
+def run_suite(tree: Path) -> bool:
+    """Grade ``tree`` -- always the scratch copy, never ROOT."""
+    env = dict(os.environ, PYTHONDONTWRITEBYTECODE="1", PYTHONPATH=str(tree))
     result = subprocess.run(
         [sys.executable, "-B", "-m", "pytest", "-x", "-q", "-m", "not slow",
          "-p", "no:cacheprovider", "tests/"],
-        cwd=ROOT, capture_output=True, text=True, env=env, timeout=600,
+        cwd=tree, capture_output=True, text=True, env=env, timeout=600,
     )
     return result.returncode == 0
 
 
 def main() -> int:
+    # Line-buffered even when redirected to a file: a 20-minute run whose
+    # progress appears only at exit looks stuck from the outside.
+    try:
+        sys.stdout.reconfigure(line_buffering=True)  # type: ignore[attr-defined]
+    except (AttributeError, ValueError):
+        pass
+    with tempfile.TemporaryDirectory(prefix="chotot-mutate-") as scratch:
+        tree = Path(scratch) / "tree"
+        shutil.copytree(ROOT, tree, ignore=SCRATCH_IGNORE, symlinks=True)
+        print(f"grading a scratch copy at {tree}; the working tree is not touched")
+        return _grade(tree)
+
+
+def _grade(tree: Path) -> int:
     print("baseline ...", end=" ", flush=True)
-    if not run_suite():
+    if not run_suite(tree):
         print("RED — fix the suite before mutating")
         return 1
     print("green")
 
     caught, escaped, skipped = [], [], []
     for index, mutation in enumerate(MUTATIONS, 1):
-        target = ROOT / mutation.path
+        target = tree / mutation.path
         original = target.read_text(encoding="utf-8")
         if mutation.before not in original:
             skipped.append(mutation)
@@ -465,7 +567,7 @@ def main() -> int:
             continue
         target.write_text(original.replace(mutation.before, mutation.after, 1), encoding="utf-8")
         try:
-            survived = run_suite()
+            survived = run_suite(tree)
         finally:
             target.write_text(original, encoding="utf-8")
         if survived:
@@ -477,7 +579,7 @@ def main() -> int:
             print(f"[{index:2d}/{len(MUTATIONS)}] caught  {mutation.name}")
 
     print("\nre-checking baseline after restore ...", end=" ", flush=True)
-    print("green" if run_suite() else "RED — a restore failed")
+    print("green" if run_suite(tree) else "RED — a restore failed")
 
     total = len(MUTATIONS)
     print(f"\ngraded {total} mutants: {len(caught)} caught, "

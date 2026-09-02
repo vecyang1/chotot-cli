@@ -45,11 +45,22 @@ modifying anything in `chotot/` or `tools/`.
    `bin/chotot` resolves its path through symlinks and injects `$root` into `PYTHONPATH`.
    CLI commands should be invoked directly via the `chotot` binary or `bin/chotot`, never via `cd <repo> && python3 -m chotot.cli`.
 
-7. **Proxy readiness and anti-scraping self-healing.**
-   `chotot/proxy.py` resolves explicit proxies (`--proxy <url>`), environment proxies (`CHOTOT_PROXY`, `HTTPS_PROXY`),
-   and auto-resolves residential proxy pools (DataImpulse with `--geo vn`) via `ultra-low-cost-scraper`.
-   When `--auto-proxy` (or `CHOTOT_AUTO_PROXY=1`) is active, rate-limited or blocked direct requests automatically
-   switch to residential proxy egress and self-heal.
+7. **Proxy: direct first, one credential owner, nothing printed.**
+   `chotot/proxy.py` decides the proxy (`--proxy URL|auto|none`, then `CHOTOT_PROXY`, then the
+   standard variables) and `chotot/http.py` reacts to blocks. `--auto-proxy` (or `CHOTOT_AUTO_PROXY=1`)
+   means the FIRST request is direct; only after HTTP 403/429 (`CHOTOT_PROXY_FALLBACK_STATUSES`) or a
+   connection failure is the residential proxy resolved — once per transport — and switched in for
+   the rest of the run, announced on stderr. `--proxy auto` resolves before the first request and
+   is an error when nothing resolves; a user-named proxy is never replaced by a paid one. SOCKS URLs
+   are refused with the cause named (urllib cannot speak SOCKS). The residential credential is read
+   by exactly one owner, the resolver command (`CHOTOT_PROXY_RESOLVER`, else the installed
+   `ultra-low-cost-scraper` `proxy_resolver.py`); this repo must never read `DATAIMPULSE_*`, the
+   scraper's cache file, or format a provider URL itself — `tests/test_proxy.py` greps for that.
+   Only `mask_proxy()` output may reach a log or report; the test grades every prefix of a
+   credential against it, because the previous mask kept four characters of the login.
+   The 2.1.0 transport resolved the proxy in its constructor, so the fallback branch was dead in
+   both directions and its only test passed on an already-proxied transport. The e2e suite
+   (`tests/test_e2e_proxy_fallback.py`) now runs the real entry point against local servers.
 
 ## CLI Subcommands
 
@@ -70,15 +81,19 @@ modifying anything in `chotot/` or `tools/`.
 ## Verification Protocol
 
 ```bash
-# 1. Full unit test suite (391 tests)
-python3 -m pytest tests/ -rs   # -rs: a skipped gate must not read as a pass
+# 1. Full unit + end-to-end suite. The count is whatever the run prints; do not
+#    copy it into prose, it rots. -rs: a skipped gate must not read as a pass.
+python3 -m pytest tests/ -rs
 
-# 2. Packaging test (builds and validates wheel in isolated sandbox)
+# 2. Packaging test (builds and validates the wheel in an isolated venv)
 python3 -m pytest tests/test_packaging.py
 
-# 3. Mutation test harness (55/55 mutants caught)
+# 3. Mutation harness — runs against a scratch COPY of the tree, so reading or
+#    testing the working tree concurrently never sees a mutant. Every mutant
+#    must be caught; a SKIP means the harness is stale, not that the code is safe.
 python3 tools/mutate.py
 
-# 4. Upstream live contract check
+# 4. Upstream live contract check, direct and through the residential proxy
 chotot doctor
+chotot doctor --proxy auto
 ```

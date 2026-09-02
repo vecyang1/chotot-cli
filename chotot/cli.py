@@ -37,7 +37,7 @@ from typing import Any, Dict, List, Optional, Sequence, TextIO
 
 from chotot import __version__
 from chotot.analyzer import MarketAnalyzer
-from chotot import facets
+from chotot import contract, facets
 from chotot.client import (
     CONDITIONS, LISTING_TYPE_CHOICES, SELLER_TYPES, SORT_CHOICES, ChototClient,
 )
@@ -71,7 +71,10 @@ PROG = "chotot"
 GLOBAL_DEFAULTS = {
     "no_colour": False, "timeout": 20.0, "min_interval": 0.2,
     "retries": 3, "verbose": False, "proxy": None, "auto_proxy": False,
-    "geo": "vn",
+    # None, not "vn": the transport needs to tell "--geo was given" from
+    # "--geo was defaulted" to warn when it is paired with a proxy it cannot
+    # apply to. The default exit country lives in chotot.proxy.DEFAULT_GEO.
+    "geo": None,
 }
 
 
@@ -102,6 +105,7 @@ examples:
   chotot export "ipad pro" --limit 200 --output ipad.csv
   chotot categories --parent 5000
   chotot regions --search "can tho"
+  chotot search "iphone 13" --auto-proxy   # direct first; residential proxy only after a block
   chotot doctor --proxy auto
   chotot mcp
 
@@ -130,11 +134,16 @@ are applied locally because the gateway ignores them; every result says so.
     common.add_argument("--retries", type=int, default=argparse.SUPPRESS, metavar="N",
                         help="Attempts per request on a retryable failure (default: 3).")
     common.add_argument("--proxy", default=argparse.SUPPRESS, metavar="URL",
-                        help="Proxy URL ('http://...', 'socks5://...', or 'auto' for residential proxy).")
+                        help="HTTP proxy URL ('http://...'), 'auto' to resolve a residential "
+                             "proxy now, or 'none' to force a direct connection. SOCKS is not "
+                             "supported by the standard library. Env: CHOTOT_PROXY.")
     common.add_argument("--auto-proxy", action="store_true", default=argparse.SUPPRESS,
-                        help="Automatically fall back to residential proxy on rate limits / anti-bot.")
+                        help="Start direct; after HTTP 403/429 or a connection block, switch "
+                             "to the resolved residential proxy for the rest of the run. "
+                             "Env: CHOTOT_AUTO_PROXY=1.")
     common.add_argument("--geo", default=argparse.SUPPRESS, metavar="CC",
-                        help="Target country code for residential proxy (default: vn).")
+                        help="Exit country for the residential proxy resolver (default: vn); "
+                             "applies to 'auto' and the fallback only.")
     common.add_argument("--verbose", action="store_true", default=argparse.SUPPRESS,
                         help="Log gateway activity to stderr.")
     for action in common._actions:
@@ -236,7 +245,10 @@ are applied locally because the gateway ignores them; every result says so.
                              "masks the same number on a listing.")
     shop_p.add_argument("--json", action="store_true", help="Emit JSON on stdout.")
 
-    subparsers.add_parser("doctor", parents=[common], help="Re-measure the gateway contract and report health.")
+    doctor = subparsers.add_parser("doctor", parents=[common],
+                                   help="Re-measure the gateway contract and report health.")
+    doctor.add_argument("--json", action="store_true",
+                        help="Emit the graded checks and transport telemetry as JSON on stdout.")
     subparsers.add_parser("mcp", parents=[common], help="Serve the Model Context Protocol over stdio.")
     return parser
 
@@ -244,13 +256,16 @@ are applied locally because the gateway ignores them; every result says so.
 # -- command handlers ------------------------------------------------------
 
 def _client(args: argparse.Namespace) -> ChototClient:
+    # CHOTOT_BASE_URL points the CLI at another gateway root -- a mirror, or
+    # the local servers the end-to-end suite stands up. Not a user-facing flag.
     return ChototClient(
+        base_url=os.getenv("CHOTOT_BASE_URL") or contract.GATEWAY_BASE_URL,
         timeout=args.timeout,
         max_retries=args.retries,
         min_interval=args.min_interval,
         proxy=getattr(args, "proxy", None),
         auto_proxy=getattr(args, "auto_proxy", False),
-        geo=getattr(args, "geo", "vn"),
+        geo=getattr(args, "geo", None),
     )
 
 
@@ -573,7 +588,7 @@ def cmd_regions(args: argparse.Namespace, palette: Palette) -> int:
 def cmd_doctor(args: argparse.Namespace, palette: Palette) -> int:
     from chotot.doctor import run_doctor
 
-    return run_doctor(_client(args), palette, as_json=False)
+    return run_doctor(_client(args), palette, as_json=args.json)
 
 
 def cmd_mcp(args: argparse.Namespace, palette: Palette) -> int:

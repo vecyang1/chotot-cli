@@ -104,3 +104,58 @@ def test_documented_facet_and_province_counts_are_current():
     modern = len(taxonomy.modern_groups())
     for value in [int(n) for n in re.findall(r"onto \*\*(\d+) modern provinces\*\*", CONTRACT_DOC)]:
         assert value == modern, f"doc says {value} modern provinces, snapshot has {modern}"
+
+
+def _shared_long_options():
+    """Every long option accepted before AND after the subcommand."""
+    from chotot.cli import build_parser
+
+    parser = build_parser()
+    names = set()
+    for action in parser._actions:
+        longs = [s for s in action.option_strings if s.startswith("--")]
+        if not longs or action.dest in ("help", "version"):
+            continue
+        names.add(longs[0])
+    return names
+
+
+def test_readme_documents_every_shared_option():
+    """A flag added without a README line is undiscoverable: the whole proxy
+    surface shipped in 2.1.0 with no mention outside `--help`."""
+    shared = _shared_long_options()
+    missing = sorted(o for o in shared if o not in README)
+    print(f"graded {len(shared)} shared options against the README")
+    assert len(shared) >= 8, f"only {len(shared)} shared options found; the selector is too narrow"
+    assert not missing, f"shared options absent from the README: {missing}"
+
+
+def test_readme_documents_every_chotot_environment_variable():
+    """Environment variables are an interface with no --help at all."""
+    import re as _re
+
+    source = "".join(p.read_text(encoding="utf-8") for p in (ROOT / "chotot").glob("*.py"))
+    live = set(_re.findall(r'"(CHOTOT_[A-Z_]+)"', source))
+    print(f"graded {len(live)} CHOTOT_* variables against the README")
+    assert live, "no CHOTOT_* variables found in the source; the extractor is broken"
+    missing = sorted(v for v in live if v not in README)
+    assert not missing, f"environment variables absent from the README: {missing}"
+
+
+def test_pyproject_and_package_agree_on_the_version():
+    import re as _re
+
+    from chotot import __version__
+
+    pyproject = (ROOT / "pyproject.toml").read_text(encoding="utf-8")
+    declared = _re.search(r'^version = "([^"]+)"', pyproject, _re.MULTILINE)
+    assert declared, "pyproject.toml has no version line"
+    assert declared.group(1) == __version__, \
+        f"pyproject says {declared.group(1)}, chotot.__version__ is {__version__}"
+
+
+def test_changelog_has_an_entry_for_the_current_version():
+    from chotot import __version__
+
+    changelog = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
+    assert f"## [{__version__}]" in changelog, f"CHANGELOG.md has no entry for {__version__}"

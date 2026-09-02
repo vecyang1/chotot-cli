@@ -450,15 +450,17 @@ def run_doctor(client: ChototClient, palette: Palette, as_json: bool = False) ->
 
     failed = sum(1 for r in results if r.status == FAIL)
     warned = sum(1 for r in results if r.status == WARN)
-    proxy_info = getattr(client.transport, "proxy_masked", "none")
-    is_proxied = getattr(client.transport, "is_proxied", False)
+    summarise = getattr(client.transport, "transport_summary", None)
+    transport = summarise() if callable(summarise) else {
+        "mode": "direct", "proxy": "none", "source": "injected",
+        "fallback_fired_at": None, "requests": None, "proxied_requests": None,
+    }
 
     if as_json:
         print(to_json({
             "contract_measured_at": contract.CONTRACT_MEASURED_AT,
             "taxonomy_snapshot": taxonomy.snapshot_date(),
-            "transport": "proxy" if is_proxied else "direct",
-            "proxy": proxy_info,
+            "transport": transport,
             "graded": len(results),
             "failed": failed, "warned": warned,
             "checks": [r.to_dict() for r in results],
@@ -469,8 +471,13 @@ def run_doctor(client: ChototClient, palette: Palette, as_json: bool = False) ->
     rows = [[palette(r.status, colours[r.status], "bold"), r.name, r.detail] for r in results]
     print(render_table(rows, ["", "Check", "Detail"], palette))
     print()
-    if is_proxied:
-        print(palette(f"Transport: proxy ({proxy_info})", "cyan"))
+    if transport["mode"] != "direct":
+        switched = transport["fallback_fired_at"]
+        note = f", switched after request {switched}" if switched is not None else ""
+        print(palette(f"Transport: {transport['mode']} via {transport['proxy']} "
+                      f"[{transport['source']}{note}] · "
+                      f"{transport['proxied_requests']}/{transport['requests']} requests proxied",
+                      "cyan"))
     print(f"Graded {len(results)} subjects · "
           f"{palette(str(len(results) - failed - warned) + ' passed', 'green')} · "
           f"{palette(str(warned) + ' warned', 'yellow')} · "
