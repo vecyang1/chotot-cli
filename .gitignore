@@ -63,3 +63,6 @@ outputs/
 *.log
 export_*.json
 export_*.csv
+
+# derived code graph (graphify); rebuilt on demand, never a source of truth
+graphify-out/

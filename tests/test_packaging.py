@@ -113,4 +113,7 @@ def test_the_package_imports_without_the_source_tree(installed):
                   cwd=installed["cwd"])
     assert result.returncode == 0, result.stderr
     version, provinces = result.stdout.split()
-    assert version == "2.1.0" and int(provinces) > 60
+    # The wheel must carry the version the source tree declares; the
+    # source-vs-pyproject agreement is graded in test_docs_parity.
+    from chotot import __version__
+    assert version == __version__ and int(provinces) > 60

@@ -182,7 +182,7 @@ $ chotot doctor
 │ PASS │ listing type filter (st)   │ unfiltered {u:38, s:12} vs st=s {s:50}     │
 │ PASS │ merged provinces expand    │ HCM = [2010, 2011, 13000], all populated   │
 │ PASS │ listing phone stays masked │ masked as 0399****                         │
-Graded 17 subjects · 16 passed · 0 warned · 0 failed
+Graded 17 subjects · 17 passed · 0 warned · 0 failed
 ```
 
 (Abridged — 17 subjects are graded, covering every claim in the list above.)
@@ -191,6 +191,55 @@ A `FAIL` means upstream changed and results may be wrong until the contract is
 re-measured — and each check has a negative side, so it can actually fail: it
 proves `price` still filters *and* that `sp`/`ep` are still ignored. Full detail:
 [docs/api-contract.md](docs/api-contract.md).
+
+---
+
+## Proxies and blocks
+
+Every request is direct by default. Nothing here is needed until Chợ Tốt
+starts answering `HTTP 403` or `429` to your address.
+
+| Option | What it does |
+|---|---|
+| `--proxy http://host:port` | Use this HTTP proxy for every request. Also `CHOTOT_PROXY`, which outranks `HTTPS_PROXY`/`HTTP_PROXY`/`ALL_PROXY`; `none` forces a direct connection even when those are set. |
+| `--proxy auto` | Resolve a residential proxy **now** and use it from the first request. If nothing resolves, this is an error — never a quiet direct connection. |
+| `--auto-proxy` | **Direct first.** After a `403`, a `429` or a connection failure, resolve a residential proxy and use it for the rest of the run. Announced on stderr once. Also `CHOTOT_AUTO_PROXY=1`. |
+| `--geo CC` | Exit country for the resolver (default `vn`). Applies to `auto` and the fallback only; an explicit URL is used exactly as given. |
+
+The residential proxy costs money per byte, which is why `--auto-proxy` pays
+nothing until a block is actually seen, and why a proxy you named yourself is
+never swapped for a paid one behind your back.
+
+**SOCKS is not supported.** The standard library has no SOCKS client, so a
+`socks5://` URL — on the flag or in `ALL_PROXY` — is refused with the cause
+named rather than failing deep inside `urllib`. Clash and mihomo expose an HTTP
+proxy on the same port; use that.
+
+**Where the residential credential comes from.** `chotot` never holds one. It
+runs a *resolver command* whose stdout is a proxy URL:
+
+```bash
+export CHOTOT_PROXY_RESOLVER='my-resolver --country {geo}'   # {geo} is replaced
+```
+
+Exit non-zero or print nothing to say "no proxy available". When the variable
+is unset, the [`ultra-low-cost-scraper`](https://github.com/vecyang1) skill's
+`proxy_resolver.py` is used if it is installed; it owns the DataImpulse
+credential (1Password, environment or its own cache) and its geo tagging, and
+this tool reads none of that itself.
+
+Other knobs: `CHOTOT_PROXY_FALLBACK_STATUSES=403,429` changes which statuses
+trigger the switch; `CHOTOT_BASE_URL` points the CLI at another gateway root (a
+mirror, or the local servers the end-to-end suite stands up).
+
+`chotot doctor --proxy auto` grades the whole contract through the proxy and
+prints the transport line — mode, masked proxy, source, and how many requests
+were proxied — so a report always says which address it was measured from.
+`chotot doctor --json` emits the same checks and the transport object as JSON.
+
+The shared options `--timeout`, `--min-interval`, `--retries`, `--verbose` and
+`--no-colour` are accepted before or after the subcommand; `--verbose` logs
+every gateway request to stderr, with the proxy masked.
 
 ---
 
@@ -231,19 +280,24 @@ Not affiliated with or endorsed by Chợ Tốt or Carousell.
 ## Development
 
 ```bash
-python3 -m pytest tests/ -rs             # 391 tests; -rs so a skip cannot read as a pass
-python3 tools/mutate.py                  # 55 mutants; all must be caught
-python3 -m chotot.cli doctor             # re-measure the live contract against the gateway
+python3 -m pytest tests/ -rs             # -rs so a skip cannot read as a pass
+python3 tools/mutate.py                  # every mutant must be caught; the run prints the count
+chotot doctor                            # re-measure the live contract against the gateway
 ```
+
+The suite includes a real-process end-to-end run of the proxy fallback: the
+CLI is executed against three servers on `127.0.0.1` — a gateway that blocks,
+a proxy that forwards, an upstream that answers — through the real entry point,
+so the one paid path is exercised on every run without a residential byte.
 
 The suite is checked on Python 3.10 as well as 3.14 — an earlier revision could
 not be imported at all below 3.14, and passed its tests anyway.
 
-Use `-rs`. Six of those 391 build a wheel and install it into a clean
+Use `-rs`. The packaging tests build a wheel and install it into a clean
 virtualenv, and they **skip** rather than fail when pip's build backend is
 unavailable — an editable-install `.pth` left in a system interpreter was enough
-to skip all six, and the run still printed `382 passed`. A gate that skips
-itself reports the same green as one that passed.
+to skip all of them, and the run still printed a healthy-looking `passed`. A
+gate that skips itself reports the same green as one that passed.
 
 Refresh the bundled taxonomy and facet snapshots:
 

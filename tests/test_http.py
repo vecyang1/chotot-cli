@@ -267,3 +267,216 @@ def test_healthy_interpreter_never_touches_certifi(monkeypatch):
 
     assert ctx.get_ca_certs(), "reference machine has a populated trust store"
     assert not [r for r in records if r.levelno >= logging.WARNING]
+
+
+# -- residential-proxy fallback: direct first, switch on a block ----------------
+#
+# The 2.1.0 transport resolved the proxy in its constructor whenever
+# ``auto_proxy`` was set, so every request was paid from the first one and the
+# fallback branch below it could never execute: with a credential it was
+# already proxied, without one it had nothing to switch to. The only test of
+# the branch constructed an already-proxied transport and passed vacuously.
+
+import logging as _logging
+
+from chotot.errors import UsageError as _UsageError
+
+
+@pytest.fixture(autouse=True)
+def _no_ambient_proxy(monkeypatch):
+    """Hermetic: a developer's HTTPS_PROXY must not decide what 'direct' means."""
+    from chotot import proxy as _proxy
+
+    for name in _proxy.ALL_PROXY_ENV_NAMES + (_proxy.ENV_RESOLVER, _proxy.ENV_AUTO_PROXY,
+                                              "CHOTOT_PROXY_FALLBACK_STATUSES"):
+        monkeypatch.delenv(name, raising=False)
+
+
+class _Recorder:
+    """Records which proxy URL each opener was built with, and serves scripted
+    responses, so the switch is observed from the opener's side."""
+
+    def __init__(self, script):
+        self.script = list(script)  # each item: FakeResponse or an exception
+        self.built_with = []
+        self.served_via = []
+
+    def factory(self, proxy_url):
+        self.built_with.append(proxy_url)
+
+        def opener(request, timeout=None):
+            self.served_via.append(proxy_url)
+            item = self.script.pop(0)
+            if isinstance(item, BaseException):
+                raise item
+            return item
+
+        return opener
+
+
+def _blocked(status, retry_after="0"):
+    headers = {"Retry-After": retry_after} if status == 429 else {}
+    return urllib.error.HTTPError("https://example.invalid/x", status, "blocked", headers,
+                                  io.BytesIO(b'{"blocked":true}'))
+
+
+def _ok():
+    return FakeResponse(b'{"ads": [], "total": 1}')
+
+
+def _transport(recorder, resolver, **kwargs):
+    kwargs.setdefault("min_interval", 0)
+    return HttpTransport("https://example.invalid", opener_factory=recorder.factory,
+                         resolver=resolver, sleep=lambda _: None, **kwargs)
+
+
+def test_auto_proxy_starts_direct_even_when_a_proxy_is_resolvable():
+    recorder = _Recorder([_ok()])
+    transport = _transport(recorder, resolver=lambda geo: "http://u:p@res:1", auto_proxy=True)
+    assert transport.is_proxied is False
+    assert transport.transport_mode == "direct"
+    transport.get_json("ad-listing")
+    assert recorder.served_via == [None]
+
+
+def test_a_direct_429_switches_to_the_resolved_proxy_and_retries(caplog):
+    recorder = _Recorder([_blocked(429), _ok()])
+    calls = []
+
+    def resolver(geo):
+        calls.append(geo)
+        return "http://u:p@res:1"
+
+    transport = _transport(recorder, resolver, auto_proxy=True, geo="vn", max_retries=3)
+    with caplog.at_level(_logging.WARNING, logger="chotot.http"):
+        payload = transport.get_json("ad-listing")
+
+    assert payload["total"] == 1
+    assert recorder.built_with == [None, "http://u:p@res:1"]
+    assert recorder.served_via == [None, "http://u:p@res:1"]
+    assert calls == ["vn"]
+    assert transport.is_proxied and transport.transport_mode == "proxy (after fallback)"
+    assert transport.fallback_fired_at == 1 and transport.proxied_request_count == 1
+    announced = [r.message for r in caplog.records if "residential proxy" in r.message]
+    assert len(announced) == 1 and "u:p@" not in announced[0]
+
+
+def test_a_direct_403_switches_when_the_fallback_is_armed():
+    """403 is not retryable on its own; with the fallback armed it is the
+    signal the fallback exists for."""
+    recorder = _Recorder([_blocked(403), _ok()])
+    transport = _transport(recorder, lambda geo: "http://u:p@res:1", auto_proxy=True)
+    assert transport.get_json("ad-listing")["total"] == 1
+    assert recorder.served_via == [None, "http://u:p@res:1"]
+
+
+def test_a_403_without_the_fallback_is_not_retried_and_the_remedy_names_the_flag():
+    recorder = _Recorder([_blocked(403)])
+    transport = _transport(recorder, lambda geo: "http://u:p@res:1", auto_proxy=False)
+    with pytest.raises(TransportError) as info:
+        transport.get_json("ad-listing")
+    assert "403" in str(info.value)
+    assert "--auto-proxy" in (info.value.remedy or "")
+    assert recorder.served_via == [None]
+
+
+def test_the_fallback_is_resolved_once_and_warns_once_when_nothing_resolves(caplog):
+    recorder = _Recorder([_blocked(429), _blocked(429), _blocked(429)])
+    calls = []
+
+    def resolver(geo):
+        calls.append(geo)
+        return None
+
+    transport = _transport(recorder, resolver, auto_proxy=True, max_retries=3)
+    with caplog.at_level(_logging.WARNING, logger="chotot.http"):
+        with pytest.raises(RateLimitedError):
+            transport.get_json("ad-listing")
+    assert calls == ["vn"], "resolution is attempted once per transport, not per attempt"
+    assert sum("could not resolve" in r.message for r in caplog.records) == 1
+    assert recorder.served_via == [None, None, None]
+
+
+def test_a_connection_error_triggers_the_fallback():
+    recorder = _Recorder([urllib.error.URLError("connection refused"), _ok()])
+    transport = _transport(recorder, lambda geo: "http://u:p@res:1", auto_proxy=True)
+    assert transport.get_json("ad-listing")["total"] == 1
+    assert recorder.served_via == [None, "http://u:p@res:1"]
+
+
+def test_a_switch_on_the_last_attempt_still_gets_one_proxied_try():
+    """--retries 1 --auto-proxy would otherwise resolve a proxy and never use it."""
+    recorder = _Recorder([_blocked(429), _ok()])
+    transport = _transport(recorder, lambda geo: "http://u:p@res:1", auto_proxy=True, max_retries=1)
+    assert transport.get_json("ad-listing")["total"] == 1
+    assert recorder.served_via == [None, "http://u:p@res:1"]
+
+
+def test_fallback_statuses_are_configurable_per_transport():
+    recorder = _Recorder([_blocked(403)])
+    transport = _transport(recorder, lambda geo: "http://u:p@res:1", auto_proxy=True,
+                           fallback_statuses=frozenset({429}))
+    with pytest.raises(TransportError):
+        transport.get_json("ad-listing")
+    assert recorder.served_via == [None]
+
+
+def test_fallback_statuses_are_read_from_the_environment(monkeypatch):
+    monkeypatch.setenv("CHOTOT_PROXY_FALLBACK_STATUSES", "429, 503")
+    recorder = _Recorder([_blocked(403)])
+    transport = _transport(recorder, lambda geo: "http://u:p@res:1", auto_proxy=True)
+    assert transport.fallback_statuses == frozenset({429, 503})
+    with pytest.raises(TransportError):
+        transport.get_json("ad-listing")
+
+
+def test_a_malformed_fallback_status_list_is_a_usage_error_naming_the_variable(monkeypatch):
+    monkeypatch.setenv("CHOTOT_PROXY_FALLBACK_STATUSES", "429,teapot")
+    with pytest.raises(_UsageError) as info:
+        _transport(_Recorder([]), lambda geo: None, auto_proxy=True)
+    assert "CHOTOT_PROXY_FALLBACK_STATUSES" in str(info.value)
+
+
+def test_auto_proxy_is_armed_by_the_environment(monkeypatch):
+    monkeypatch.setenv("CHOTOT_AUTO_PROXY", "1")
+    recorder = _Recorder([_blocked(429), _ok()])
+    transport = _transport(recorder, lambda geo: "http://u:p@res:1")
+    assert transport.auto_proxy is True
+    assert transport.get_json("ad-listing")["total"] == 1
+    assert recorder.served_via == [None, "http://u:p@res:1"]
+
+
+def test_explicit_auto_resolves_before_the_first_request():
+    recorder = _Recorder([_ok()])
+    transport = _transport(recorder, lambda geo: "http://u:p@res:1", proxy="auto")
+    assert transport.is_proxied and transport.transport_mode == "proxy"
+    assert transport.proxy_source == "resolver"
+    transport.get_json("ad-listing")
+    assert recorder.served_via == ["http://u:p@res:1"]
+    assert transport.proxied_request_count == 1
+
+
+def test_an_explicit_proxy_is_never_replaced_by_the_fallback():
+    """A user-chosen proxy that gets blocked is the user's decision to revisit;
+    silently swapping in a paid one spends money they did not ask to spend."""
+    recorder = _Recorder([_blocked(429), _blocked(429)])
+    transport = _transport(recorder, lambda geo: "http://u:p@res:1",
+                           proxy="http://mine:1", auto_proxy=True, max_retries=2)
+    with pytest.raises(RateLimitedError):
+        transport.get_json("ad-listing")
+    assert recorder.served_via == ["http://mine:1", "http://mine:1"]
+
+
+def test_geo_with_an_explicit_url_is_warned_about(caplog):
+    with caplog.at_level(_logging.WARNING, logger="chotot.http"):
+        _transport(_Recorder([]), lambda geo: None, proxy="http://mine:1", geo="jp")
+    assert any("--geo" in r.message for r in caplog.records)
+
+
+def test_transport_summary_is_credential_free():
+    recorder = _Recorder([_ok()])
+    transport = _transport(recorder, lambda geo: "http://user:pw@res:1", proxy="auto")
+    summary = transport.transport_summary()
+    assert summary == {"mode": "proxy", "proxy": "http://***:***@res:1", "source": "resolver",
+                       "fallback_fired_at": None, "requests": 0, "proxied_requests": 0}
+    assert "pw" not in json.dumps(summary)

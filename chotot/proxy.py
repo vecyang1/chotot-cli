@@ -7,196 +7,221 @@
 # later version. This program is distributed WITHOUT ANY WARRANTY; see the GNU
 # Affero General Public License <https://www.gnu.org/licenses/> for details.
 
-"""Proxy resolution and formatting for chotot-cli.
+"""Proxy resolution: one decision, one credential owner, nothing printed.
 
-Provides zero-dependency proxy resolution supporting:
-1. Explicit CLI/API proxy URLs (--proxy http://...)
-2. Environment variables (CHOTOT_PROXY, HTTPS_PROXY, HTTP_PROXY, ALL_PROXY)
-3. Residential proxy auto-resolution (DataImpulse / ultra-low-cost-scraper)
-   with Vietnam geo-targeting (__cr-vn) and sticky sessions (__session-{id}).
-4. Credential masking for safe logging and status output.
+The transport asks this module one question -- *which proxy, if any, and
+why* -- and gets a :class:`ProxyPlan` back. Three rules shape the answer:
+
+* **A proxy is an ``http://`` or ``https://`` URL.** The standard library has
+  no SOCKS support, and handing ``urllib`` a ``socks5://`` URL fails deep in
+  the stack as ``unknown url type``. That cause is named here, where it is
+  known, instead of there.
+* **Explicit intent never degrades silently.** ``--proxy auto`` that cannot
+  resolve a proxy is an error. The 2.1.0 code fell through to a direct
+  connection, so the user asked for a proxy, paid nothing, and got their own
+  address blocked while the output looked normal.
+* **The residential credential has exactly one reader: the resolver
+  command.** This module does not know DataImpulse, its environment
+  variables, or its credential cache. It runs a command whose stdout is a
+  proxy URL -- ``CHOTOT_PROXY_RESOLVER`` if set, else the
+  ``ultra-low-cost-scraper`` skill's ``proxy_resolver.py`` where that is
+  installed -- and keeps nothing. A second reader of another tool's
+  credential store is a second owner, and two owners drift.
+
+Only :func:`mask_proxy` output may ever reach a log, a terminal or a JSON
+report; ``tests/test_proxy.py`` grades every prefix of a credential against it.
 """
 from __future__ import annotations
 
-import json
 import logging
 import os
-import re
+import shlex
 import subprocess
 import sys
+from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Dict, Optional
+from typing import Callable, List, Optional, Tuple
+from urllib.parse import urlsplit
+
+from chotot.errors import UsageError
 
 logger = logging.getLogger("chotot.proxy")
 
 DEFAULT_GEO = "vn"
-CACHE_FILE = Path.home() / ".cache" / "ultra-low-cost-scraper" / "proxy_cache.json"
 
+#: The chotot-specific override; wins over the standard variables below.
+#: ``none``/``direct`` forces a direct connection even when they are set.
+ENV_PROXY = "CHOTOT_PROXY"
+#: ``1``/``true``/``yes`` arms the residential fallback without ``--auto-proxy``.
+ENV_AUTO_PROXY = "CHOTOT_AUTO_PROXY"
+#: A command (shell-quoted) that prints a proxy URL on stdout. ``{geo}`` is
+#: replaced with the requested exit country. Exit non-zero or print nothing to
+#: report "no proxy available".
+ENV_RESOLVER = "CHOTOT_PROXY_RESOLVER"
+
+STANDARD_PROXY_ENV_NAMES: Tuple[str, ...] = (
+    "HTTPS_PROXY", "https_proxy", "HTTP_PROXY", "http_proxy", "ALL_PROXY", "all_proxy",
+)
+ALL_PROXY_ENV_NAMES: Tuple[str, ...] = (ENV_PROXY,) + STANDARD_PROXY_ENV_NAMES
+
+DIRECT_WORDS = frozenset({"none", "direct", "off", "0", "false"})
+SUPPORTED_SCHEMES = frozenset({"http", "https"})
+SOCKS_SCHEMES = frozenset({"socks", "socks4", "socks4a", "socks5", "socks5h"})
+
+#: Where the owning resolver lives when the skill is installed. Overridable
+#: through ``CHOTOT_PROXY_RESOLVER``; probed in order, first existing file wins.
+DEFAULT_RESOLVER_CANDIDATES: Tuple[Path, ...] = (
+    Path.home() / ".gemini" / "antigravity" / "skills" / "ultra-low-cost-scraper"
+    / "scripts" / "proxy_resolver.py",
+    Path.home() / ".agents" / "skills" / "ultra-low-cost-scraper" / "scripts" / "proxy_resolver.py",
+)
+#: The owning resolver may consult 1Password, to which it gives 15 s itself.
+RESOLVER_TIMEOUT = 25.0
+
+Resolver = Callable[[str], Optional[str]]
+
+
+@dataclass(frozen=True)
+class ProxyPlan:
+    """The transport's marching orders: ``url`` (None = direct) and ``source``,
+    one of ``direct``, ``flag``, ``env:<VARIABLE>``, ``resolver``, ``injected``."""
+
+    url: Optional[str]
+    source: str
+
+
+# -- display ---------------------------------------------------------------
 
 def mask_proxy(url: Optional[str]) -> str:
-    """Mask proxy credentials for safe display and logging.
+    """Render a proxy URL with its userinfo removed entirely.
 
-    Example: 'http://user:password@gw.dataimpulse.com:823' -> 'http://user***:***@gw.dataimpulse.com:823'
+    ``http://user:pw@host:823`` -> ``http://***:***@host:823``. No prefix of
+    the user name survives: the previous mask kept four characters of it, and
+    four characters of a residential login are a working eighth of the secret.
     """
     if not url:
         return "none"
-    match = re.match(r"^(https?://)([^:]+):([^@]+)@(.*)$", url)
-    if match:
-        scheme, user, _pwd, hostport = match.groups()
-        masked_user = user[:4] + "***" if len(user) > 4 else "***"
-        return f"{scheme}{masked_user}:***@{hostport}"
+    parts = urlsplit(url)
+    if "@" in parts.netloc:
+        hostport = parts.netloc.rsplit("@", 1)[1]
+        return f"{parts.scheme or 'proxy'}://***:***@{hostport}"
+    if "@" in url:
+        # Unparseable but carrying something that looks like a credential:
+        # showing any of it is the wrong default.
+        return "***"
     return url
 
 
-def get_env_proxy() -> Optional[str]:
-    """Check standard environment variables for configured proxy."""
-    for key in (
-        "CHOTOT_PROXY",
-        "chotot_proxy",
-        "HTTPS_PROXY",
-        "https_proxy",
-        "HTTP_PROXY",
-        "http_proxy",
-        "ALL_PROXY",
-        "all_proxy",
-    ):
-        val = os.getenv(key)
-        if val and val.strip() and val.lower() not in ("none", "direct", "0", "false"):
-            return val.strip()
-    return None
+# -- validation ------------------------------------------------------------
+
+def validate_proxy_url(url: str, origin: str) -> str:
+    """Accept only what ``urllib`` can actually use, naming ``origin`` on refusal."""
+    value = url.strip()
+    scheme = urlsplit(value).scheme.lower()
+    if scheme in SOCKS_SCHEMES:
+        raise UsageError(
+            f"{origin} is a SOCKS proxy ({mask_proxy(value)}), which the Python standard "
+            f"library cannot speak.",
+            remedy="Point it at an HTTP proxy instead (Clash and mihomo expose one, usually "
+                   "http://127.0.0.1:7890), or use --proxy auto for the residential resolver.",
+        )
+    if scheme not in SUPPORTED_SCHEMES or not urlsplit(value).netloc:
+        raise UsageError(
+            f"{origin} is not an http:// or https:// proxy URL: {mask_proxy(value)}",
+            remedy="Write the scheme and host, e.g. http://127.0.0.1:7890.",
+        )
+    return value
 
 
-def _format_dataimpulse_url(
-    base_url: str, geo: Optional[str] = None, session_id: Optional[str] = None,
-) -> str:
-    """Inject __cr-{geo} and __session-{session_id} into DataImpulse proxy URL."""
-    match = re.match(r"^(https?://)([^:]+):([^@]+)@([^:]+:\d+)$", base_url)
-    if not match:
-        return base_url
+# -- sources ---------------------------------------------------------------
 
-    scheme, user, pwd, hostport = match.groups()
-    clean_user = re.split(r"__(cr|country|session)", user)[0]
-    addons = []
-    if geo:
-        addons.append(f"__cr-{geo.lower()}")
-    if session_id:
-        addons.append(f"__session-{session_id}")
+def env_proxy() -> Optional[Tuple[Optional[str], str]]:
+    """The first proxy variable that is set, as ``(url_or_None, variable)``.
 
-    return f"{scheme}{clean_user}{''.join(addons)}:{pwd}@{hostport}"
-
-
-def _resolve_from_cache(geo: Optional[str] = None, session_id: Optional[str] = None) -> Optional[str]:
-    """Attempt reading cached DataImpulse credentials from ultra-low-cost-scraper cache."""
-    if not CACHE_FILE.exists():
-        return None
-    try:
-        data = json.loads(CACHE_FILE.read_text(encoding="utf-8"))
-        login = data.get("login")
-        password = data.get("password")
-        hostname = data.get("hostname", "gw.dataimpulse.com")
-        port = data.get("port", "823")
-        if login and password:
-            base_url = f"http://{login}:{password}@{hostname}:{port}"
-            return _format_dataimpulse_url(base_url, geo=geo, session_id=session_id)
-    except Exception as exc:  # noqa: BLE001
-        logger.debug("Failed to read proxy cache at %s: %s", CACHE_FILE, exc)
-    return None
-
-
-def _resolve_from_env_credentials(
-    geo: Optional[str] = None, session_id: Optional[str] = None,
-) -> Optional[str]:
-    """Attempt resolution from SCRAPER_PROXY_URL / DATAIMPULSE env vars."""
-    url = os.getenv("SCRAPER_PROXY_URL") or os.getenv("DATAIMPULSE_PROXY_URL")
-    if url:
-        return _format_dataimpulse_url(url.strip(), geo=geo, session_id=session_id)
-
-    login = os.getenv("DATAIMPULSE_LOGIN")
-    password = os.getenv("DATAIMPULSE_PASSWORD")
-    if login and password:
-        host = os.getenv("DATAIMPULSE_HOST", "gw.dataimpulse.com")
-        port = os.getenv("DATAIMPULSE_PORT", "823")
-        base_url = f"http://{login}:{password}@{host}:{port}"
-        return _format_dataimpulse_url(base_url, geo=geo, session_id=session_id)
-    return None
-
-
-def _resolve_from_resolver_script(
-    geo: Optional[str] = None, session_id: Optional[str] = None,
-) -> Optional[str]:
-    """Attempt resolution via ultra-low-cost-scraper proxy_resolver.py."""
-    candidates = [
-        Path.home() / ".gemini" / "antigravity" / "skills" / "ultra-low-cost-scraper" / "scripts" / "proxy_resolver.py",
-        Path.home() / ".agents" / "skills" / "ultra-low-cost-scraper" / "scripts" / "proxy_resolver.py",
-    ]
-    script = next((p for p in candidates if p.exists()), None)
-    if not script:
-        return None
-
-    cmd = [sys.executable, str(script), "--format", "url"]
-    if geo:
-        cmd.extend(["--geo", geo])
-    if session_id:
-        cmd.extend(["--session", session_id])
-
-    try:
-        res = subprocess.run(cmd, capture_output=True, text=True, timeout=8)
-        if res.returncode == 0 and res.stdout.strip():
-            return res.stdout.strip()
-    except Exception as exc:  # noqa: BLE001
-        logger.debug("Failed running proxy resolver %s: %s", script, exc)
-    return None
-
-
-def resolve_proxy(
-    proxy_arg: Optional[str] = None,
-    geo: Optional[str] = DEFAULT_GEO,
-    auto: bool = False,
-    session_id: Optional[str] = None,
-) -> Optional[str]:
-    """Resolve an effective proxy URL based on arguments and environment.
-
-    Args:
-        proxy_arg: Explicit URL, 'auto', 'direct', 'none', or None.
-        geo: Target country code (default 'vn' for Chợ Tốt Vietnam).
-        auto: If True, allow auto-resolving residential proxy when none is given.
-        session_id: Optional sticky session ID for continuous crawls.
-
-    Returns:
-        Fully-qualified proxy URL (e.g. 'http://user__cr-vn:pass@gw.dataimpulse.com:823') or None.
+    ``None`` means no variable is set at all. A variable holding ``none`` or
+    ``direct`` returns ``(None, name)``: an explicit direct connection, which
+    outranks any variable further down the list.
     """
-    if proxy_arg:
-        val = proxy_arg.strip()
-        if val.lower() in ("none", "direct"):
-            return None
-        if val.lower() != "auto":
-            # Format if it's DataImpulse
-            if "dataimpulse.com" in val:
-                return _format_dataimpulse_url(val, geo=geo, session_id=session_id)
-            return val
+    for name in ALL_PROXY_ENV_NAMES:
+        value = os.getenv(name)
+        if value is None or not value.strip():
+            continue
+        if value.strip().lower() in DIRECT_WORDS:
+            return None, name
+        return validate_proxy_url(value, origin=name), name
+    return None
 
-    # If auto resolution was requested or CHOTOT_AUTO_PROXY is enabled
-    auto_enabled = (
-        auto
-        or (proxy_arg and proxy_arg.strip().lower() == "auto")
-        or os.getenv("CHOTOT_AUTO_PROXY", "").lower() in ("1", "true", "yes")
-    )
 
-    if auto_enabled:
-        # 1. Environment proxy URL with credentials
-        res = _resolve_from_env_credentials(geo=geo, session_id=session_id)
-        if res:
-            return res
+def resolver_command(geo: str) -> Optional[List[str]]:
+    """The command that owns the residential credential, or None if there is none."""
+    configured = os.getenv(ENV_RESOLVER, "").strip()
+    if configured:
+        return [part.replace("{geo}", geo) for part in shlex.split(configured)]
+    for candidate in DEFAULT_RESOLVER_CANDIDATES:
+        if candidate.is_file():
+            return [sys.executable, str(candidate), "--format", "url", "--geo", geo]
+    return None
 
-        # 2. Disk cache from ultra-low-cost-scraper
-        res = _resolve_from_cache(geo=geo, session_id=session_id)
-        if res:
-            return res
 
-        # 3. Dynamic resolution via 1Password bridge in proxy_resolver.py
-        res = _resolve_from_resolver_script(geo=geo, session_id=session_id)
-        if res:
-            return res
+def resolve_residential(geo: str, timeout: float = RESOLVER_TIMEOUT) -> Optional[str]:
+    """Run the resolver command and return the URL it printed, or None.
 
-    # Fall back to standard environment proxy (if any)
-    return get_env_proxy()
+    The URL is returned to the caller and to nobody else: it is never logged,
+    and the resolver's own output is never echoed.
+    """
+    command = resolver_command(geo)
+    if command is None:
+        logger.debug("no proxy resolver: %s is unset and no known resolver script exists",
+                     ENV_RESOLVER)
+        return None
+    try:
+        result = subprocess.run(command, capture_output=True, text=True, timeout=timeout)
+    except subprocess.TimeoutExpired:
+        logger.warning("proxy resolver %s gave no answer within %.0fs", command[0], timeout)
+        return None
+    except OSError as exc:
+        logger.warning("proxy resolver %s could not be started: %s", command[0], exc)
+        return None
+    if result.returncode != 0:
+        logger.debug("proxy resolver exited %d; treating as unresolved", result.returncode)
+        return None
+    lines = [line.strip() for line in result.stdout.splitlines() if line.strip()]
+    return lines[0] if lines else None
+
+
+# -- the decision ------------------------------------------------------------
+
+def resolve_proxy(proxy_arg: Optional[str], geo: Optional[str] = None,
+                  resolver: Optional[Resolver] = None) -> ProxyPlan:
+    """Decide the proxy for a transport from the flag, then the environment.
+
+    ``proxy_arg`` is the ``--proxy`` value: a URL, ``auto``, ``none``/``direct``,
+    or None when the flag was not given. ``auto`` resolves NOW and fails loudly;
+    the fallback armed by ``--auto-proxy`` is the transport's business, not this
+    function's, because it is a reaction to a response.
+    """
+    exit_country = geo or DEFAULT_GEO
+    resolve = resolver or resolve_residential
+
+    if proxy_arg is not None and proxy_arg.strip():
+        value = proxy_arg.strip()
+        if value.lower() in DIRECT_WORDS:
+            return ProxyPlan(None, "direct")
+        if value.lower() == "auto":
+            url = resolve(exit_country)
+            if not url:
+                raise UsageError(
+                    f"--proxy auto could not resolve a residential proxy for geo={exit_country}.",
+                    remedy=f"Set {ENV_RESOLVER} to a command that prints a proxy URL on "
+                           f"stdout, or pass an explicit --proxy http://... (or set "
+                           f"{ENV_PROXY}). The ultra-low-cost-scraper skill's "
+                           f"proxy_resolver.py is found automatically when it is installed.",
+                )
+            return ProxyPlan(validate_proxy_url(url, origin="the proxy resolver"), "resolver")
+        return ProxyPlan(validate_proxy_url(value, origin="--proxy"), "flag")
+
+    found = env_proxy()
+    if found is None:
+        return ProxyPlan(None, "direct")
+    url, name = found
+    return ProxyPlan(url, f"env:{name}") if url else ProxyPlan(None, "direct")

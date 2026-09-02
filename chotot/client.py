@@ -169,7 +169,7 @@ class ChototClient:
         min_interval: float = 0.2,
         proxy: Optional[str] = None,
         auto_proxy: bool = False,
-        geo: str = "vn",
+        geo: Optional[str] = None,
     ) -> None:
         self.transport = transport or HttpTransport(
             base_url,
