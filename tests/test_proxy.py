@@ -40,7 +40,7 @@ def test_mask_keeps_no_substring_of_the_credential(url, user, password):
     """A safety-named function is believed on its name; check what it emits.
     Every prefix of length >= 3 is graded, not just the whole value: the old
     mask kept ``user[:4]``, which a whole-value check passes by construction.
-    (Two letters are below the floor -- 'se' is a substring of 'dataimpulse'.)"""
+    (Two letters are below the floor -- 'se' is a substring of 'example'.)"""
     masked = proxy.mask_proxy(url)
     for secret in (user, password):
         for length in range(3, len(secret) + 1):

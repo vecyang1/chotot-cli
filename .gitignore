@@ -66,3 +66,15 @@ export_*.csv
 
 # derived code graph (graphify); rebuilt on demand, never a source of truth
 graphify-out/
+
+# Local private files and indices
+PROJECT_LINKS.md
+VAULT.md
+decisions.md
+progress.md
+task_plan.md
+handoff.md
+CLAUDE.md
+GEMINI.md
+AGENTS.md
+
